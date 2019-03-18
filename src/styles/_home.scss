@@ -1,0 +1,28 @@
+@import "../../node_modules/bulma/sass/utilities/initial-variables.sass";
+
+$brand-colors: (
+	youtube: #e60f0f,
+	soundcloud: #f94f11,
+	filimo: #ff9800,
+	namava: #36559a
+);
+
+a.xlink {
+	border-radius: $radius;
+	box-shadow: 0 3px 30px -5px #0002;
+	padding: 1.25rem 1.5rem;
+	&, & > * {
+		color: #fff
+	}
+	@each $brand, $color in $brand-colors {
+		&.is-#{ $brand } {
+			background-image: linear-gradient(45deg, $color, lighten(saturate($color, 12%), 5%))
+		}
+	}
+	// &.is-namava {
+	// 	background-image: linear-gradient(to right, #3030ff, #010277);
+	// }
+	// &.is-filimo {
+	// 	background-image: linear-gradient(to right, #ff9800, #ff9870);
+	// }
+}
