@@ -1,4 +1,3 @@
-
 <template>
 	<div>
 		<div class="hero is-small is-light">

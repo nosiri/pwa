@@ -1,5 +1,4 @@
-# madeline
-
+# NoSiri
 ## Project setup
 ```
 yarn install
