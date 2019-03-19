@@ -1,48 +1,34 @@
 <template lang="pug">
-section.section: .container: .tile.is-ancestor.is-mobile
+section.section: .container: .tile.is-ancestor
 	.tile.is-vertical
 		.tile
-			.tile.is-parent.is-vertical
+			.tile.is-parent
 				router-link(to="/filimo").tile.is-child.xlink.is-filimo
-					h1.title Filimo
+					.title فیلیمو
+			.tile.is-parent
 				router-link(to="/namava").tile.is-child.xlink.is-namava
-					h1.title Namava
-				.tile.is-child
-					.columns.is-mobile.is-vcentered
-						.column: router-link(to="/sc").tile.is-child.xlink.is-soundcloud
-								img(:src="require('../assets/soundcloud.svg')")
-						.column: router-link(to="/yt").tile.is-child.xlink.is-youtube
-								img(:src="require('../assets/youtube.svg')")
-						.column: router-link(to="/npm").tile.is-child.xlink.is-npm
-								img(:src="require('../assets/npm.svg')")
-						.column: router-link(to="/").tile.is-child.xlink.has-background-dark
-								.title b
+					.title نماوا
+		.tile
+			.tile.is-parent.is-4
+				.tile.is-child.xlink.is-soundcloud.is-clickable
+					img(:src="require('../assets/soundcloud.svg')")
+			.tile.is-parent.is-4
+				.tile.is-child.xlink.is-youtube.is-clickable
+					img(:src="require('../assets/youtube.svg')")
+			.tile.is-parent
+				.tile.is-child.xlink.has-background-grey.is-size-6.is-centered
+					i.material-icons.is-3x.has-text-grey-lighter attach_money
+					| ۱۳۵۰۰ تومان
 	.tile
 		.tile.is-parent
-			.tile.is-child.xlink.has-background-info.has-text-centered
-				.icon: i.material-icons wb_sunny
-				br
-				.title 17&deg;
-		.tile.is-parent.is-4
-			.tile.is-child.xlink.has-background-success
-				| USD Price:
-				b  13500
+			.tile.is-child.xlink.has-background-info.is-centered
+				i.material-icons.is-6x.has-text-warning wb_sunny
+				.is-size-1.has-text-weight-light ۱۷&deg;
 
 </template>
 <script>
+import Modal from '@/components/Modal.vue'
 export default {
-/* 	data: () => ({
-		items: [{
-			icon: 'movie',
-			title: 'Namava',
-			color: 'blue',
-			to: '/namava'
-		}, {
-			icon: 'movie',
-			title: 'Filimo',
-			color: 'orange',
-			to: '/filimo'
-		}]
-	})
- */}
+	components: { Modal } // will be used later
+}
 </script>

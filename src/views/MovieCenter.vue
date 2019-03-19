@@ -3,16 +3,16 @@
 		<div class="hero is-small is-light">
 			<div class="hero-body">
 				<div class="container">
-					<h1 class="title">{{ provider | cap }} Downloader</h1>
+					<h1 class="title">{{ faProvider }}</h1>
 					<form @submit.prevent="handleSubmit">
 						<div class="columns is-mobile is-vcentered">
 							<div class="column">
 								<div class="control">
-									<input type="text" v-model="query" class="input" autofocus :placeholder="`Search ${ provider }...`">
+									<input type="text" v-model="query" class="input" autofocus placeholder="جستجو کنید...">
 								</div>
 							</div>
 							<div class="column is-narrow">
-								<button class="button is-primary" :disabled="!query" :class="{'is-loading': loading}" type="submit">Search</button>
+								<button class="button is-primary" :disabled="!query" :class="{'is-loading': loading}" type="submit">جستجو</button>
 							</div>
 						</div>
 					</form>
@@ -47,6 +47,11 @@ export default {
 		results: [],
 		query: ''
 	}),
+	computed: {
+		faProvider() {
+			return this.provider === 'filimo' ? 'فیلیمو' : 'نماوا'
+		}
+	},
 	methods: {
 		handleSubmit() {
 			if (!this.query) return
@@ -56,10 +61,10 @@ export default {
 				this.loading = false
 				this.results = [{
 					id: 15326,
-					title: 'True Detective'
+					title: 'کارآگاه حقیقی'
 				}, {
 					id: 12485,
-					title: 'Interstellar'
+					title: 'میان ستاره‌ای'
 				}]
 			}, 1000)
 		}
