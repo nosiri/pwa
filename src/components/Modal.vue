@@ -4,7 +4,6 @@
 		<div class="modal-card">
 			<header class="modal-card-head">
 				<p class="modal-card-title">{{ title }}</p>
-				<button class="delete" aria-label="close" @click="close"></button>
 			</header>
 			<section class="modal-card-body">
 				<slot></slot>
@@ -15,7 +14,7 @@
 				</slot>
 			</footer>
 		</div>
-		<!-- <button class="modal-close is-large" aria-label="close" @click="close"></button> -->
+		<button class="modal-close is-large" aria-label="close" @click="close"></button>
 	</div>
 </template>
 <script>
@@ -32,6 +31,7 @@ export default {
 		close() {
 			this.$emit('toggle', false)
 		}
-	}
+	},
+	name: 'Modal'
 }
 </script>

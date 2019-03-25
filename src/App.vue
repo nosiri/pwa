@@ -1,6 +1,13 @@
 <template>
-	<router-view></router-view>
+	<router-view v-if="hasLoggedIn" /> 
+	<signin-form v-else />
 </template>
 <script>
-export default {}
+import SigninForm from './views/SigninForm.vue'
+export default {
+	components: { SigninForm },
+	data: () => ({
+		hasLoggedIn: !0
+	})
+}
 </script>
