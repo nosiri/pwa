@@ -2,12 +2,12 @@
 section.section: .container
 	.columns.is-mobile.is-vcentered
 		.column
-			tile(responsive icon='usd' color='#4a8d4a')
+			tile(responsive icon='usd' color='#4a8d4a' small)
 				b ۱۳۵۰۰ تومان
-		.column.is-size-4.is-7-desktop
-			tile(responsive icon='weather-pouring' color='#6c8397')
+		.column.is-7-desktop
+			tile(responsive icon='weather-pouring' color='#6c8397' small)
 				| تهران: 
-				b ۱۷ درجه
+				b &deg;۱۷
 	.columns.is-centered.is-vcentered
 		.column
 			tile(icon='youtube' color='red' href='/youtube') 

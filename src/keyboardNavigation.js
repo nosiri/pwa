@@ -1,10 +1,10 @@
 import router from "./router";
 
 const ROUTES = {
-	"": "/",
+	"": ["/", "h"],
 	filimo: "f",
 	namava: "n",
-	youtube: 'y'
+	youtube: "y"
 };
 
 window.addEventListener("keypress", ev => {
@@ -13,6 +13,9 @@ window.addEventListener("keypress", ev => {
 	if (document.activeElement.tagName === "INPUT") return;
 
 	for (const [route, key] of Object.entries(ROUTES)) {
-		if (key === ev.key) router.push(`/${route}`);
+		const doesMatch = Array.isArray(key)
+			? key.includes(ev.key)
+			: key === ev.key;
+		if (doesMatch) router.push(`/${route}`);
 	}
 });

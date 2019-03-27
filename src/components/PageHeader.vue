@@ -1,8 +1,8 @@
 <template>
-	<div class="hero is-light">
+	<div class="hero is-dark">
 		<div class="hero-body">
 			<div class="container">
-				<h1 class="title">{{ title }}</h1>
+				<h1 class="title has-text-weight-bold">{{ title }}</h1>
 				<slot />
 			</div>
 		</div>
