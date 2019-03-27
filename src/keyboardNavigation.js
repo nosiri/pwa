@@ -3,7 +3,8 @@ import router from "./router";
 const ROUTES = {
 	"": "/",
 	filimo: "f",
-	namava: "n"
+	namava: "n",
+	youtube: 'y'
 };
 
 window.addEventListener("keypress", ev => {
