@@ -1,10 +1,14 @@
-<template lang="pug">
-component(:is='href ? "router-link" : "div"' :to='href' :class='{ "is-size-4": !small }').box
-	.columns.is-vcentered.has-text-right(:class='classNames')
-		.column.is-narrow.icon
-			icon(:name='icon' size='2.75em' :color='color')
-		.column
-			slot
+<template>
+<component :is='href ? "router-link" : "div"' :to='href' :class="`is-size-${small ? 5 : 4}`" class="box">
+	<div class="columns is-vcentered has-text-right" :class="classNames">
+		<div class="column is-narrow icon">
+			<icon :name="icon" size="2.75em" :color="color" />
+		</div>
+		<div class="column text">
+			<slot />
+		</div>
+	</div>
+</component>
 </template>
 <script>
 import Icon from './Icon.vue'
@@ -32,5 +36,8 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+.text:empty {
+	display: none;
 }
 </style>

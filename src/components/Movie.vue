@@ -1,5 +1,6 @@
 <template lang="pug">
-fake-link.box(@click="$emit('click')")
+//- to be re-written later
+.box
 	.columns.is-mobile.is-vcentered
 		.column.is-narrow
 			figure.image.is-48x48

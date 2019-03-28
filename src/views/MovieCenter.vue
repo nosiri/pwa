@@ -17,7 +17,7 @@
 			<h2 class="title">پیشنهاد</h2>
 			<div class="columns is-multiline">
 				<div class="column is-6-desktop" v-for="i in 70" :key="i">
-					<movie :rate="4.5" release-date="۲۰۱۶" duration="۱:۴۲:۰۷" @click="query = 'hi'">
+					<movie :rate="4.5" release-date="۲۰۱۶" duration="۱:۴۲:۰۷">
 						فیلم شماره {{ i | faNum }}
 					</movie>
 				</div>
@@ -29,6 +29,7 @@
 <script>
 import Modal from "../components/Modal.vue";
 import Movie from "../components/Movie.vue";
+import PageHeader from "../components/PageHeader.vue";
 export default {
 	props: {
 		provider: {
@@ -61,6 +62,6 @@ export default {
 
 		}
 	},
-	components: { Modal, Movie }
+	components: { Modal, Movie, PageHeader }
 }
 </script>
