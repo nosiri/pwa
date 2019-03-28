@@ -1,5 +1,6 @@
 <template lang="pug">
 section.section: .container
+	snackbar(v-model='snack') خطایی رخ داده‌است.
 	.columns.is-mobile.is-vcentered
 		.column
 			tile(responsive icon='usd' color='#4a8d4a' small)
@@ -21,7 +22,9 @@ section.section: .container
 </template>
 <script>
 import Tile from '../components/Tile.vue'
+import Snackbar from '../components/Snackbar.vue'
 export default {
-	components: { Tile }
+	components: { Tile, Snackbar },
+	data: () => ({ snack: false })
 }
 </script>

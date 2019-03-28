@@ -1,30 +1,11 @@
-@import "iransans";
-
 * {
 	box-sizing: border-box;
 	-webkit-tap-highlight-color: transparent;
 	outline: none;
 }
 
-@import "../../node_modules/bulma/sass/utilities/initial-variables.sass";
-
-$family-sans-serif: 'IRANSans';
-$weight-semibold: 500;
-$primary: $orange;
-$link: $yellow;
-$link-hover: $grey-lighter;
-$body-background-color: $black-bis;
-$text: $white-ter;
-$text-strong: $white;
-$title-color: $text-strong;
-$box-background-color: $black-ter;
-$box-radius: $radius;
-$input-color: $text;
-$input-background-color: lighten($grey-darker, 5%);
-$input-border-color: $grey;
-$label-color: $text-strong;
-$card-background-color: $grey-darker;
-
+@import "iransans";
+@import "vars";
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/_all.sass";
 @import "../../node_modules/bulma/sass/elements/button.sass";
