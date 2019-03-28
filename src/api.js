@@ -28,14 +28,11 @@ export async function call(path, data = {}) {
 			{ status, statusText, ok } = response;
 
 		let data;
-		response
-			.json()
-			.then(j => {
-				data = j;
-			})
-			.catch(() => {
-				data = {};
-			});
+		try {
+			data = await response.json();
+		} catch {
+			data = {};
+		}
 		return {
 			status: [status, statusText],
 			ok,
@@ -47,4 +44,4 @@ export async function call(path, data = {}) {
 	}
 }
 
-call("/", {}, false);
+call("/init", {}, false).then(console.log);
