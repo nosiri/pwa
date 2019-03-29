@@ -4,12 +4,12 @@
 		<div class="columns is-mobile is-vcentered">
 			<div class="column">
 				<tile responsive icon="usd" color="#4a8d4a" small>
-					<b>۱۳۵۰۰ تومان</b>				
+					<b>{{ usdPrice | faNum }} تومان</b>				
 				</tile>			
 			</div>
 			<div class="column is-7-desktop">
 				<tile responsive icon="weather-pouring" color="#6c8397" small>
-					تهران: <b>&deg;۱۷</b>
+					تهران: <b>&deg;{{ temperature | faNum }}</b>
 				</tile>
 			</div>
 		</div>
@@ -34,8 +34,25 @@
 </section>
 </template>
 <script>
+import { call } from '../api'
 import Tile from '../components/Tile.vue'
 export default {
+	data: () => ({
+		usdPrice: 0,
+		temperature: 0
+	}),
+	created() {
+		call('/init').then(res => {
+			const { result } = res.data
+
+			this.usdPrice = result.dollar
+
+			const w = result.weather.result.weather,
+			f = +(w.match(/[-+]?\d+/) || 0),
+			c = Math.round((f - 32) * 5/9);
+			this.temperature = c
+		})
+	},
 	components: { Tile }
 }
 </script>

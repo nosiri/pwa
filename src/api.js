@@ -34,7 +34,10 @@ export async function call(path, data = {}) {
 			data = {};
 		}
 		return {
-			status: [status, statusText],
+			status: {
+				code: status,
+				text: statusText
+			},
 			ok,
 			data
 		};
@@ -43,5 +46,3 @@ export async function call(path, data = {}) {
 		throw "client-error";
 	}
 }
-
-call("/init", {}, false).then(console.log);

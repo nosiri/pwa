@@ -16,6 +16,10 @@ export default new Router({
 			path: "/:provider(namava|filimo)/:id(\\d+)?",
 			component: () => import("./views/MovieCenter.vue"),
 			props: true
+		},
+		{
+			path: "/youtube",
+			component: () => import("./views/YoutubeDownloader.vue")
 		}
 	]
 });
