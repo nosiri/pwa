@@ -4,7 +4,7 @@
 		<form @submit.prevent="handleSubmit">
 			<div class="columns is-mobile is-vcentered">
 				<div class="column control">
-					<input type="text" v-model="query" class="input" placeholder="جستجو کنید...">
+					<input type="text" v-model="query" class="input" placeholder="جستجو کنید..." dir="auto">
 				</div>
 				<div class="column is-narrow">
 					<button class="button is-primary" :disabled="!query" :class="{'is-loading': loading}" type="submit">جستجو</button>

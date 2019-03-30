@@ -1,5 +1,5 @@
 <template>
-<component :is='href ? "router-link" : "div"' :to='href' :class="`is-size-${small ? 5 : 4}`" class="box">
+<component :is='tagName' :to='href' :href='button ? "#" : ""' :class="`is-size-${small ? 5 : 4}`" class="box" @click='onClick($event)'>
 	<div class="columns is-vcentered has-text-right" :class="classNames">
 		<div class="column is-narrow icon">
 			<icon :name="icon" size="2.75em" :color="color" />
@@ -18,13 +18,26 @@ export default {
 		responsive: Boolean,
 		small: Boolean,
 		color: String,
-		href: String
+		href: String,
+		button: Boolean
 	},
 	computed: {
 		classNames() {
 			return {
 				"is-mobile": !this.responsive,
 				"has-text-centered-mobile": this.responsive
+			}
+		},
+		tagName() {
+			return this.button ? 'a' : this.href ? 'router-link' : 'div'
+		}
+	},
+	methods: {
+		/** @param {MouseEvent} e */
+		onClick(e) {
+			if (this.button) {
+				e.preventDefault()
+				this.$emit('tap')
 			}
 		}
 	},
@@ -39,5 +52,8 @@ export default {
 }
 .text:empty {
 	display: none;
+}
+.box {
+	padding: 0.75em 1em;
 }
 </style>

@@ -20,9 +20,11 @@ $radius-small: 2.5px;
 $radius-large: 10px;
 
 // dark theme
+$border: $black;
+$body-background-color: $black-bis;
+$background: $black-ter;
 $box-shadow: 0 2px 5px -1px #0007;
 $link-hover: $grey-lighter;
-$body-background-color: $black-bis;
 $text: $white-ter;
 $text-strong: $white;
 $title-color: $text-strong;
@@ -32,3 +34,4 @@ $input-background-color: lighten($grey-darker, 5%);
 $input-border-color: $grey;
 $label-color: $text-strong;
 $card-background-color: $grey-darker;
+$modal-card-body-background-color: $grey-darker;
