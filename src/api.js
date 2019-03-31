@@ -1,6 +1,6 @@
 import { get } from "tiny-cookie";
 
-export const API_DOMAIN = "https://nosiri.herokuapp.com";
+export const API_DOMAIN = "https://nosiri.sh-sh.ir";
 
 export const getToken = () => get("TOKEN");
 
@@ -14,17 +14,15 @@ export async function call(path, data = {}) {
 	if (!usePost) fullUrl += "?" + new URLSearchParams(data);
 
 	try {
-		const response = await fetch(fullUrl, {
-				method: usePost ? "POST" : "GET",
-				...(usePost
+		const response = await fetch(
+				fullUrl,
+				usePost
 					? {
-							headers: {
-								Authorization: getToken()
-							},
-							body: data
+							method: "post",
+							body: JSON.stringify(data)
 					  }
-					: {})
-			}),
+					: {}
+			),
 			{ status, statusText, ok } = response;
 
 		let data;

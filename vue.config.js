@@ -1,6 +1,6 @@
 module.exports = {
 	devServer: {
-		host: "localhost"
+		// host: "localhost"
 	},
 	lintOnSave: false,
 	pwa: {

@@ -1,13 +1,18 @@
 <template>
 <div>
-	<page-header :title="faProvider">
+	<page-header :title="isFilimo ? 'فیلیمو' : 'نماوا'" has-tabs>
 		<form @submit.prevent="handleSubmit">
 			<div class="columns is-mobile is-vcentered">
 				<div class="column control">
 					<input type="text" v-model="query" class="input" placeholder="جستجو کنید..." dir="auto">
 				</div>
 				<div class="column is-narrow">
-					<button class="button is-primary" :disabled="!query" :class="{'is-loading': loading}" type="submit">جستجو</button>
+					<div class="buttons has-addons">
+						<button class="button is-link" :disabled="!query" :class="{'is-loading': loading}" type="submit" tabindex="2">جستجو</button>
+						<router-link tabindex="1" class="button is-outlined is-light" :to="isFilimo ? 'namava' : 'filimo'">
+							{{ isFilimo ? 'نماوا' : 'فیلیمو' }}
+						</router-link>
+					</div>
 				</div>
 			</div>
 		</form>
@@ -45,8 +50,8 @@ export default {
 		query: '',
 	}),
 	computed: {
-		faProvider() {
-			return this.provider === 'filimo' ? 'فیلیمو' : 'نماوا'
+		isFilimo() {
+			return this.provider === 'filimo'
 		}
 	},
 	methods: {

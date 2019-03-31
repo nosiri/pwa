@@ -1,5 +1,7 @@
 <template>
-	<router-view v-if="hasLoggedIn" class="rv" /> 
+	<keep-alive v-if="hasLoggedIn">
+		<router-view class="rv" /> 
+	</keep-alive>
 	<signin-form v-else />
 </template>
 <script>

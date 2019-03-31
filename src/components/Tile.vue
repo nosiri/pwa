@@ -1,5 +1,5 @@
 <template>
-<component :is='tagName' :to='href' :href='button ? "#" : ""' :class="`is-size-${small ? 5 : 4}`" class="box" @click='onClick($event)'>
+<component :is='tagName' v-bind="attrs" :class="`is-size-${small ? 5 : 4}`" class="box" @click='onClick($event)'>
 	<div class="columns is-vcentered has-text-right" :class="classNames">
 		<div class="column is-narrow icon">
 			<icon :name="icon" size="2.75em" :color="color" />
@@ -30,6 +30,13 @@ export default {
 		},
 		tagName() {
 			return this.button ? 'a' : this.href ? 'router-link' : 'div'
+		},
+		attrs() {
+			return this.button ? {
+				href: '#'
+			} : this.href ? {
+				to: this.href
+			} : {}
 		}
 	},
 	methods: {

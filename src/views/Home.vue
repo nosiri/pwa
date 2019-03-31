@@ -7,22 +7,22 @@
 					<b>{{ usdPrice | faNum }} تومان</b>				
 				</tile>			
 			</div>
-			<div class="column is-7-desktop">
+			<div class="column is-6-desktop">
 				<tile responsive icon="weather-pouring" color="#6c8397" small>
 					تهران: <b dir="ltr">{{ temperature | faNum }}&deg;</b>
 				</tile>
 			</div>
 		</div>
 		<div class="columns is-vcentered">
+			<div class="column is-5">
+				<tile icon="movies" color="#5716da" href="/filimo">
+					<b>نماوا/فیلیمو</b>
+				</tile>
+			</div>
 			<div class="column">
 				<tile icon="youtube" color="red" href="/youtube">
 					<b>یوتیوب</b>
 				</tile> 
-			</div>
-			<div class="column is-5">
-				<tile icon="movies" color="#2f477d" href="/namava">
-					<b>نماوا/فیلیمو</b>
-				</tile>
 			</div>
 			<div class="column">
 				<tile icon="soundcloud" color="#ff7500" button @tap="scModal = true">
@@ -30,7 +30,28 @@
 				</tile>
 			</div>
 		</div>
+		<div class="columns is-mobile is-vcentered is-multiline">
+			<div class="column is-12-mobile is-7-desktop">
+				<tile icon="telegram" color="#2a89b6" small button @tap="getAProxy">
+					<b>پراکسی تلگرام</b>
+				</tile>
+			</div>
+			<div class="column">
+				<tile icon="omen" color="#bd9548" small>
+					<b>فال حافظ</b>
+				</tile>
+			</div>
+			<div class="column is-narrow">
+				<tile icon="dns" color="#757575" small />
+			</div>
+		</div>
+		<p class="is-size-6 has-text-grey" dir="ltr" v-if="loaded">
+			IP: <b>{{ ip }}</b>
+			<br>
+			{{ date }}
+		</p>
 	</div>	
+
 	<modal v-model="scModal" title="دانلود از ساندکلود">
 		<div class="control">
 			<input type="url" dir="ltr" class="input" placeholder="https://soundcloud.com/..." autofocus>
@@ -38,6 +59,18 @@
 		<template slot="footer">
 			<button class="button is-primary">دانلود</button>
 			<button class="button is-dark">لغو</button>
+		</template>
+	</modal>
+	<modal v-model="proxy.open" title="پراکسی تلگرام">
+		<template v-if="proxy.loaded">
+			<p>با استفاده از لینک زیر می‌توانید بدون استفاده از فیلترشکن به تلگرام متصل شوید.</p>
+			<div slot="footer">
+				<a class="button is-primary" :href="proxy.url">اتصال</a>
+				<button class="button is-dark">کپی</button>
+			</div>
+		</template>
+		<template v-else>
+			<p>لطفا چند لحظه صبر کنید...</p>
 		</template>
 	</modal>
 </section>
@@ -49,29 +82,54 @@ import Tile from '../components/Tile.vue'
 import Modal from '../components/Modal.vue'
 export default {
 	data: () => ({
+		loaded: false,
 		usdPrice: 0,
 		temperature: 0,
-		scModal: false
+		ip: '',
+		date: '',
+		scModal: false,
+		proxy: {
+			open: false,
+			loaded: false,
+			url: ''
+		}
 	}),
 	async created() {
 		try {
-			const res = await call('/init')
+			const res = await call('/init', { a: 1 })
 			if (res.ok) {
 				const { result } = res.data
+
+				this.ip = result.ip
+				this.date = result.date
 				
 				animateNumber(i => {
 					this.usdPrice = i
-				}, result.dollar, 150)
+				}, result.dollar, 200)
 	
 				const w = result.weather.result.weather,
-				f = +(w.match(/[-+]?\d+/) || 0),
-				c = Math.round((f - 32) * 5/9);
+				c = +(w.match(/[-+]?\d+/) || 0);
 				animateNumber(i => {
 					this.temperature = i
 				}, c)
 			}
+			this.loaded = true
 		} catch (e) {
 			console.log(e)
+		}
+	},
+	methods: {
+		getAProxy() {
+			this.proxy.open = true
+			if (!this.proxy.loaded) {
+				call('/proxy').then(({ data, ok }) => {
+					if (ok) {
+						const link = data.result.proxy
+						this.proxy.loaded = true
+						this.proxy.url = link
+					}
+				})
+			}
 		}
 	},
 	components: { Tile, Modal }

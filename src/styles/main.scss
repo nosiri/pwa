@@ -24,7 +24,14 @@
 	text-align: right;
 }
 
-.modal-card-foot .button:not(:last-child) {
-	margin-right: 0;
-	margin-left: 10px;
+.modal-card-foot {
+	justify-content: flex-end;
+	.button:not(:last-child) {
+		margin-right: 0;
+		margin-left: 10px;
+	}
+}
+
+.buttons {
+	flex-direction: row-reverse;
 }
