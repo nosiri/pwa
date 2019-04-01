@@ -29,12 +29,10 @@
 			<div class="column is-12-mobile is-7-desktop">
 				<tile icon="telegram" color="#2a89b6" small button @tap="getAProxy"><b>پراکسی تلگرام</b></tile>
 			</div>
-			<modal v-model="proxy.open" title="پراکسی تلگرام" close-button="لغو">
+			<modal v-model="proxy.open" title="پراکسی تلگرام" close-button="لغو" id="mtp">
 				<template v-if="proxy.loaded">
 					<p>با استفاده از لینک زیر می‌توانید بدون استفاده از فیلترشکن به تلگرام متصل شوید.</p>
-					<div slot="footer">
-						<a class="button is-primary" :href="proxy.url">اتصال</a>
-					</div>
+					<a slot='footer' class="button is-primary" :href="proxy.url">اتصال</a>
 				</template>
 				<template v-else>
 					<p>لطفا چند لحظه صبر کنید...</p>

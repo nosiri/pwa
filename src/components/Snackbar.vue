@@ -1,5 +1,5 @@
 <template>
-	<div class="snackbar" :class='{ active }' @click="close">
+	<div class="snackbar" :class="{ 'is-active': active }" @click="close">
 		<div>
 			<slot></slot>
 		</div>
@@ -28,8 +28,8 @@ export default {
 		}
 	},
 	watch: {
-		active(active) {
-			if (active) {
+		active(b) {
+			if (b) {
 				this.timeout = setTimeout(() => {
 					this.close()
 				}, this.duration);
@@ -51,9 +51,7 @@ export default {
 	pointer-events: none;
 	transition: transform $speed $easing;
 	z-index: 10;
-	&:not(.active) {
-		transform: translateY(100%)
-	}
+	transform: translateY(100%);
 	> div {
 		cursor: pointer;
 		width: 100%;
@@ -62,8 +60,11 @@ export default {
 		box-shadow: 0 -5px 20px -2px #0008;
 		max-width: 720px;
 	}
-	&.active > div {
-		pointer-events: auto
+	&.is-active {
+		transform: translateY(0);
+		> div {
+			pointer-events: auto
+		}
 	}
 }
 </style>

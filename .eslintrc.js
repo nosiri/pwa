@@ -1,7 +1,13 @@
 module.exports = {
 	root: true,
 	env: {
-		node: true
+		node: true,
+		jasmine: true,
+		mocha: true
+	},
+	globals: {
+		cy: true,
+		Cypress: true
 	},
 	extends: ["plugin:vue/essential", "@vue/prettier"],
 	rules: {

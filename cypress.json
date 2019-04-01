@@ -1,0 +1,8 @@
+{
+	"fixturesFolder": "test/fixtures",
+	"integrationFolder": "test/integration",
+	"videosFolder": "test/videos",
+	"screenshotsFolder": "test/screenshots",
+	"baseUrl": "http://localhost:8080",
+	"video": false
+}
