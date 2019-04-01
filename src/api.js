@@ -23,7 +23,7 @@ export async function call(path, data = {}) {
 					  }
 					: {}
 			),
-			{ status, statusText, ok } = response;
+			{ status, ok } = response;
 
 		let data;
 		try {
@@ -32,10 +32,7 @@ export async function call(path, data = {}) {
 			data = {};
 		}
 		return {
-			status: {
-				code: status,
-				text: statusText
-			},
+			status,
 			ok,
 			data
 		};

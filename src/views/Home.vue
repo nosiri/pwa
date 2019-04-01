@@ -3,9 +3,7 @@
 	<div class="container">
 		<div class="columns is-mobile is-vcentered">
 			<div class="column">
-				<tile responsive icon="usd" color="#4a8d4a" small>
-					<b>{{ usdPrice | faNum }} تومان</b>				
-				</tile>			
+				<tile responsive icon="usd" color="#4a8d4a" small><b>{{ usdPrice | faNum }} تومان</b></tile>			
 			</div>
 			<div class="column is-6-desktop">
 				<tile responsive icon="weather-pouring" color="#6c8397" small>
@@ -15,31 +13,21 @@
 		</div>
 		<div class="columns is-vcentered">
 			<div class="column is-5">
-				<tile icon="movies" color="#5716da" href="/filimo">
-					<b>نماوا/فیلیمو</b>
-				</tile>
+				<tile icon="movies" color="#5716da" href="/filimo"><b>نماوا/فیلیمو</b></tile>
 			</div>
 			<div class="column">
-				<tile icon="youtube" color="red" href="/youtube">
-					<b>یوتیوب</b>
-				</tile> 
+				<tile icon="youtube" color="red" href="/youtube"><b>یوتیوب</b></tile> 
 			</div>
 			<div class="column">
-				<tile icon="soundcloud" color="#ff7500" button @tap="scModal = true">
-					<b>ساندکلود</b>
-				</tile>
+				<tile icon="soundcloud" color="#ff7500" button @tap="scModal = true"><b>ساندکلود</b></tile>
 			</div>
 		</div>
 		<div class="columns is-mobile is-vcentered is-multiline">
 			<div class="column is-12-mobile is-7-desktop">
-				<tile icon="telegram" color="#2a89b6" small button @tap="getAProxy">
-					<b>پراکسی تلگرام</b>
-				</tile>
+				<tile icon="telegram" color="#2a89b6" small button @tap="getAProxy"><b>پراکسی تلگرام</b></tile>
 			</div>
 			<div class="column">
-				<tile icon="omen" color="#bd9548" small>
-					<b>فال حافظ</b>
-				</tile>
+				<tile icon="omen" color="#bd9548" small><b>فال حافظ</b></tile>
 			</div>
 			<div class="column is-narrow">
 				<tile icon="dns" color="#757575" small />
@@ -52,27 +40,19 @@
 		</p>
 	</div>	
 
-	<modal v-model="scModal" title="دانلود از ساندکلود">
-		<div class="control">
-			<input type="url" dir="ltr" class="input" placeholder="https://soundcloud.com/..." autofocus>
-		</div>
-		<template slot="footer">
-			<button class="button is-primary">دانلود</button>
-			<button class="button is-dark">لغو</button>
-		</template>
-	</modal>
-	<modal v-model="proxy.open" title="پراکسی تلگرام">
+	<modal v-model="proxy.open" title="پراکسی تلگرام" close-button="لغو">
 		<template v-if="proxy.loaded">
 			<p>با استفاده از لینک زیر می‌توانید بدون استفاده از فیلترشکن به تلگرام متصل شوید.</p>
 			<div slot="footer">
 				<a class="button is-primary" :href="proxy.url">اتصال</a>
-				<button class="button is-dark">کپی</button>
 			</div>
 		</template>
 		<template v-else>
 			<p>لطفا چند لحظه صبر کنید...</p>
 		</template>
 	</modal>
+
+	<soundcloud-modal v-model="scModal" />
 </section>
 </template>
 <script>
@@ -80,6 +60,7 @@ import { call } from '../api'
 import { animateNumber } from '../utils'
 import Tile from '../components/Tile.vue'
 import Modal from '../components/Modal.vue'
+import SoundcloudModal from '../components/SoundcloudModal.vue'
 export default {
 	data: () => ({
 		loaded: false,
@@ -112,8 +93,8 @@ export default {
 				animateNumber(i => {
 					this.temperature = i
 				}, c)
-			}
-			this.loaded = true
+				this.loaded = true
+			} else throw res.status
 		} catch (e) {
 			console.log(e)
 		}
@@ -132,6 +113,6 @@ export default {
 			}
 		}
 	},
-	components: { Tile, Modal }
+	components: { Tile, Modal, SoundcloudModal }
 }
 </script>

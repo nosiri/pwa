@@ -10,9 +10,10 @@
 					<slot></slot>
 				</section>
 				<footer class="modal-card-foot">
-					<slot name="footer">
-						<button class="button is-primary" @click="close">باشه</button>
-					</slot>
+					<slot name="footer" />
+						<button class="button is-dark" v-if="closeButton" @click="close">
+							{{ closeButton }}
+						</button>
 				</footer>
 			</div>
 			<button class="modal-close is-large" aria-label="close" @click="close"></button>
@@ -23,7 +24,8 @@
 export default {
 	props: {
 		open: Boolean,
-		title: String
+		title: String,
+		closeButton: String
 	},
 	model: {
 		prop: 'open',
