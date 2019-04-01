@@ -36,6 +36,12 @@ export default {
 			this.$emit('toggle', false)
 		}
 	},
+	watch: {
+		open(isOpen) {
+			if (isOpen) document.body.style.overflowY = 'hidden'
+			else document.body.removeAttribute('style')
+		}
+	},
 	name: 'Modal'
 }
 </script>

@@ -15,10 +15,10 @@
 		</form>
 
 		<p>
-			<div v-if="error">
+			<template v-if="error">
 				<span class="has-text-danger">خطایی رخ داد:</span>
 				<b> {{ error | errfmt }}</b>
-			</div>
+			</template>
 			<b v-if="response" class="has-text-success">
 				لینک دانلود پیدا شد!
 			</b>

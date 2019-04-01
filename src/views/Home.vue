@@ -11,6 +11,7 @@
 				</tile>
 			</div>
 		</div>
+		
 		<div class="columns is-vcentered">
 			<div class="column is-5">
 				<tile icon="movies" color="#5716da" href="/filimo"><b>نماوا/فیلیمو</b></tile>
@@ -21,11 +22,24 @@
 			<div class="column">
 				<tile icon="soundcloud" color="#ff7500" button @tap="scModal = true"><b>ساندکلود</b></tile>
 			</div>
+			<soundcloud-modal v-model="scModal" />
 		</div>
+
 		<div class="columns is-mobile is-vcentered is-multiline">
 			<div class="column is-12-mobile is-7-desktop">
 				<tile icon="telegram" color="#2a89b6" small button @tap="getAProxy"><b>پراکسی تلگرام</b></tile>
 			</div>
+			<modal v-model="proxy.open" title="پراکسی تلگرام" close-button="لغو">
+				<template v-if="proxy.loaded">
+					<p>با استفاده از لینک زیر می‌توانید بدون استفاده از فیلترشکن به تلگرام متصل شوید.</p>
+					<div slot="footer">
+						<a class="button is-primary" :href="proxy.url">اتصال</a>
+					</div>
+				</template>
+				<template v-else>
+					<p>لطفا چند لحظه صبر کنید...</p>
+				</template>
+			</modal>
 			<div class="column">
 				<tile icon="omen" color="#bd9548" small><b>فال حافظ</b></tile>
 			</div>
@@ -33,26 +47,13 @@
 				<tile icon="dns" color="#757575" small />
 			</div>
 		</div>
+
 		<p class="is-size-6 has-text-grey" dir="ltr" v-if="loaded">
 			IP: <b>{{ ip }}</b>
 			<br>
 			{{ date }}
 		</p>
 	</div>	
-
-	<modal v-model="proxy.open" title="پراکسی تلگرام" close-button="لغو">
-		<template v-if="proxy.loaded">
-			<p>با استفاده از لینک زیر می‌توانید بدون استفاده از فیلترشکن به تلگرام متصل شوید.</p>
-			<div slot="footer">
-				<a class="button is-primary" :href="proxy.url">اتصال</a>
-			</div>
-		</template>
-		<template v-else>
-			<p>لطفا چند لحظه صبر کنید...</p>
-		</template>
-	</modal>
-
-	<soundcloud-modal v-model="scModal" />
 </section>
 </template>
 <script>
