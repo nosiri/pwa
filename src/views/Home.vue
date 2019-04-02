@@ -22,14 +22,14 @@
 			<div class="column">
 				<tile icon="soundcloud" color="#ff7500" button @tap="scModal = true"><b>ساندکلود</b></tile>
 			</div>
-			<soundcloud-modal v-model="scModal" />
+			<soundcloud-modal v-model="scModal" id="sc-modal" />
 		</div>
 
 		<div class="columns is-mobile is-vcentered is-multiline">
 			<div class="column is-12-mobile is-7-desktop">
 				<tile icon="telegram" color="#2a89b6" small button @tap="getAProxy"><b>پراکسی تلگرام</b></tile>
 			</div>
-			<modal v-model="proxy.open" title="پراکسی تلگرام" close-button="لغو" id="mtp">
+			<modal v-model="proxy.open" title="پراکسی تلگرام" close-button="لغو" id="mtp-modal">
 				<template v-if="proxy.loaded">
 					<p>با استفاده از لینک زیر می‌توانید بدون استفاده از فیلترشکن به تلگرام متصل شوید.</p>
 					<a slot='footer' class="button is-primary" :href="proxy.url">اتصال</a>

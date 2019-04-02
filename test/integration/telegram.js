@@ -7,14 +7,12 @@ context("Telegram MTProxy provider", () => {
 			.click();
 	});
 	it("waits for server response", () => {
-		cy.get("#mtp p").should("contain", "صبر کنید");
+		cy.get("#mtp-modal p").should("contain", "صبر کنید");
 	});
 	it("handles server response", () => {
-		cy.get("#mtp a.button")
+		cy.get("#mtp-modal a.button")
 			.should("exist")
 			.invoke("attr", "href")
-			.should("match", /^tg:\/\//)
-			.get("#mtp button.button")
-			.click();
+			.should("match", /^tg:\/\//);
 	});
 });

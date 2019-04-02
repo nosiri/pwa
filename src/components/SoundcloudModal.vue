@@ -5,28 +5,28 @@
 		</p>
 		<br>
 
-		<form class="columns is-mobile is-vcentered" @submit.prevent="handleSubmit">
+		<form class="columns is-mobile is-vcentered" @submit.stop.prevent="handleSubmit">
 			<div class="column control">
-				<input v-model="url" dir="ltr" class="input" placeholder="https://soundcloud.com/...">
+				<input v-model="url" dir="ltr" class="input" placeholder="soundcloud.com/">
 			</div>
 			<div class="column is-narrow">
 				<button :disabled='!isValid' class="button is-link" :class="{'is-loading': loading}">جستجو</button>
 			</div>
 		</form>
 
-		<p>
-			<template v-if="error">
-				<span class="has-text-danger">خطایی رخ داد:</span>
+		<template v-if="!loading">
+			<p class="has-text-danger" v-if="error">
+				خطایی رخ داد:
 				<b> {{ error | errfmt }}</b>
-			</template>
-			<b v-if="response" class="has-text-success">
+			</p>
+			<p v-else-if="response" class="has-text-success has-text-weight-bold">
 				لینک دانلود پیدا شد!
-			</b>
-		</p>
-		
-		<a slot="footer" :href='response' v-if='response' target="_blank" class="button is-primary">
-			دانلود
-		</a>
+			</p>
+
+			<a slot="footer" :href='response' v-if='response' target="_blank" class="button is-primary">
+				دانلود
+			</a>
+		</template>		
 	</modal>
 </template>
 <script>
