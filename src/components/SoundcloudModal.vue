@@ -10,7 +10,7 @@
 				<input v-model="url" dir="ltr" class="input" placeholder="soundcloud.com/">
 			</div>
 			<div class="column is-narrow">
-				<button :disabled='!isValid' class="button is-link" :class="{'is-loading': loading}">جستجو</button>
+				<btn :disabled='!isValid' color="link" :loading='loading'>جستجو</btn>
 			</div>
 		</form>
 

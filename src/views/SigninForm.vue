@@ -16,7 +16,7 @@
 									</div>
 									<br>
 									<div class="control has-text-centered">
-										<button class="button is-primary is-medium" :disabled="!email" :class="{'is-loading': loading}">ورود</button>
+										<btn class="is-medium" color="primary" :disabled="!email" :loading='loading'>ورود</btn>
 									</div>
 								</form>
 							</div>

@@ -2,7 +2,9 @@ export function animateNumber(callback, to, step = 1) {
 	const absTo = Math.abs(to);
 
 	let range = [];
-	for (let i = 0; i <= absTo / step; i++) range.push(i * step);
+	for (let i = 0; i <= absTo; i++) {
+		if (i % step === 0) range.push(i);
+	}
 	if (range[range.length - 1] !== absTo) range.push(absTo);
 
 	let i = 1;
