@@ -5,9 +5,5 @@ it("navigates on keypress", () => {
 		.get("body")
 		.type("n")
 		.location()
-		.should("have.property", "pathname", "/namava")
-		.get("body")
-		.type("h")
-		.location()
-		.should("have.property", "pathname", "/");
+		.should("have.property", "pathname", "/namava");
 });

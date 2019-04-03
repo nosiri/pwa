@@ -7,7 +7,9 @@ context("Telegram MTProxy provider", () => {
 			.click();
 	});
 	it("waits for server response", () => {
-		cy.get("#mtp-modal p").should("contain", "صبر کنید");
+		cy.get("#mtp-modal p")
+			.eq(1)
+			.should("contain", "صبر کنید");
 	});
 	it("handles server response", () => {
 		cy.get("#mtp-modal a.button")
