@@ -11,9 +11,9 @@
 				</section>
 				<footer class="modal-card-foot">
 					<slot name="footer" />
-						<btn color="dark" v-if="closeButton" @click.native="close">
-							{{ closeButton }}
-						</btn>
+					<btn color="dark" v-if="closeButton" @click.native="close">
+						{{ closeButton }}
+					</btn>
 				</footer>
 			</div>
 			<button class="modal-close is-large" aria-label="close" @click="close"></button>
@@ -38,8 +38,9 @@ export default {
 	},
 	watch: {
 		open(isOpen) {
-			if (isOpen) document.body.style.overflowY = 'hidden'
-			else document.body.removeAttribute('style')
+			const html = document.body.parentElement
+			if (isOpen) html.style.overflowY = 'hidden'
+			else html.removeAttribute('style')
 		}
 	},
 	name: 'Modal'

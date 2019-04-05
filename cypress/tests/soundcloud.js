@@ -18,7 +18,7 @@ context("Soundcloud downloader", () => {
 				.should("be.disabled")
 				.get("input")
 				.clear()
-				.type("soundcloud.com/divarrecords/marg")
+				.type("divarrecords/marg")
 				.get("@submit")
 				.should("be.enabled")
 				.click()
@@ -31,7 +31,7 @@ context("Soundcloud downloader", () => {
 		cy.get("#sc-modal").within(() => {
 			cy.get("input")
 				.clear()
-				.type("soundcloud.com/lolololol/foobarbaz")
+				.type("lolololol/foobarbaz")
 				.get("button")
 				.eq(0)
 				.click()

@@ -32,6 +32,7 @@
 <script>
 import Modal from './Modal.vue'
 import { call } from '../api';
+const URL_REGEX = /^(?:(?:https?:\/\/)?(?:www\.|m\.)?soundcloud\.com\/)?([^/]+)\/([^/]+)$/i
 export default {
 	props: {
 		open: Boolean
@@ -48,7 +49,7 @@ export default {
 	}),
 	computed: {
 		isValid() {
-			return /^(https?:\/\/)?((www|m)\.)?soundcloud\.com\/.+/i.test(this.url) // *shrug*
+			return URL_REGEX.test(this.url)
 		}
 	},
 	methods: {
@@ -58,11 +59,10 @@ export default {
 		async handleSubmit() {
 			if (!this.isValid || this.loading) return;
 			
-			let { url } = this;
-			if (!url.startsWith('http')) url = `https://${url}`
 			this.loading = true
+			const normalizedUrl = 'https://soundcloud.com/' + this.url.replace(URL_REGEX, '$1/$2')
 			try {
-				const { ok, data, status } = await call('/soundcloud', { link: url })
+				const { ok, data, status } = await call('/soundcloud', { link: normalizedUrl })
 				if (ok) {
 					const { link } = data.result
 					this.response = link

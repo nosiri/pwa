@@ -38,6 +38,6 @@ export async function call(path, data = {}) {
 		};
 	} catch ({ message }) {
 		console.log(message);
-		throw "client-error";
+		throw "client-err";
 	}
 }

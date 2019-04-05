@@ -5,7 +5,6 @@ import Btn from "./components/Btn.vue";
 Vue.component("btn", Btn);
 import "./keyboardNavigation";
 import "./filters";
-import "./api";
 import "./registerServiceWorker";
 import "./styles/main.scss";
 
