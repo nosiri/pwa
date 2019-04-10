@@ -31,6 +31,10 @@
 	padding: 0 1rem;
 }
 
+.button {
+	font-weight: $weight-semibold;
+}
+
 .modal-card-foot {
 	justify-content: flex-end;
 	.button:not(:last-child) {
