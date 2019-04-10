@@ -61,6 +61,6 @@ export default {
 	display: none;
 }
 .box {
-	padding: 0.75em 1em;
+	padding: 0.825em;
 }
 </style>

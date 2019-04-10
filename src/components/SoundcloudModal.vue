@@ -30,7 +30,6 @@
 	</modal>
 </template>
 <script>
-import Modal from './Modal.vue'
 import { call } from '../api';
 const URL_REGEX = /^(?:(?:https?:\/\/)?(?:www\.|m\.)?soundcloud\.com\/)?([^/]+)\/([^/]+)$/i
 export default {
@@ -76,7 +75,6 @@ export default {
 				this.loading = false
 			}
 		}
-	},
-	components: { Modal }
+	}
 }
 </script>

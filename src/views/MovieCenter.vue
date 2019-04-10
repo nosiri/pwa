@@ -41,7 +41,6 @@
 </div>
 </template>
 <script>
-import Modal from "../components/Modal.vue";
 import PageHeader from "../components/PageHeader.vue";
 export default {
 	props: {
@@ -72,6 +71,6 @@ export default {
 			}, 1000)
 		}
 	},
-	components: { Modal, PageHeader }
+	components: { PageHeader }
 }
 </script>

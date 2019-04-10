@@ -25,8 +25,8 @@
 			<soundcloud-modal v-model="scModal" id="sc-modal" />
 		</div>
 
-		<div class="columns is-mobile is-vcentered is-multiline">
-			<div class="column is-12-mobile is-7-desktop">
+		<div class="columns is-mobile is-multiline is-vcentered">
+			<div class="column is-full-mobile is-5-tablet">
 				<tile icon="telegram" color="#2a89b6" small button @tap="getAProxy"><b>پراکسی تلگرام</b></tile>
 			</div>
 			<modal v-model="proxy.open" title="پراکسی تلگرام" close-button="لغو" id="mtp-modal">
@@ -39,10 +39,10 @@
 				</template>
 			</modal>
 			<div class="column">
-				<tile icon="omen" color="#bd9548" small><b>فال حافظ</b></tile>
+				<tile icon="word" color="#c25541" small button><b>لغت‌نامه</b></tile>
 			</div>
-			<div class="column is-narrow">
-				<tile icon="dns" color="#757575" small />
+			<div class="column is-3-tablet">
+				<tile icon="omen" color="#bd9548" small><b>فال حافظ</b></tile>
 			</div>
 		</div>
 
@@ -58,7 +58,6 @@
 import { call } from '../api'
 import { animateNumber } from '../utils'
 import Tile from '../components/Tile.vue'
-import Modal from '../components/Modal.vue'
 export default {
 	data: () => ({
 		loaded: false,
@@ -112,7 +111,7 @@ export default {
 		}
 	},
 	components: {
-		Tile, Modal,
+		Tile,
 		SoundcloudModal: () => import('../components/SoundcloudModal.vue')
 	}
 }
