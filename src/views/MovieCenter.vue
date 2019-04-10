@@ -21,10 +21,19 @@
 		<div class="container">
 			<h2 class="title">پیشنهاد</h2>
 			<div class="columns is-multiline">
-				<div class="column is-6-desktop" v-for="i in 70" :key="i">
-					<movie :rate="4.5" release-date="۲۰۱۶" duration="۱:۴۲:۰۷">
-						فیلم شماره {{ i | faNum }}
-					</movie>
+				<div class="column is-6-desktop" v-for="i in 20" :key="i">
+					<a class="box">
+						<div class="columns is-mobile is-vcentered">
+							<div class="column is-narrow">
+								<figure class="image is-64x64"></figure>
+							</div>
+							<div class="column">
+								<div class="title is-size-5">
+									فیلم شماره {{ i | faNum }}
+								</div>
+							</div>
+						</div>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -33,7 +42,6 @@
 </template>
 <script>
 import Modal from "../components/Modal.vue";
-import Movie from "../components/Movie.vue";
 import PageHeader from "../components/PageHeader.vue";
 export default {
 	props: {
@@ -62,11 +70,8 @@ export default {
 			setTimeout(() => {
 				this.loading = false
 			}, 1000)
-		},
-		getLink(id) {
-
 		}
 	},
-	components: { Modal, Movie, PageHeader }
+	components: { Modal, PageHeader }
 }
 </script>

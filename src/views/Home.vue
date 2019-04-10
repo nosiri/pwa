@@ -59,7 +59,6 @@ import { call } from '../api'
 import { animateNumber } from '../utils'
 import Tile from '../components/Tile.vue'
 import Modal from '../components/Modal.vue'
-import SoundcloudModal from '../components/SoundcloudModal.vue'
 export default {
 	data: () => ({
 		loaded: false,
@@ -76,7 +75,7 @@ export default {
 	}),
 	async created() {
 		try {
-			const res = await call('/init', { a: 1 })
+			const res = await call('/init')
 			if (res.ok) {
 				const { result } = res.data
 
@@ -112,6 +111,9 @@ export default {
 			}
 		}
 	},
-	components: { Tile, Modal, SoundcloudModal }
+	components: {
+		Tile, Modal,
+		SoundcloudModal: () => import('../components/SoundcloudModal.vue')
+	}
 }
 </script>
