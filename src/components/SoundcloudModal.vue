@@ -7,7 +7,7 @@
 
 		<form class="columns is-mobile is-vcentered" @submit.stop.prevent="handleSubmit">
 			<div class="column control">
-				<input v-model="url" dir="ltr" class="input" placeholder="soundcloud.com/">
+				<input v-model="url" dir="ltr" class="input" placeholder="soundcloud.com/" :class="{'is-danger': url && !isValid}">
 			</div>
 			<div class="column is-narrow">
 				<btn :disabled='!isValid' color="link" :loading='loading'>جستجو</btn>
