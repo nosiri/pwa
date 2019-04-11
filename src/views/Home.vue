@@ -72,7 +72,7 @@ export default {
 			url: ''
 		}
 	}),
-	async created() {
+	async mounted() {
 		try {
 			const res = await call('/init')
 			if (res.ok) {
@@ -111,8 +111,9 @@ export default {
 		}
 	},
 	components: {
-		Tile,
-		SoundcloudModal: () => import('../components/SoundcloudModal.vue')
+		Tile: () => import("../components/Tile.vue"),
+		SoundcloudModal: () => import("../components/SoundcloudModal.vue"),
+		Modal: () => import("../components/Modal.vue")
 	}
 }
 </script>

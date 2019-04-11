@@ -9,7 +9,6 @@ import "./styles/main.scss";
 Vue.config.productionTip = false;
 
 Vue.component("btn", () => import("./components/Btn.vue"));
-Vue.component("modal", () => import("./components/Modal.vue"));
 
 new Vue({
 	router,

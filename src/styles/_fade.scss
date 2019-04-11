@@ -1,0 +1,15 @@
+@import "vars";
+.fade-enter-active, .fade-leave-active {
+	transition-duration: $speed;
+	transition-timing-function: $easing;
+	transition-property: opacity, transform;
+}
+
+.fade-enter-to, .fade-leave {
+	transform: translateY(0)
+}
+
+.fade-enter, .fade-leave-to {
+	opacity: 0;
+	transform: translateY(3px)
+}

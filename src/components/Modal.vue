@@ -11,7 +11,7 @@
 				</section>
 				<footer class="modal-card-foot">
 					<slot name="footer" />
-					<btn color="lighter" v-if="closeButton" @click.native="close">
+					<btn v-if="closeButton" @click.native="close">
 						{{ closeButton }}
 					</btn>
 				</footer>

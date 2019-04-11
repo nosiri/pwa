@@ -1,6 +1,12 @@
 import Vue from "vue";
 import Router from "vue-router";
 
+const Home = () => import(/* webpackChunkName: "home" */ "./views/Home.vue");
+const MovieCenter = () =>
+	import(/* webpackChunkName: "movie" */ "./views/MovieCenter.vue");
+const YoutubeDownloader = () =>
+	import(/* webpackChunkName: "ytdl" */ "./views/YoutubeDownloader.vue");
+
 Vue.use(Router);
 
 export default new Router({
@@ -9,16 +15,16 @@ export default new Router({
 	routes: [
 		{
 			path: "/",
-			component: () => import("./views/Home.vue")
+			component: Home
 		},
 		{
 			path: "/:provider(namava|filimo)/:id(\\d+)?",
-			component: () => import("./views/MovieCenter.vue"),
+			component: MovieCenter,
 			props: true
 		},
 		{
 			path: "/youtube",
-			component: () => import("./views/YoutubeDownloader.vue")
+			component: YoutubeDownloader
 		}
 	]
 });

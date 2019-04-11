@@ -75,6 +75,9 @@ export default {
 				this.loading = false
 			}
 		}
+	},
+	components: {
+		Modal: () => import("./Modal.vue")
 	}
 }
 </script>

@@ -6,10 +6,7 @@
 <script>
 export default {
 	props: {
-		color: {
-			type: String,
-			default: 'dark'
-		},
+		color: String,
 		outlined: Boolean,
 		loading: Boolean,
 		to: String
@@ -19,7 +16,7 @@ export default {
 			return {
 				'is-loading': this.loading,
 				'is-outlined': this.outlined,
-				[`is-${this.color}`]: true
+				...this.color ? { [`is-${this.color}`]: true } : {}
 			}
 		}
 	}
