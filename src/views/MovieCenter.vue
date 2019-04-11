@@ -9,7 +9,7 @@
 				<div class="column is-narrow">
 					<div class="buttons has-addons">
 						<btn color="link" :disabled="!query" :loading='loading' type="submit" tabindex="2">جستجو</btn>
-						<btn tabindex="1" outlined color="light" :to="isFilimo ? 'namava' : 'filimo'">
+						<btn tabindex="1" outlined color="dark" :to="isFilimo ? 'namava' : 'filimo'">
 							{{ isFilimo ? 'نماوا' : 'فیلیمو' }}
 						</btn>
 					</div>

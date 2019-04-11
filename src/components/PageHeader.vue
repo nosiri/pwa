@@ -1,5 +1,5 @@
 <template>
-	<section class="hero is-dark">
+	<section class="hero" :class="`is-${primary ? 'primary' : 'light'}`">
 		<div class="hero-body">
 			<div class="container">
 				<h1 class="title has-text-weight-bold">{{ title }}</h1>
@@ -11,7 +11,8 @@
 <script>
 export default {
 	props: {
-		title: String
+		title: String,
+		primary: Boolean
 	}
 }
 </script>

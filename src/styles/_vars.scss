@@ -1,6 +1,7 @@
 @import "../../node_modules/bulma/sass/utilities/initial-variables.sass";
 
 // colors
+$white-ter: #f1f1f1;
 $purple: #673ab7;
 $red: #fa574b;
 $primary: $purple;
@@ -20,19 +21,22 @@ $radius: 5px;
 $radius-small: 2.5px;
 $radius-large: 10px;
 
+//light theme
+$body-background-color: mix($white-ter, $white);
+
 // dark theme
-$border: $black;
-$body-background-color: $black-bis;
-$background: $black-ter;
-$box-shadow: 0 2px 5px -1px #0007;
-$link-hover: $grey-lighter;
-$text: $white-ter;
-$text-strong: $white;
-$title-color: $text-strong;
-$box-background-color: $black-ter;
-$input-color: $text;
-$input-background-color: lighten($grey-darker, 5%);
-$input-border-color: $grey;
-$label-color: $text-strong;
-$card-background-color: $grey-darker;
-$modal-card-body-background-color: $grey-darker;
+// $border: $black;
+// $body-background-color: $black-bis;
+// $background: $black-ter;
+// $box-shadow: 0 2px 5px -1px #0007;
+// $link-hover: $grey-lighter;
+// $text: $white-ter;
+// $text-strong: $white;
+// $title-color: $text-strong;
+// $box-background-color: $black-ter;
+// $input-color: $text;
+// $input-background-color: lighten($grey-darker, 5%);
+// $input-border-color: $grey;
+// $label-color: $text-strong;
+// $card-background-color: $grey-darker;
+// $modal-card-body-background-color: $grey-darker;

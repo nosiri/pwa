@@ -57,12 +57,12 @@ export default {
 		width: 100%;
 		padding: 1rem 1.5rem;
 		background: $grey-darker;
-		box-shadow: 0 -5px 20px -2px #0008;
-		max-width: 720px;
+		max-width: 540px;
 	}
 	&.is-active {
 		transform: translateY(0);
 		> div {
+			box-shadow: 0 -5px 20px -2px #0008;
 			pointer-events: auto
 		}
 	}
