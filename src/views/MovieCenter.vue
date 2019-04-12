@@ -17,7 +17,7 @@
 			</div>
 		</form>
 	</page-header>
-	<section class="section">
+	<main class="section">
 		<div class="container">
 			<h2 class="title">پیشنهاد</h2>
 			<div class="columns is-multiline">
@@ -37,7 +37,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</main>
 </div>
 </template>
 <script>

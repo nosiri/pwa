@@ -1,7 +1,7 @@
 <template>
 <div>
 	<page-header title="دانلود از یوتیوب" primary />
-	<section class="section">
+	<main class="section">
 		<div class="container">
 			<transition name="fade" mode="out-in">
 				<div key="a" class="columns" v-if="state === 1 && data">
@@ -9,9 +9,13 @@
 						<video :src="data.link" controls />
 					</div>
 					<div class="column">
-						<h2 class="title" dir="auto">{{ data.title }}</h2>
-						<hr>
-						<btn @click.native="reset">جستجوی دوباره</btn>
+						<template v-if="data.title.trim()">
+							<h2 class="title" dir="auto">{{ data.title }}</h2>
+							<hr>
+						</template>
+						<div class="has-text-centered">
+							<btn @click.native="reset">جستجوی دوباره</btn>
+						</div>
 					</div>
 				</div>
 				<div key="b" class="columns is-vcentered is-center" v-else>
@@ -37,7 +41,7 @@
 				</div>
 			</transition>
 		</div>
-	</section>
+	</main>
 </div>
 </template>
 <script>

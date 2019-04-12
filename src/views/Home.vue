@@ -1,5 +1,5 @@
 <template>
-<section class="section">
+<main class="section">
 	<div class="container">
 		<div class="columns is-mobile is-vcentered">
 			<div class="column">
@@ -25,8 +25,8 @@
 			<soundcloud-modal v-model="scModal" id="sc-modal" />
 		</div>
 
-		<div class="columns is-mobile is-multiline is-vcentered">
-			<div class="column is-full-mobile is-5-tablet">
+		<div class="columns is-multiline is-vcentered">
+			<div class="column is-5">
 				<tile icon="telegram" color="#2a89b6" small button @tap="getAProxy"><b>پراکسی تلگرام</b></tile>
 			</div>
 			<modal v-model="proxy.open" title="پراکسی تلگرام" close-button="لغو" id="mtp-modal">
@@ -41,18 +41,18 @@
 			<div class="column">
 				<tile icon="word" color="#c25541" small button><b>لغت‌نامه</b></tile>
 			</div>
-			<div class="column is-3-tablet">
+			<div class="column is-3">
 				<tile icon="omen" color="#bd9548" small><b>فال حافظ</b></tile>
 			</div>
 		</div>
 
-		<p class="is-size-6 has-text-grey" dir="ltr" v-if="loaded">
+		<p class="is-size-6 has-text-grey-dark" dir="ltr" v-if="loaded">
 			IP: <b>{{ ip }}</b>
 			<br>
 			{{ date }}
 		</p>
 	</div>	
-</section>
+</main>
 </template>
 <script>
 import { call } from '../api'
