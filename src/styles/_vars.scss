@@ -21,6 +21,11 @@ $radius: 5px;
 $radius-small: 2.5px;
 $radius-large: 10px;
 
+// components
+$box-shadow: 0 3px 10px -3px #0002;
+$box-link-hover-shadow: 0 5px 20px -4px #0004;
+$box-link-active-shadow: 0 5px 20px -4px #0005, 0 0 0 2px $link;
+
 //light theme
 $body-background-color: mix($white-ter, $white);
 
@@ -28,7 +33,6 @@ $body-background-color: mix($white-ter, $white);
 // $border: $black;
 // $body-background-color: $black-bis;
 // $background: $black-ter;
-// $box-shadow: 0 2px 5px -1px #0007;
 // $link-hover: $grey-lighter;
 // $text: $white-ter;
 // $text-strong: $white;

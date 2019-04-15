@@ -47,4 +47,8 @@
 	flex-direction: row-reverse;
 }
 
+.box {
+	transition: box-shadow $speed/2 $easing;
+}
+
 @import "fade";
