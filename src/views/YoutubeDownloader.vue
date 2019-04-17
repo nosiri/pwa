@@ -18,7 +18,7 @@
 						</div>
 					</div>
 				</div>
-				<div key="b" class="columns is-vcentered is-center" v-else>
+				<div key="b" class="columns is-vcentered is-center is-variable is-1-mobile" v-else>
 					<div class="column is-4 has-text-centered">
 						<icon name="youtube" size="200" color="red" id="icon"></icon>
 					</div>
@@ -31,7 +31,7 @@
 						<br>
 						<form class="columns is-multiline is-vcentered is-mobile" @submit.prevent="handleSubmit" ref="form">
 							<div class="column control">
-								<input type="url" class="input" placeholder="لینک فیلم" v-model.trim="link" required>
+								<input type="url" dir="ltr" class="input" placeholder="https://youtube.com" v-model.trim="link" required>
 							</div>
 							<div class="column is-narrow">
 								<btn color="primary" :disabled="!isValid" :loading="state === 0" type="submit">دریافت</btn>

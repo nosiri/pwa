@@ -2,7 +2,7 @@
 <div>
 	<page-header :title="isFilimo ? 'فیلیمو' : 'نماوا'" has-tabs>
 		<form @submit.prevent="handleSubmit">
-			<div class="columns is-mobile is-vcentered">
+			<div class="columns is-mobile is-vcentered is-variable is-2-mobile">
 				<div class="column control">
 					<input type="text" v-model="query" class="input" placeholder="جستجو کنید..." dir="auto">
 				</div>

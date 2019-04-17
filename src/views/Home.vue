@@ -1,9 +1,11 @@
 <template>
 <main class="section">
 	<div class="container">
-		<div class="columns is-mobile is-vcentered">
+		<div class="columns is-mobile is-vcentered is-variable is-2-mobile">
 			<div class="column">
-				<tile responsive icon="usd" color="#4a8d4a" small><b>{{ usdPrice | faNum }} تومان</b></tile>			
+				<tile responsive icon="usd" color="#4a8d4a" small href="/currencies">
+					<b>{{ usdPrice | faNum }} تومان</b>
+				</tile>			
 			</div>
 			<div class="column is-6-desktop">
 				<tile responsive icon="weather-pouring" color="#6c8397" small>
@@ -57,7 +59,6 @@
 <script>
 import { call } from '../api'
 import { animateNumber } from '../utils'
-import Tile from '../components/Tile.vue'
 export default {
 	data: () => ({
 		loaded: false,
@@ -112,6 +113,7 @@ export default {
 	},
 	components: {
 		Tile: () => import("../components/Tile.vue"),
+		Snackbar: () => import("../components/Snackbar.vue"),
 		SoundcloudModal: () => import("../components/SoundcloudModal.vue"),
 		Modal: () => import("../components/Modal.vue")
 	}
