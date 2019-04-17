@@ -39,7 +39,14 @@ export default {
 	watch: {
 		open(isOpen) {
 			const html = document.body.parentElement
-			if (isOpen) html.style.overflowY = 'hidden'
+			if (isOpen) {
+				html.style.overflowY = 'hidden'
+
+				this.$nextTick(() => {
+					const input = this.$el.querySelector('input')
+					if (input) input.focus()
+				})
+			}
 			else html.removeAttribute('style')
 		}
 	},

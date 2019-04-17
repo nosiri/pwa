@@ -1,5 +1,6 @@
-export function animateNumber(callback, to, step = 1) {
-	const absTo = Math.abs(to);
+export function animateNumber(callback, to) {
+	const absTo = Math.abs(to),
+		step = Math.max((to / 100) >> 0, 1);
 
 	let range = [];
 	for (let i = 0; i <= absTo; i++) {

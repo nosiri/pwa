@@ -51,7 +51,7 @@
 		<p class="is-size-6 has-text-grey-dark" dir="ltr" v-if="loaded">
 			IP: <b>{{ ip }}</b>
 			<br>
-			{{ date }}
+			{{ date | faNum }}
 		</p>
 	</div>	
 </main>
@@ -84,7 +84,7 @@ export default {
 				
 				animateNumber(i => {
 					this.usdPrice = i
-				}, result.dollar, 200)
+				}, result.dollar)
 	
 				const w = result.weather.result.weather,
 				c = +(w.match(/[-+]?\d+/) || 0);
