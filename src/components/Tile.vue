@@ -52,6 +52,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@import "~bulma/sass/utilities/mixins";
 .icon {
 	display: flex;
 	align-items: center;
@@ -62,5 +63,12 @@ export default {
 }
 .box {
 	padding: 0.825em;
+	> .columns:not(.is-mobile) {
+		@include mobile {
+			.column:first-child {
+				padding-bottom: 0;
+			}
+		}
+	}
 }
 </style>
