@@ -2,7 +2,7 @@
 	<header class="hero" :class="classNames">
 		<div class="hero-body">
 			<div class="container">
-				<h1 class="title has-text-weight-bold">{{ title }}</h1>
+				<h1 v-if="title" class="title has-text-weight-bold">{{ title }}</h1>
 				<slot />
 			</div>
 		</div>
