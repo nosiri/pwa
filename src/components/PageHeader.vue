@@ -1,5 +1,5 @@
 <template>
-	<header class="hero" :class="`is-${primary ? 'primary' : 'light'}`">
+	<header class="hero" :class="classNames">
 		<div class="hero-body">
 			<div class="container">
 				<h1 class="title has-text-weight-bold">{{ title }}</h1>
@@ -12,7 +12,16 @@
 export default {
 	props: {
 		title: String,
-		primary: Boolean
+		primary: Boolean,
+		small: Boolean
+	},
+	computed: {
+		classNames() {
+			return {
+				[`is-${this.primary ? 'primary' : 'light'}`]: true,
+				"is-small": this.small
+			}
+		}
 	}
 }
 </script>

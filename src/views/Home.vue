@@ -28,7 +28,8 @@ main.section
 					a.button.is-primary(slot='footer' :href="proxy_link") اتصال
 				p(v-else) لطفا چند لحظه صبر کنید...
 			.column
-				tile(icon="word" color="#c25541" small button responsive): b لغت‌نامه
+				tile(icon="word" color="#c25541" small href='/dictionary' responsive)
+					b لغت‌نامه
 			.column.is-3-desktop
 				tile(icon="omen" color="#bd9548" small button responsive): b فال حافظ
 		p.is-size-6.has-text-grey-dark(dir="ltr" v-if="init_state === 1")

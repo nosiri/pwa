@@ -4,7 +4,8 @@ const ROUTES = {
 	"": ["/", "h"],
 	filimo: "f",
 	namava: "n",
-	youtube: "y"
+	youtube: "y",
+	dictionary: "d"
 };
 
 window.addEventListener("keypress", ev => {
