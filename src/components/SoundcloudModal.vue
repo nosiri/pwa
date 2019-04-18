@@ -61,12 +61,12 @@ export default {
 			this.loading = true
 			const normalizedUrl = 'https://soundcloud.com/' + this.url.replace(URL_REGEX, '$1/$2')
 			try {
-				const { ok, data, status } = await call('/soundcloud', { link: normalizedUrl })
+				const { ok, data, error } = await call('/soundcloud', { link: normalizedUrl })
 				if (ok) {
 					const { link } = data.result
 					this.response = link
 					this.error = ''
-				} else throw status
+				} else throw error
 			} catch (e) {
 				console.log(e);
 				this.error = e

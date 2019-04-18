@@ -71,7 +71,7 @@ export default {
 					this.data = res.data.result
 					const { title, link } = res.data.result
 					console.log(title + ': ' + link);
-				} else throw res.status
+				} else throw res.error
 			} catch (e) {
 				this.state = 2
 				console.log(e)

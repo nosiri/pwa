@@ -7,7 +7,7 @@ main.section
 					b {{ init_usd | faNum }} تومان
 			.column
 				tile(responsive icon="weather-pouring" color="#6c8397" small)
-					| تهران:
+					| تهران: 
 					b(dir="ltr") {{ init_temperature | faNum }}&deg;
 		.columns.is-vcentered
 			.column.is-5
@@ -36,7 +36,7 @@ main.section
 			b {{ init_ip }}
 			br
 			b {{ init_date | faNum }}
-		snackbar(v-if="init_state === 2" v-model="init_err_snack" :duration='10000')
+		snackbar(v-if='init_state === 2' v-model="init_err_snack" :duration='10000')
 			| خطایی رخ داد:  
 			b {{ init_err | errfmt }}
 </template>
@@ -77,12 +77,14 @@ export default {
 					this.init_temperature = i
 				}, c)
 				this.init_state = 1
-			} else throw res.status
+			} else throw res.error
 		} catch (e) {
 			console.log(e)
 			this.init_state = 2
 			this.init_err = e
-			this.init_err_snack = true
+			this.$nextTick(() => {
+				this.init_err_snack = true
+			})
 		}
 	},
 	methods: {
