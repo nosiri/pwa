@@ -88,7 +88,7 @@ export default {
 	methods: {
 		getAProxy() {
 			this.proxy_open = true
-			if (!this.proxy.loaded) {
+			if (!this.proxy_loaded) {
 				call('/proxy').then(({ data, ok }) => {
 					if (ok) {
 						const link = data.result.proxy
