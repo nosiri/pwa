@@ -11,5 +11,5 @@ const faNum = string => {
 Vue.filter("faNum", faNum);
 
 /** @param {string} err */
-const formatErrorCode = err => ERR_CODES[err] || `خطای ${err}`;
+const formatErrorCode = err => faNum(ERR_CODES[err] || `خطای ${err}`);
 Vue.filter("errfmt", formatErrorCode);

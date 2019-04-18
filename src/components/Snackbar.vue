@@ -27,14 +27,18 @@ export default {
 			this.$emit("toggle", false)
 		}
 	},
-	watch: {
-		active(b) {
+	mounted() {
+		this.$watch('active', b => {
 			if (b) {
 				this.timeout = setTimeout(() => {
 					this.close()
 				}, this.duration);
-			} else clearTimeout(this.timeout)
-		}
+			} else {
+				clearTimeout(this.timeout)
+			}
+		}, {
+			immediate: true
+		})
 	}
 }
 </script>

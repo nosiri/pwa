@@ -1,6 +1,6 @@
 <template>
 <component :is='tagName' v-bind="attrs" :class="`is-size-${small ? 5 : 4}`" class="box" @click='onClick($event)'>
-	<div class="columns is-vcentered has-text-right" :class="classNames">
+	<div class="columns is-variable is-3 is-vcentered has-text-right" :class="columnClassNames">
 		<div class="column is-narrow icon">
 			<icon :name="icon" size="2.75em" :color="color" />
 		</div>
@@ -22,7 +22,7 @@ export default {
 		button: Boolean
 	},
 	computed: {
-		classNames() {
+		columnClassNames() {
 			return {
 				"is-mobile": !this.responsive,
 				"has-text-centered-mobile": this.responsive
@@ -51,7 +51,7 @@ export default {
 	components: { Icon }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
 .icon {
 	display: flex;
 	align-items: center;

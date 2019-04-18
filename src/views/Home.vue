@@ -4,11 +4,11 @@ main.section
 		.columns.is-mobile.is-vcentered.is-variable.is-2-mobile
 			.column
 				tile(responsive icon="usd" color="#4a8d4a" small href="/currencies")
-					b {{ usdPrice | faNum }} تومان
+					b {{ init_usd | faNum }} تومان
 			.column
 				tile(responsive icon="weather-pouring" color="#6c8397" small)
 					| تهران:
-					b(dir="ltr") {{ temperature | faNum }}&deg;
+					b(dir="ltr") {{ init_temperature | faNum }}&deg;
 		.columns.is-vcentered
 			.column.is-5
 				tile(icon="movies" color="#5716da" href="/filimo"): b نماوا/فیلیمو
@@ -18,24 +18,27 @@ main.section
 				tile(icon="soundcloud" color="#ff7500" button @tap="scModal = true")
 					b ساندکلود
 			soundcloud-modal#sc-modal(v-model="scModal")
-		.columns.is-multiline.is-vcentered
-			.column.is-5
+		.columns.is-multiline.is-vcentered.is-mobile.is-variable.is-2-mobile
+			.column.is-5-desktop.is-12-mobile
 				tile(icon="telegram" color="#2a89b6" small button @tap="getAProxy")
 					b پراکسی تلگرام
-			modal#mtp-modal(v-model="proxy.open" title="پراکسی تلگرام" close-button="لغو")
-				template(v-if="proxy.loaded")
+			modal#mtp-modal(v-model="proxy_open" title="پراکسی تلگرام" close-button="لغو")
+				template(v-if="proxy_loaded")
 					p با استفاده از لینک زیر می‌توانید بدون استفاده از فیلترشکن به تلگرام متصل شوید.
-					a(slot='footer' class="button is-primary" :href="proxy.url") اتصال
+					a.button.is-primary(slot='footer' :href="proxy_link") اتصال
 				p(v-else) لطفا چند لحظه صبر کنید...
 			.column
-				tile(icon="word" color="#c25541" small button): b لغت‌نامه
-			.column.is-3
-				tile(icon="omen" color="#bd9548" small): b فال حافظ
-		p.is-size-6.has-text-grey-dark(dir="ltr" v-if="loaded")
+				tile(icon="word" color="#c25541" small button responsive): b لغت‌نامه
+			.column.is-3-desktop
+				tile(icon="omen" color="#bd9548" small button responsive): b فال حافظ
+		p.is-size-6.has-text-grey-dark(dir="ltr" v-if="init_state === 1")
 			| IP: 
-			b {{ ip }}
+			b {{ init_ip }}
 			br
-			b {{ date | faNum }}
+			b {{ init_date | faNum }}
+		snackbar(v-if="init_state === 2" v-model="init_err_snack" :duration='10000')
+			| خطایی رخ داد:  
+			b {{ init_err | errfmt }}
 </template>
 <script>
 import { call } from '../api'
@@ -43,17 +46,17 @@ import { animateNumber } from '../utils'
 import Tile from "../components/Tile.vue"
 export default {
 	data: () => ({
-		loaded: false,
-		usdPrice: 0,
-		temperature: 0,
-		ip: '',
-		date: '',
 		scModal: false,
-		proxy: {
-			open: false,
-			loaded: false,
-			url: ''
-		}
+		init_state: 0,
+		init_err: null,
+		init_err_snack: false,
+		init_ip: '',
+		init_date: '',
+		init_usd: 0,
+		init_temperature: 0,
+		proxy_open: false,
+		proxy_loaded: false,
+		proxy_link: ''
 	}),
 	async mounted() {
 		try {
@@ -61,33 +64,36 @@ export default {
 			if (res.ok) {
 				const { result } = res.data
 
-				this.ip = result.ip
-				this.date = result.date
+				this.init_ip = result.ip
+				this.init_date = result.date
 				
 				animateNumber(i => {
-					this.usdPrice = i
+					this.init_usd = i
 				}, result.dollar)
 	
 				const w = result.weather.result.weather,
 				c = +(w.match(/[-+]?\d+/) || 0);
 				animateNumber(i => {
-					this.temperature = i
+					this.init_temperature = i
 				}, c)
-				this.loaded = true
+				this.init_state = 1
 			} else throw res.status
 		} catch (e) {
 			console.log(e)
+			this.init_state = 2
+			this.init_err = e
+			this.init_err_snack = true
 		}
 	},
 	methods: {
 		getAProxy() {
-			this.proxy.open = true
+			this.proxy_open = true
 			if (!this.proxy.loaded) {
 				call('/proxy').then(({ data, ok }) => {
 					if (ok) {
 						const link = data.result.proxy
-						this.proxy.loaded = true
-						this.proxy.url = link
+						this.proxy_loaded = true
+						this.proxy_link = link
 					}
 				})
 			}
@@ -96,6 +102,7 @@ export default {
 	components: {
 		Tile,
 		SoundcloudModal: () => import("../components/SoundcloudModal.vue"),
+		Snackbar: () => import("../components/Snackbar.vue"),
 		Modal: () => import("../components/Modal.vue")
 	}
 }
