@@ -7,9 +7,10 @@
 	<signin-form v-else />
 </template>
 <script>
-import SigninForm from './views/SigninForm.vue'
 export default {
-	components: { SigninForm },
+	components: {
+		SigninForm: () => import(/* webpackChunkName: "signin" */'./views/SigninForm.vue')
+	},
 	data: () => ({
 		hasLoggedIn: !0
 	})

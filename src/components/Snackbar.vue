@@ -1,6 +1,6 @@
 <template>
 	<div class="snackbar" :class="{ 'is-active': active }" @click="close">
-		<div>
+		<div @click.self="close">
 			<slot></slot>
 		</div>
 	</div>
@@ -49,20 +49,27 @@ export default {
 	align-items: center;
 	justify-content: center;
 	pointer-events: none;
-	transition: transform $speed $easing;
+	transition: $speed*1.5 $easing;
 	z-index: 10;
 	transform: translateY(100%);
+	opacity: .75;
 	> div {
+		transition: inherit;
 		cursor: pointer;
 		width: 100%;
 		padding: 1rem 1.5rem;
 		background: $grey-darker;
+		color: $white;
 		max-width: 540px;
+		opacity: 0;
+		border-radius: $radius-small $radius-small 0 0
 	}
 	&.is-active {
 		transform: translateY(0);
+		opacity: 1;
 		> div {
-			box-shadow: 0 -5px 20px -2px #0008;
+			opacity: 1;
+			box-shadow: 0 5px 35px -2px #000a;
 			pointer-events: auto
 		}
 	}

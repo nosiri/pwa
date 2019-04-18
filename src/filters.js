@@ -5,8 +5,8 @@ import ERR_CODES from "./errors.json";
 const faNum = string => {
 	if (typeof string === "number") string = string.toString();
 	return string
-		.replace(/\d/g, n => String.fromCodePoint(n.codePointAt(0) + 1728))
-		.replace(/\./g, "/");
+		.replace(/(\d)?\.(\d)/g, "$1/$2")
+		.replace(/\d/g, n => String.fromCodePoint(n.codePointAt(0) + 1728));
 };
 Vue.filter("faNum", faNum);
 
