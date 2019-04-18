@@ -7,7 +7,7 @@ const MovieCenter = () =>
 const YoutubeDownloader = () =>
 	import(/* webpackChunkName: "ytdl" */ "./views/YoutubeDownloader.vue");
 const Dictionary = () =>
-	import(/* webpackChunkName: "ytdl" */ "./views/Dictionary.vue");
+	import(/* webpackChunkName: "dict" */ "./views/Dictionary.vue");
 
 Vue.use(Router);
 
