@@ -23,7 +23,7 @@ export async function call(path, data = {}) {
 					  }
 					: {}
 			),
-			{ status, ok } = response;
+			{ status } = response;
 
 		let data;
 		try {
@@ -31,10 +31,12 @@ export async function call(path, data = {}) {
 		} catch {
 			data = {};
 		}
+		const ok = response.ok && data.ok;
 		return {
 			status,
+			data,
 			ok,
-			data
+			error: ok ? null : data.error || status
 		};
 	} catch ({ message }) {
 		console.log(message);
