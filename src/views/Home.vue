@@ -37,7 +37,7 @@ main.section
 			b {{ init_ip }}
 			br
 			b {{ init_date | faNum }}
-		snackbar(v-if='init_state === 2' v-model="init_err_snack" :duration='10000')
+		snackbar(v-model="init_err_snack" :duration='10')
 			| خطایی رخ داد:  
 			b {{ init_err | errfmt }}
 </template>
@@ -72,11 +72,13 @@ export default {
 					this.init_usd = i
 				}, result.dollar)
 	
-				const w = result.weather.result.weather,
-				c = +(w.match(/[-+]?\d+/) || 0);
-				animateNumber(i => {
-					this.init_temperature = i
-				}, c)
+				// if (result.weather.ok) {
+				// 	const w = result.weather.result.weather,
+				// 	c = +(w.match(/[-+]?\d+/) || 0);
+				// 	animateNumber(i => {
+				// 		this.init_temperature = i
+				// 	}, c)
+				// }
 				this.init_state = 1
 			} else throw res.error
 		} catch (e) {
@@ -105,7 +107,6 @@ export default {
 	components: {
 		Tile,
 		SoundcloudModal: () => import("../components/SoundcloudModal.vue"),
-		Snackbar: () => import("../components/Snackbar.vue"),
 		Modal: () => import("../components/Modal.vue")
 	}
 }

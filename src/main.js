@@ -8,7 +8,12 @@ import "./styles/main.scss";
 
 Vue.config.productionTip = false;
 
-Vue.component("btn", () => import("./components/Btn.vue"));
+Vue.component("btn", () =>
+	import(/* webpackChunkName: "btn" */ "./components/Btn.vue")
+);
+Vue.component("snackbar", () =>
+	import(/* webpackChunkName: "snackbar" */ "./components/Snackbar.vue")
+);
 
 new Vue({
 	router,
