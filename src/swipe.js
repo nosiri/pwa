@@ -1,4 +1,5 @@
 import router from "./router";
+import { isInput } from "./utils";
 
 /** @type {Array<{ x: number, y: number }>} */
 let records = [];
@@ -8,8 +9,8 @@ window.addEventListener("touchmove", ({ targetTouches: touches }) => {
 	records.push({ x, y });
 });
 
-window.addEventListener("touchend", () => {
-	if (records.length >= 2) {
+window.addEventListener("touchend", ({ target }) => {
+	if (!isInput(target) && records.length >= 2) {
 		const [first] = records,
 			last = records[records.length - 1];
 

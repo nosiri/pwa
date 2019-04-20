@@ -37,7 +37,7 @@ main.section
 			b {{ init_ip }}
 			br
 			b {{ init_date | faNum }}
-		snackbar(v-model="init_err_snack" :duration='10')
+		snackbar(v-model="init_err_snack")
 			| خطایی رخ داد:  
 			b {{ init_err | errfmt }}
 </template>
