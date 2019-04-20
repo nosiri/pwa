@@ -6,6 +6,12 @@ import "./swipe";
 import "./filters";
 import "./registerServiceWorker";
 import "./styles/main.scss";
+import * as lf from "localforage";
+
+lf.config({
+	name: "app",
+	storeName: "store"
+});
 
 Vue.config.productionTip = false;
 
