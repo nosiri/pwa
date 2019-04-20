@@ -1,5 +1,5 @@
 <template>
-	<transition v-if="hasLoggedIn" name="fade" mode="out-in">
+	<transition v-if="hasLoggedIn" name="route" mode="out-in">
 		<keep-alive>
 			<router-view class="rv" /> 
 		</keep-alive>

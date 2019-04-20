@@ -62,6 +62,11 @@ export default {
 			}
 		}
 	},
+	beforeRouteEnter(_to, _from, next) {
+		next(vm => {
+			if (vm.word) vm.query = vm.word
+		})
+	},
 	components: { PageHeader }
 }
 </script>

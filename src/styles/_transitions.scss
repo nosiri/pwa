@@ -1,29 +1,37 @@
 @import "vars";
-.fade-enter-active, .fade-leave-active {
+.route-enter-active, .route-leave-active {
 	transition-duration: $speed;
 	transition-timing-function: $easing;
 	transition-property: opacity, transform;
 }
 
-.fade-enter-to, .fade-leave {
+.route-enter-to, .route-leave {
 	transform: translateY(0)
 }
 
-.fade-enter, .fade-leave-to {
+.route-enter, .route-leave-to {
 	opacity: 0;
 	transform: translateY(12px)
 }
 
-.snackbar-transition-enter-active, .snackbar-transition-leave-active {
+.fade-enter-active, .fade-leave-active {
+	transition: opacity $speed $easing
+}
+
+.fade-enter, .fade-leave-to {
+	opacity: 0;
+}
+
+.snack-enter-active, .snack-leave-active {
 	transition-duration: .12s;
 	transition-property: opacity, transform;
 }
 
-.snackbar-transition-enter-to, .snackbar-transition-leave {
+.snack-enter-to, .snack-leave {
 	transform: translateY(0);
 }
 
-.snackbar-transition-enter, .snackbar-transition-leave-to {
+.snack-enter, .snack-leave-to {
 	opacity: 0;
 	transform: translateY(50%)
 }

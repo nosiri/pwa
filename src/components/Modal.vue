@@ -1,24 +1,24 @@
 <template>
-	<div class="modal" :class="{ 'is-active': open }">
-		<template v-if="open">
-			<div class="modal-background" @click.self="close"></div>
-			<div class="modal-card">
-				<header class="modal-card-head">
-					<p class="modal-card-title">{{ title }}</p>
-				</header>
-				<section class="modal-card-body">
-					<slot></slot>
-				</section>
-				<footer class="modal-card-foot">
-					<slot name="footer" />
-					<btn v-if="closeButton" @click.native="close">
-						{{ closeButton }}
-					</btn>
-				</footer>
-			</div>
-			<button class="modal-close is-large" aria-label="close" @click="close"></button>
-		</template>
+<transition name="fade">
+	<div class="modal is-active" v-if='open'>
+		<div class="modal-background" @click.self="close"></div>
+		<div class="modal-card">
+			<header class="modal-card-head">
+				<p class="modal-card-title">{{ title }}</p>
+			</header>
+			<section class="modal-card-body">
+				<slot></slot>
+			</section>
+			<footer class="modal-card-foot">
+				<slot name="footer" />
+				<btn v-if="closeButton" @click.native="close">
+					{{ closeButton }}
+				</btn>
+			</footer>
+		</div>
+		<button class="modal-close is-large" aria-label="close" @click="close"></button>
 	</div>
+</transition>
 </template>
 <script>
 export default {

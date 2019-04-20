@@ -1,5 +1,5 @@
 <template>
-<transition name="snackbar-transition">
+<transition name="snack">
 	<div class="snackbar is-active" @click="close" v-if="active">
 		<div @click.self="close">
 			<slot></slot>

@@ -104,6 +104,11 @@ export default {
 			}
 		}
 	},
+	beforeRouteEnter(_to, _from, next) {
+		next(vm => {
+			if (vm.init_err && !vm.init_err_snack) vm.init_err_snack = true
+		})	
+	},
 	components: {
 		Tile,
 		SoundcloudModal: () => import("../components/SoundcloudModal.vue"),
