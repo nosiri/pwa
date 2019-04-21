@@ -6,6 +6,8 @@ const MovieCenter = () =>
 	import(/* webpackChunkName: "movie" */ "./views/MovieCenter.vue");
 const YoutubeDownloader = () =>
 	import(/* webpackChunkName: "ytdl" */ "./views/YoutubeDownloader.vue");
+const Dictionary = () =>
+	import(/* webpackChunkName: "dict" */ "./views/Dictionary.vue");
 
 Vue.use(Router);
 
@@ -25,6 +27,10 @@ export default new Router({
 		{
 			path: "/youtube",
 			component: YoutubeDownloader
+		},
+		{
+			path: "/dictionary",
+			component: Dictionary
 		}
 	]
 });

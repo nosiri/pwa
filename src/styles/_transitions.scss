@@ -1,0 +1,37 @@
+@import "vars";
+.route-enter-active, .route-leave-active {
+	transition-duration: $speed;
+	transition-timing-function: $easing;
+	transition-property: opacity, transform;
+}
+
+.route-enter-to, .route-leave {
+	transform: translateY(0)
+}
+
+.route-enter, .route-leave-to {
+	opacity: 0;
+	transform: translateY(12px)
+}
+
+.fade-enter-active, .fade-leave-active {
+	transition: opacity $speed $easing
+}
+
+.fade-enter, .fade-leave-to {
+	opacity: 0;
+}
+
+.snack-enter-active, .snack-leave-active {
+	transition-duration: .12s;
+	transition-property: opacity, transform;
+}
+
+.snack-enter-to, .snack-leave {
+	transform: translateY(0);
+}
+
+.snack-enter, .snack-leave-to {
+	opacity: 0;
+	transform: translateY(50%)
+}

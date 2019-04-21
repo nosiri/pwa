@@ -1,9 +1,11 @@
 <template>
-	<div class="snackbar" :class="{ 'is-active': active }" @click="close">
+<transition name="snack">
+	<div class="snackbar is-active" @click="close" v-if="active">
 		<div @click.self="close">
 			<slot></slot>
 		</div>
 	</div>
+</transition>
 </template>
 <script>
 export default {
@@ -14,7 +16,7 @@ export default {
 		},
 		duration: {
 			type: Number,
-			default: 5000
+			default: 5
 		}
 	},
 	model: {
@@ -32,7 +34,7 @@ export default {
 			if (b) {
 				this.timeout = setTimeout(() => {
 					this.close()
-				}, this.duration);
+				}, this.duration * 1000);
 			} else {
 				clearTimeout(this.timeout)
 			}
@@ -53,10 +55,7 @@ export default {
 	align-items: center;
 	justify-content: center;
 	pointer-events: none;
-	transition: $speed*1.5 $easing;
 	z-index: 10;
-	transform: translateY(100%);
-	opacity: .75;
 	> div {
 		transition: inherit;
 		cursor: pointer;
@@ -65,17 +64,9 @@ export default {
 		background: $grey-darker;
 		color: $white;
 		max-width: 540px;
-		opacity: 0;
-		border-radius: $radius-small $radius-small 0 0
-	}
-	&.is-active {
-		transform: translateY(0);
-		opacity: 1;
-		> div {
-			opacity: 1;
-			box-shadow: 0 5px 35px -2px #000a;
-			pointer-events: auto
-		}
+		border-radius: $radius-small $radius-small 0 0;
+		box-shadow: 0 5px 35px -2px #000a;
+		pointer-events: auto
 	}
 }
 </style>

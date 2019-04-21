@@ -16,3 +16,6 @@ export function animateNumber(callback, to) {
 		if (i === range.length) clearInterval(timer);
 	}, 1000 / range.length);
 }
+
+/** @param {Element} el */
+export const isInput = ({ tagName }) => tagName.toLowerCase() === "input";

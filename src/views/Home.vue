@@ -28,7 +28,8 @@ main.section
 					a.button.is-primary(slot='footer' :href="proxy_link") اتصال
 				p(v-else) لطفا چند لحظه صبر کنید...
 			.column
-				tile(icon="word" color="#c25541" small button responsive): b لغت‌نامه
+				tile(icon="word" color="#c25541" small href='/dictionary' responsive)
+					b لغت‌نامه
 			.column.is-3-desktop
 				tile(icon="omen" color="#bd9548" small button responsive): b فال حافظ
 		p.is-size-6.has-text-grey-dark(dir="ltr" v-if="init_state === 1")
@@ -36,7 +37,7 @@ main.section
 			b {{ init_ip }}
 			br
 			b {{ init_date | faNum }}
-		snackbar(v-if='init_state === 2' v-model="init_err_snack" :duration='10000')
+		snackbar(v-model="init_err_snack")
 			| خطایی رخ داد:  
 			b {{ init_err | errfmt }}
 </template>
@@ -71,11 +72,13 @@ export default {
 					this.init_usd = i
 				}, result.dollar)
 	
-				const w = result.weather.result.weather,
-				c = +(w.match(/[-+]?\d+/) || 0);
-				animateNumber(i => {
-					this.init_temperature = i
-				}, c)
+				// if (result.weather.ok) {
+				// 	const w = result.weather.result.weather,
+				// 	c = +(w.match(/[-+]?\d+/) || 0);
+				// 	animateNumber(i => {
+				// 		this.init_temperature = i
+				// 	}, c)
+				// }
 				this.init_state = 1
 			} else throw res.error
 		} catch (e) {
@@ -101,10 +104,14 @@ export default {
 			}
 		}
 	},
+	beforeRouteEnter(_to, _from, next) {
+		next(vm => {
+			if (vm.init_err && !vm.init_err_snack) vm.init_err_snack = true
+		})	
+	},
 	components: {
 		Tile,
 		SoundcloudModal: () => import("../components/SoundcloudModal.vue"),
-		Snackbar: () => import("../components/Snackbar.vue"),
 		Modal: () => import("../components/Modal.vue")
 	}
 }
