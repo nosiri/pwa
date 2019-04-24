@@ -35,6 +35,7 @@
 			</transition>
 		</div>
 	</main>
+	<snackbar v-model="error_snack" :duration="3">{{ data | errfmt }}</snackbar>
 </div>
 </template>
 <script>
@@ -46,7 +47,8 @@ export default {
 	data: () => ({
 		link: '',
 		state: null,
-		data: null
+		data: null,
+		error_snack: false
 	}),
 	methods: {
 		reset() {
@@ -59,14 +61,15 @@ export default {
 			try {
 				const res = await call('/youtube', { link: this.link })
 				if (res.ok) {
+					this.error_snack = false
 					this.state = 1
 					this.data = res.data.result
 					const { title, link } = res.data.result
-					console.log(title + ': ' + link);
 				} else throw res.error
 			} catch (e) {
 				this.state = 2
-				console.log(e)
+				this.data = e
+				this.error_snack = true
 			}
 		},
 		isValidUrl: url => /^https?:\/\//i.test(url)
