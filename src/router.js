@@ -20,9 +20,8 @@ export default new Router({
 			component: Home
 		},
 		{
-			path: "/:provider(namava|filimo)/:id(\\d+)?",
-			component: MovieCenter,
-			props: true
+			path: "/movies/:uid(\\d+)?",
+			component: MovieCenter
 		},
 		{
 			path: "/youtube",

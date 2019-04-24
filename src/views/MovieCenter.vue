@@ -1,66 +1,31 @@
-<template>
-<div>
-	<page-header :title="isFilimo ? 'فیلیمو' : 'نماوا'" has-tabs>
-		<form @submit.prevent="handleSubmit">
-			<div class="columns is-mobile is-vcentered is-variable is-2-mobile">
-				<div class="column control">
-					<input type="text" v-model="query" class="input" placeholder="جستجو کنید..." dir="auto">
-				</div>
-				<div class="column is-narrow">
-					<div class="buttons has-addons">
-						<btn color="link" :disabled="!query" :loading='loading' type="submit" tabindex="2">جستجو</btn>
-						<btn tabindex="1" outlined color="dark" :to="isFilimo ? 'namava' : 'filimo'">
-							{{ isFilimo ? 'نماوا' : 'فیلیمو' }}
-						</btn>
-					</div>
-				</div>
-			</div>
-		</form>
-	</page-header>
-	<main class="section">
-		<div class="container">
-			<h2 class="title">پیشنهاد</h2>
-			<div class="columns is-multiline">
-				<div class="column is-6-desktop" v-for="i in 20" :key="i">
-					<a class="box">
-						<div class="columns is-mobile is-vcentered">
-							<div class="column is-narrow">
-								<figure class="image is-64x64"></figure>
-							</div>
-							<div class="column">
-								<div class="title is-size-5">
-									فیلم شماره {{ i | faNum }}
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
-		</div>
-	</main>
-</div>
+<template lang="pug">
+div
+	page-header(title="سینما"): form(@submit.prevent='handleSubmit')
+		.columns.is-vcentered.is-variable.is-2-mobile.is-mobile
+			.column.control
+				input.input(v-model='query' dir='auto' placeholder='نام فیلم')
+			.column.is-narrow
+				btn(color='primary' :loading='loading' :disabled='!query') جستجو
+	main.section: .container: .columns.is-multiline
+		.column.is-6-desktop(v-for="i in 20" :key="i")
+			box(button small)
+				figure.image.is-48x48(slot='avatar')
+				b فیلم شماره {{ i | faNum }}
 </template>
 <script>
 import PageHeader from "../components/PageHeader.vue";
+import Box from "../components/Box.vue";
+import Modal from "../components/Modal.vue";
 export default {
 	props: {
-		provider: {
-			type: String,
-			required: true
-		},
-		id: String
+		uid: String
 	},
 	data: () => ({
 		loading: false,
-		/** @type {Array<{ id: number, title: string }>} */
 		results: [],
 		query: '',
+		provider: 0
 	}),
-	computed: {
-		isFilimo() {
-			return this.provider === 'filimo'
-		}
-	},
 	methods: {
 		handleSubmit() {
 			if (!this.query) return
@@ -71,6 +36,8 @@ export default {
 			}, 1000)
 		}
 	},
-	components: { PageHeader }
+	components: {
+		PageHeader, Box, Modal
+	}
 }
 </script>

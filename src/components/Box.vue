@@ -1,8 +1,10 @@
 <template>
-<component :is='tagName' v-bind="attrs" :class="`is-size-${small ? 5 : 4}`" class="box" @click='onClick($event)'>
+<component :is='tagName' v-bind="attrs" :class="`is-size-${small ? 5 : 4}`" class="box" @click='handleClick($event)'>
 	<div class="columns is-variable is-3 is-vcentered has-text-right" :class="columnClassNames">
 		<div class="column is-narrow icon">
-			<icon :name="icon" size="2.75em" :color="color" />
+			<slot name="avatar">
+				<icon :name="icon" size="2.75em" :color="iconColor" />
+			</slot>
 		</div>
 		<div class="column text">
 			<slot />
@@ -11,13 +13,12 @@
 </component>
 </template>
 <script>
-import Icon from './Icon.vue'
 export default {
 	props: {
 		icon: String,
 		responsive: Boolean,
 		small: Boolean,
-		color: String,
+		iconColor: String,
 		href: String,
 		button: Boolean
 	},
@@ -41,14 +42,16 @@ export default {
 	},
 	methods: {
 		/** @param {MouseEvent} e */
-		onClick(e) {
+		handleClick(e) {
 			if (this.button) {
 				e.preventDefault()
 				this.$emit('tap')
 			}
 		}
 	},
-	components: { Icon }
+	components: {
+		Icon: () => import('./Icon.vue')
+	}
 }
 </script>
 <style scoped lang="scss">

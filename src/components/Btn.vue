@@ -1,5 +1,5 @@
 <template>
-<component :is='to ? "router-link" : "button"' :to='to' class="button" :class="classNames">
+<component :is='tagName' :to='to' :href='href' class="button" :class="classNames">
 	<slot />
 </component>
 </template>
@@ -9,7 +9,8 @@ export default {
 		color: String,
 		outlined: Boolean,
 		loading: Boolean,
-		to: String
+		to: String,
+		href: String
 	},
 	computed: {
 		classNames() {
@@ -18,6 +19,9 @@ export default {
 				'is-outlined': this.outlined,
 				...this.color ? { [`is-${this.color}`]: true } : {}
 			}
+		},
+		tagName() {
+			return this.href ? 'a' : this.to ? 'router-link' : 'button'
 		}
 	}
 }

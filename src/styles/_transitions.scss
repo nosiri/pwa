@@ -23,7 +23,8 @@
 }
 
 .snack-enter-active, .snack-leave-active {
-	transition-duration: .12s;
+	transition-duration: $speed;
+	transition-timing-function: $easing;
 	transition-property: opacity, transform;
 }
 
@@ -33,5 +34,5 @@
 
 .snack-enter, .snack-leave-to {
 	opacity: 0;
-	transform: translateY(50%)
+	transform: translateY(100%)
 }

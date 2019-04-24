@@ -15,7 +15,7 @@ window.addEventListener("touchend", ({ target }) => {
 			last = records[records.length - 1];
 
 		const d = last.x - first.x;
-		if (d / window.innerWidth > 0.3) {
+		if (d / window.innerWidth > 0.25) {
 			const slope = (last.y - first.y) / (last.x - first.x);
 
 			if (slope < 0.5 && slope > -0.5) {

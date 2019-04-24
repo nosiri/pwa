@@ -13,21 +13,13 @@
 	<main class="section">
 		<div class="container">
 			<div class="columns is-centered" v-if="state === 1">
-				<div class="column is-full-mobile is-8-tablet is-6-desktop">
-					<h1 class="title">{{ word }}</h1>
-					<div class="subtitle">{{ type }}</div>
-					<hr>
-					<p>
-						{{ text }}
-						<br>
-						<b class="is-size-7">
-							منبع: {{ database }}
-						</b>
-					</p>
-				</div>
+				<word-details :word='word' :type='type' :text='text' :database='database' has-save-button />
 			</div>
 		</div>
 	</main>
+	<snackbar v-model="error_snack">
+		خطایی رخ داد: <b>{{ error | errfmt }}</b>
+	</snackbar>
 </div>
 </template>
 <script>
@@ -38,6 +30,7 @@ export default {
 		query: "",
 		state: -1,
 		error: null,
+		error_snack: false,
 		word: null,
 		text: null,
 		type: null,
@@ -59,6 +52,7 @@ export default {
 			} catch (e) {
 				this.state = 2
 				this.error = e
+				this.error_snack = true
 			}
 		}
 	},
@@ -67,6 +61,9 @@ export default {
 			if (vm.word) vm.query = vm.word
 		})
 	},
-	components: { PageHeader }
+	components: {
+		PageHeader,
+		WordDetails: () => import("../components/WordDetails.vue")
+	}
 }
 </script>

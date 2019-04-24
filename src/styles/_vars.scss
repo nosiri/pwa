@@ -2,10 +2,9 @@
 
 // colors
 $white-ter: #f1f1f1;
-$purple: #673ab7;
-$red: #fa574b;
-$primary: $purple;
-$link: mix($purple, $cyan);
+$red: #ff2919;
+$primary: #a81439;
+$link: #f08098;
 
 // font
 $family-sans-serif: 'IRANSans', sans-serif;
@@ -23,8 +22,8 @@ $radius-large: 10px;
 
 // components
 $box-shadow: 0 3px 10px -3px #0002;
-$box-link-hover-shadow: 0 5px 30px -7px #0004;
-$box-link-active-shadow: 0 5px 30px -7px #0005, inset 0 0 0 2px $link;
+$box-link-hover-shadow: 0 5px 30px -7px #0003, inset 0 0 0 1px $link;
+$box-link-active-shadow: 0 5px 30px -7px #0005, inset 0 0 0 2px $primary;
 
 //light theme
 $body-background-color: mix($white-ter, $white);

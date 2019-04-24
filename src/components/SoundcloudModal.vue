@@ -4,13 +4,13 @@
 			لینک آهنگ موردنظر را در فیلد زیر کپی کنید تا در صورت امکان، لینک دانلود آن را برای شما پیدا کنیم.
 		</p>
 		<br>
-
-		<form class="columns is-mobile is-vcentered" @submit.stop.prevent="handleSubmit">
+		
+		<form class="columns is-mobile is-vcentered is-variable is-2-mobile" @submit.stop.prevent="handleSubmit">
 			<div class="column control">
 				<input v-model="url" dir="ltr" class="input" placeholder="soundcloud.com/" :class="{'is-danger': url && !isValid}">
 			</div>
 			<div class="column is-narrow">
-				<btn :disabled='!isValid' color="link" :loading='loading'>جستجو</btn>
+				<btn :disabled='!isValid' color="primary" :loading='loading'>جستجو</btn>
 			</div>
 		</form>
 
@@ -31,7 +31,7 @@
 </template>
 <script>
 import { call } from '../api';
-const URL_REGEX = /^(?:(?:https?:\/\/)?(?:www\.|m\.)?soundcloud\.com\/)?([^/]+)\/([^/]+)$/i
+const URL_REGEX = /^(?:(?:https?:\/\/)?(?:www\.|m\.)?soundcloud\.com)?\/([^/]+)\/([^/]+)$/i
 export default {
 	props: {
 		open: Boolean
