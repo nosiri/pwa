@@ -1,14 +1,7 @@
 <template>
 <div>
 	<page-header small>
-		<form class="columns is-mobile is-variable is-2-mobile is-vcentered" @submit.prevent.stop="handleSubmit">
-			<div class="column control">
-				<input type="text" class="input" placeholder="یک کلمه" v-model='query' required>
-			</div>
-			<div class="column is-narrow">
-				<btn :disabled="!query" :loading="state === 0" type="submit" color="primary">جستجو</btn>
-			</div>
-		</form>
+		<simple-form v-model='query' placeholder="یک کلمه" @submit='handleSubmit' :loading="state === 0" />
 	</page-header>
 	<main class="section">
 		<div class="container">
@@ -48,6 +41,7 @@ export default {
 					this.database = database
 					this.word = this.query
 					this.state = 1
+					this.error_snack = false
 				} else throw error
 			} catch (e) {
 				this.state = 2
@@ -62,8 +56,7 @@ export default {
 		})
 	},
 	components: {
-		PageHeader,
-		WordDetails: () => import("../components/WordDetails.vue")
+		PageHeader, WordDetails: () => import("../components/WordDetails.vue")
 	}
 }
 </script>

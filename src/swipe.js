@@ -19,7 +19,7 @@ window.addEventListener("touchend", ({ target }) => {
 			const slope = (last.y - first.y) / (last.x - first.x);
 
 			if (slope < 0.5 && slope > -0.5) {
-				history.length <= 2 ? router.back() : router.push("/");
+				router.push("/");
 			}
 		}
 	}

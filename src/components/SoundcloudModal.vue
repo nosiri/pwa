@@ -5,14 +5,7 @@
 		</p>
 		<br>
 		
-		<form class="columns is-mobile is-vcentered is-variable is-2-mobile" @submit.stop.prevent="handleSubmit">
-			<div class="column control">
-				<input v-model="url" dir="ltr" class="input" placeholder="soundcloud.com/" :class="{'is-danger': url && !isValid}">
-			</div>
-			<div class="column is-narrow">
-				<btn :disabled='!isValid' color="primary" :loading='loading'>جستجو</btn>
-			</div>
-		</form>
+		<simple-form placeholder="soundcloud.com/" v-model='url' @submit="handleSubmit" :loading='loading' :validator='isValid' show-error />
 
 		<template v-if="!loading">
 			<p class="has-text-danger" v-if="error">
@@ -46,18 +39,14 @@ export default {
 		error: '',
 		response: ''
 	}),
-	computed: {
-		isValid() {
-			return URL_REGEX.test(this.url)
-		}
-	},
 	methods: {
+		isValid(url) {
+			return URL_REGEX.test(url)
+		},
 		close() {
 			this.$emit('toggle', false)
 		},
 		async handleSubmit() {
-			if (!this.isValid || this.loading) return;
-			
 			this.loading = true
 			const normalizedUrl = 'https://soundcloud.com/' + this.url.replace(URL_REGEX, '$1/$2')
 			try {

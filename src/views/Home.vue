@@ -26,7 +26,7 @@ main.section: .container
 		modal#mtp-modal(v-model="proxy_open" title="پراکسی تلگرام" close-button="لغو")
 			template(v-if="proxy_loaded")
 				p با استفاده از لینک زیر می‌توانید بدون استفاده از فیلترشکن به تلگرام متصل شوید.
-				a.button.is-primary(slot='footer' :href="proxy_link") اتصال
+				btn(slot='footer' color='primary' :href="proxy_link") اتصال
 			p(v-else) لطفا چند لحظه صبر کنید...
 		.column
 			box(icon="word" icon-color="#c25541" small href='/dictionary' responsive)

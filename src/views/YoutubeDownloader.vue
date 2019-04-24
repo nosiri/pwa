@@ -29,19 +29,13 @@
 							تا اون رو تماشا یا دانلود کنید.
 						</p> 
 						<br>
-						<form class="columns is-multiline is-vcentered is-mobile" @submit.prevent="handleSubmit" ref="form">
-							<div class="column control">
-								<input type="url" dir="ltr" class="input" placeholder="https://youtube.com" v-model.trim="link" required>
-							</div>
-							<div class="column is-narrow">
-								<btn color="primary" :disabled="!isValid" :loading="state === 0" type="submit">دریافت</btn>
-							</div>
-						</form>
+						<simple-form placeholder='https://youtube.com' :loading='state === 0' button-text='دریافت' :validator='isValidUrl' v-model="link" @submit="handleSubmit" show-error />
 					</div>
 				</div>
 			</transition>
 		</div>
 	</main>
+	<snackbar v-model="error_snack" :duration="3">{{ data | errfmt }}</snackbar>
 </div>
 </template>
 <script>
@@ -52,9 +46,9 @@ import { call } from '../api';
 export default {
 	data: () => ({
 		link: '',
-		isValid: false,
 		state: null,
-		data: null
+		data: null,
+		error_snack: false
 	}),
 	methods: {
 		reset() {
@@ -67,23 +61,18 @@ export default {
 			try {
 				const res = await call('/youtube', { link: this.link })
 				if (res.ok) {
+					this.error_snack = false
 					this.state = 1
 					this.data = res.data.result
 					const { title, link } = res.data.result
-					console.log(title + ': ' + link);
 				} else throw res.error
 			} catch (e) {
 				this.state = 2
-				console.log(e)
+				this.data = e
+				this.error_snack = true
 			}
-		}
-	},
-	watch: {
-		link() {
-			// TODO: to be refactored later
-			const { form } = this.$refs
-			this.isValid = form ? form.checkValidity() : true
-		}
+		},
+		isValidUrl: url => /^https?:\/\//i.test(url)
 	},
 	components: { PageHeader, Icon }
 }
