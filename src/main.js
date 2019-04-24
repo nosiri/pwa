@@ -21,6 +21,9 @@ Vue.component("btn", () =>
 Vue.component("snackbar", () =>
 	import(/* webpackChunkName: "snackbar" */ "./components/Snackbar.vue")
 );
+Vue.component("simple-form", () =>
+	import(/* webpackChunkName: "form" */ "./components/SimpleForm.vue")
+);
 
 new Vue({
 	router,
