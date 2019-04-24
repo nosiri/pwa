@@ -29,14 +29,7 @@
 							تا اون رو تماشا یا دانلود کنید.
 						</p> 
 						<br>
-						<form class="columns is-multiline is-vcentered is-mobile" @submit.prevent="handleSubmit" ref="form">
-							<div class="column control">
-								<input type="url" dir="ltr" class="input" placeholder="https://youtube.com" v-model.trim="link" required>
-							</div>
-							<div class="column is-narrow">
-								<btn color="primary" :disabled="!isValid" :loading="state === 0" type="submit">دریافت</btn>
-							</div>
-						</form>
+						<simple-form placeholder='https://youtube.com' :loading='state === 0' button-text='دریافت' :validator='isValidUrl' v-model="link" @submit="handleSubmit" show-error />
 					</div>
 				</div>
 			</transition>
@@ -52,7 +45,6 @@ import { call } from '../api';
 export default {
 	data: () => ({
 		link: '',
-		isValid: false,
 		state: null,
 		data: null
 	}),
@@ -76,14 +68,8 @@ export default {
 				this.state = 2
 				console.log(e)
 			}
-		}
-	},
-	watch: {
-		link() {
-			// TODO: to be refactored later
-			const { form } = this.$refs
-			this.isValid = form ? form.checkValidity() : true
-		}
+		},
+		isValidUrl: url => /^https?:\/\//i.test(url)
 	},
 	components: { PageHeader, Icon }
 }
