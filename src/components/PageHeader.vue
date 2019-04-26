@@ -13,15 +13,22 @@ export default {
 	props: {
 		title: String,
 		primary: Boolean,
-		small: Boolean
+		small: Boolean,
+		raised: Boolean
 	},
 	computed: {
 		classNames() {
 			return {
 				[`is-${this.primary ? 'primary' : 'light'}`]: true,
-				"is-small": this.small
+				"is-small": this.small,
+				"is-raised": this.raised
 			}
 		}
 	}
 }
 </script>
+<style scoped>
+.hero.is-raised {
+	box-shadow: 0 3px 20px -3px #0007
+}
+</style>

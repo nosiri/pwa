@@ -1,48 +1,50 @@
 <template lang="pug">
-main.section: .container
-	.columns.is-mobile.is-vcentered.is-variable.is-2-mobile
-		.column
-			box(responsive icon="usd" icon-color="#4a8d4a" small href="/currencies")
-				b {{ init_usd | faNum }} تومان
-		.column
-			box(responsive icon="weather-pouring" icon-color="#6c8397" small)
-				| تهران: 
-				b(dir="ltr") {{ init_temperature | faNum }}&deg;
+div
+	page-header.is-hidden-tablet(primary small title='صفحه اصلی' raised)
+	main.section: .container
+		.columns.is-mobile.is-vcentered.is-variable.is-2-mobile
+			.column
+				box(responsive icon="usd" icon-color="#4a8d4a" small href="/currencies")
+					b {{ init_usd | faNum }} تومان
+			.column
+				box(responsive icon="weather-pouring" icon-color="#6c8397" small)
+					| تهران: 
+					b(dir="ltr") {{ init_temperature | faNum }}&deg;
 
-	.columns.is-vcentered
-		.column.is-5
-			box(icon="movies" icon-color="#5716da" href="/movies"): b نماوا/فیلیمو
-		.column
-			box(icon="youtube" icon-color="red" href="/youtube"): b یوتیوب
-		.column
-			box(icon="soundcloud" icon-color="#ff7500" button @tap="scModal = true")
-				b ساندکلود
-		soundcloud-modal#sc-modal(v-model="scModal")
+		.columns.is-vcentered
+			.column.is-5
+				box(icon="movies" icon-color="#5716da" href="/movies"): b نماوا/فیلیمو
+			.column
+				box(icon="youtube" icon-color="red" href="/youtube"): b یوتیوب
+			.column
+				box(icon="soundcloud" icon-color="#ff7500" button @tap="scModal = true")
+					b ساندکلود
+			soundcloud-modal#sc-modal(v-model="scModal")
 
-	.columns.is-multiline.is-vcentered.is-mobile.is-variable.is-2-mobile
-		.column.is-5-desktop.is-12-mobile
-			box(icon="telegram" icon-color="#2a89b6" small button @tap="getAProxy")
-				b پراکسی تلگرام
-		modal#mtp-modal(v-model="proxy_open" title="پراکسی تلگرام" close-button="لغو")
-			template(v-if="proxy_loaded")
-				p با استفاده از لینک زیر می‌توانید بدون استفاده از فیلترشکن به تلگرام متصل شوید.
-				btn(slot='footer' color='primary' :href="proxy_link") اتصال
-			p(v-else) لطفا چند لحظه صبر کنید...
-		.column
-			box(icon="word" icon-color="#c25541" small href='/dictionary' responsive)
-				b لغت‌نامه
-		.column.is-3-desktop
-			box(icon="omen" icon-color="#bd9548" small button responsive): b فال حافظ
+		.columns.is-multiline.is-vcentered.is-mobile.is-variable.is-2-mobile
+			.column.is-5-desktop.is-12-mobile
+				box(icon="telegram" icon-color="#2a89b6" small button @tap="getAProxy")
+					b پراکسی تلگرام
+			modal#mtp-modal(v-model="proxy_open" title="پراکسی تلگرام" close-button="لغو")
+				template(v-if="proxy_loaded")
+					p با استفاده از لینک زیر می‌توانید بدون استفاده از فیلترشکن به تلگرام متصل شوید.
+					btn(slot='footer' color='primary' :href="proxy_link") اتصال
+				p(v-else) لطفا چند لحظه صبر کنید...
+			.column
+				box(icon="word" icon-color="#c25541" small href='/dictionary' responsive)
+					b لغت‌نامه
+			.column.is-3-desktop
+				box(icon="omen" icon-color="#bd9548" small button responsive): b فال حافظ
 
-	p.is-size-6.has-text-grey-dark(dir="ltr" v-if="init_state === 1")
-		| IP: 
-		b {{ init_ip }}
-		br
-		b {{ init_date | faNum }}
+		p.is-size-6.has-text-grey-dark(dir="ltr" v-if="init_state === 1")
+			| IP: 
+			b {{ init_ip }}
+			br
+			b {{ init_date | faNum }}
 
-	snackbar(v-model="init_err_snack")
-		| خطایی رخ داد:  
-		b {{ init_err | errfmt }}
+		snackbar(v-model="init_err_snack")
+			| خطایی رخ داد:  
+			b {{ init_err | errfmt }}
 </template>
 <script>
 import { call } from '../api'
@@ -115,7 +117,8 @@ export default {
 	components: {
 		Box,
 		SoundcloudModal: () => import("../components/SoundcloudModal.vue"),
-		Modal: () => import("../components/Modal.vue")
+		Modal: () => import("../components/Modal.vue"),
+		PageHeader: () => import("../components/PageHeader.vue")
 	}
 }
 </script>
