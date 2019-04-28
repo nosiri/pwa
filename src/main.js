@@ -18,6 +18,9 @@ Vue.config.productionTip = false;
 Vue.component("btn", () =>
 	import(/* webpackChunkName: "btn" */ "./components/Btn.vue")
 );
+Vue.component("page-header", () =>
+	import(/* webpackChunkName: "header" */ "./components/PageHeader.vue")
+);
 Vue.component("snackbar", () =>
 	import(/* webpackChunkName: "snackbar" */ "./components/Snackbar.vue")
 );

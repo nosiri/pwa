@@ -13,7 +13,7 @@ div
 
 		.columns.is-vcentered
 			.column.is-5
-				box(icon="movies" icon-color="#5716da" href="/movies"): b نماوا/فیلیمو
+				box(icon="movies" icon-color="#5716da" href="/cinema"): b سینما
 			.column
 				box(icon="youtube" icon-color="red" href="/youtube"): b یوتیوب
 			.column
@@ -118,7 +118,6 @@ export default {
 		Box,
 		SoundcloudModal: () => import("../components/SoundcloudModal.vue"),
 		Modal: () => import("../components/Modal.vue"),
-		PageHeader: () => import("../components/PageHeader.vue")
 	}
 }
 </script>

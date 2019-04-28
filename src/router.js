@@ -2,8 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 
 const Home = () => import(/* webpackChunkName: "home" */ "./views/Home.vue");
-const MovieCenter = () =>
-	import(/* webpackChunkName: "movie" */ "./views/MovieCenter.vue");
+const Cinema = () =>
+	import(/* webpackChunkName: "cinema" */ "./views/Cinema.vue");
 const YoutubeDownloader = () =>
 	import(/* webpackChunkName: "ytdl" */ "./views/YoutubeDownloader.vue");
 const Dictionary = () =>
@@ -20,8 +20,8 @@ export default new Router({
 			component: Home
 		},
 		{
-			path: "/movies/:uid(\\d+)?",
-			component: MovieCenter
+			path: "/cinema/:uid(\\d+)?",
+			component: Cinema
 		},
 		{
 			path: "/youtube",

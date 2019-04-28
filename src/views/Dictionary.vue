@@ -16,7 +16,6 @@
 </div>
 </template>
 <script>
-import PageHeader from "../components/PageHeader.vue";
 import { call } from '../api';
 export default {
 	data: () => ({
@@ -56,7 +55,7 @@ export default {
 		})
 	},
 	components: {
-		PageHeader, WordDetails: () => import("../components/WordDetails.vue")
+		WordDetails: () => import("../components/WordDetails.vue")
 	}
 }
 </script>

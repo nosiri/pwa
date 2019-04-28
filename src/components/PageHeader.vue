@@ -1,5 +1,5 @@
 <template>
-	<header class="hero" :class="classNames">
+	<header class="hero" :class="classNames" :style="{ 'background-image': backgroundImage }">
 		<div class="hero-body">
 			<div class="container">
 				<h1 v-if="title" class="title has-text-weight-bold">{{ title }}</h1>
@@ -14,7 +14,8 @@ export default {
 		title: String,
 		primary: Boolean,
 		small: Boolean,
-		raised: Boolean
+		raised: Boolean,
+		backgroundImage: String
 	},
 	computed: {
 		classNames() {

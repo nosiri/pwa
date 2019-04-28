@@ -9,9 +9,8 @@ div
 				b فیلم شماره {{ i | faNum }}
 </template>
 <script>
-import PageHeader from "../components/PageHeader.vue";
 import Box from "../components/Box.vue";
-import Modal from "../components/Modal.vue";
+import { call } from '../api'
 export default {
 	props: {
 		uid: String
@@ -24,7 +23,6 @@ export default {
 	}),
 	methods: {
 		handleSubmit() {
-			if (!this.query) return
 			this.results = []
 			this.loading = true
 			setTimeout(() => {
@@ -33,7 +31,8 @@ export default {
 		}
 	},
 	components: {
-		PageHeader, Box, Modal
+		Box,
+		Modal: () => import("../components/Modal.vue")
 	}
 }
 </script>

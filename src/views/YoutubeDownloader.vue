@@ -39,7 +39,6 @@
 </div>
 </template>
 <script>
-import PageHeader from '../components/PageHeader.vue'
 import Icon from '../components/Icon.vue'
 import { call } from '../api';
 // test case: https://www.youtube.com/watch?v=6SZ_wVEk2Z4
@@ -58,13 +57,12 @@ export default {
 		},
 		async handleSubmit() {
 			this.state = 0
+			this.error_snack = false
 			try {
 				const res = await call('/youtube', { link: this.link })
 				if (res.ok) {
-					this.error_snack = false
 					this.state = 1
 					this.data = res.data.result
-					const { title, link } = res.data.result
 				} else throw res.error
 			} catch (e) {
 				this.state = 2
@@ -74,7 +72,7 @@ export default {
 		},
 		isValidUrl: url => /^https?:\/\//i.test(url)
 	},
-	components: { PageHeader, Icon }
+	components: { Icon }
 }
 </script>
 <style scoped>
