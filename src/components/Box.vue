@@ -6,7 +6,7 @@
 				<icon :name="icon" size="2.75em" :color="iconColor" />
 			</slot>
 		</div>
-		<div class="column text">
+		<div class="column text" :class="{ 'no-wrap': noWrap }">
 			<slot />
 		</div>
 	</div>
@@ -20,7 +20,8 @@ export default {
 		small: Boolean,
 		iconColor: String,
 		href: String,
-		button: Boolean
+		button: Boolean,
+		noWrap: Boolean
 	},
 	computed: {
 		columnClassNames() {
@@ -61,8 +62,15 @@ export default {
 	align-items: center;
 	justify-content: center;
 }
-.text:empty {
-	display: none;
+.text {
+	&.no-wrap {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	&:empty {
+		display: none;
+	}
 }
 .box {
 	padding: 0.825em;

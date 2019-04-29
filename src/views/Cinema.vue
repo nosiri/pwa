@@ -1,15 +1,13 @@
 <template lang="pug">
-div
+span(v-if='uid' v-text='uid')
+div(v-else)
 	page-header(title="سینما")
 		simple-form(v-model='query' placeholder='نام فیلم' :loading='loading' @submit='handleSubmit')
 	main.section: .container: .columns.is-multiline
-		.column.is-6-desktop(v-for="i in 20" :key="i")
-			box(button small)
-				figure.image.is-48x48(slot='avatar')
-				b فیلم شماره {{ i | faNum }}
+		.column.is-6-desktop(v-for='(movie, i) in results' :key='i')
+			movie-box(:title='movie.title' :image='movie.image' :uid='movie.id')
 </template>
 <script>
-import Box from "../components/Box.vue";
 import { call } from '../api'
 export default {
 	props: {
@@ -18,21 +16,28 @@ export default {
 	data: () => ({
 		loading: false,
 		results: [],
-		query: '',
-		provider: 0
+		query: ''
 	}),
 	methods: {
-		handleSubmit() {
+		async handleSubmit() {
 			this.results = []
 			this.loading = true
-			setTimeout(() => {
+			try {
+				const res = await call('/cinema/search', { query: this.query })
+				if (res.ok) {
+					this.results = res.data.result
+					console.log(res.data)
+				} else throw res.error
+			} catch (e) {
+				console.log(e)
+			} finally {
 				this.loading = false
-			}, 1000)
+			}
 		}
 	},
 	components: {
-		Box,
-		Modal: () => import("../components/Modal.vue")
+		Modal: () => import("../components/Modal.vue"),
+		MovieBox: () => import("../components/MovieBox.vue")
 	}
 }
 </script>

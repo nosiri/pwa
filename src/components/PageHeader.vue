@@ -1,5 +1,5 @@
 <template>
-	<header class="hero" :class="classNames" :style="{ 'background-image': backgroundImage }">
+	<header class="hero" :class="classNames" :style="styles">
 		<div class="hero-body">
 			<div class="container">
 				<h1 v-if="title" class="title has-text-weight-bold">{{ title }}</h1>
@@ -19,10 +19,19 @@ export default {
 	},
 	computed: {
 		classNames() {
+			const isDark = this.primary || this.backgroundImage
 			return {
-				[`is-${this.primary ? 'primary' : 'light'}`]: true,
+				[`is-${isDark ? 'primary' : 'light'}`]: true,
 				"is-small": this.small,
 				"is-raised": this.raised
+			}
+		},
+		styles() {
+			const bg = this.backgroundImage
+			return {
+				...bg ? {
+					'background-image': `url(${ bg })`
+				} : {}
 			}
 		}
 	}

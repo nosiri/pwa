@@ -20,8 +20,9 @@ export default new Router({
 			component: Home
 		},
 		{
-			path: "/cinema/:uid(\\d+)?",
-			component: Cinema
+			path: "/cinema/:uid?",
+			component: Cinema,
+			props: true
 		},
 		{
 			path: "/youtube",
