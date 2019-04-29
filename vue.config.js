@@ -4,6 +4,6 @@ module.exports = {
 		workboxOptions: {
 			cacheId: "b"
 		},
-		themeColor: "#a81439"
+		themeColor: "#88061d"
 	}
 };
