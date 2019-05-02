@@ -43,7 +43,7 @@ export default {
 	> .bg {
 		$blur: 17px;
 		&.is-blurry {
-			filter: blur($blur) brightness(.5) saturate(.75);
+			filter: blur($blur) brightness(.4) saturate(1.5);
 		}
 		position: absolute;
 		top: -$blur * 2;
