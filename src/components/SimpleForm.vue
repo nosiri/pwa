@@ -3,7 +3,7 @@ form.columns.is-mobile.is-vcentered.is-variable.is-2-mobile(@submit.prevent='sub
 	.column.control
 		input.input(v-model='_value' :dir='direction' :placeholder='placeholder' :class='{ "is-danger": showError && (value && !validator(_value)) }')
 	.column.is-narrow
-		btn(color='primary' :disabled='!isValid' :loading='loading') {{ buttonText }}
+		btn(color='link' :disabled='!isValid' :loading='loading') {{ buttonText }}
 </template>
 <script>
 import { isRtlString } from '../utils';

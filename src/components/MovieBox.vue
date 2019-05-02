@@ -15,15 +15,10 @@ export default {
 	computed: {
 		to() {
 			const { uid } = this
-			switch (typeof uid) {
-				case 'string':
-					return `f-${uid}`
-				case 'number':
-					return `n-${uid}`
-				default: 
-					const { filimo, namava } = uid
-					return `${filimo}-${namava}`
-			}
+			if (typeof uid === 'object') {
+				const { filimo, namava } = uid
+				return `${filimo}-${namava}`				
+			} else return String(uid)
 		}
 	},
 	components: { Box }

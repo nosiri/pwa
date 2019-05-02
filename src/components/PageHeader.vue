@@ -1,5 +1,6 @@
 <template>
-	<header class="hero" :class="classNames" :style="styles">
+	<header class="hero" :class="classNames">
+		<div class="bg" v-if='backgroundImage' :style="{ 'background-image': `url(${ backgroundImage })` }" :class="{ 'is-blurry': blur}" />
 		<div class="hero-body">
 			<div class="container">
 				<h1 v-if="title" class="title has-text-weight-bold">{{ title }}</h1>
@@ -15,7 +16,9 @@ export default {
 		primary: Boolean,
 		small: Boolean,
 		raised: Boolean,
-		backgroundImage: String
+		backgroundImage: String,
+		fullScreen: Boolean,
+		blur: Boolean
 	},
 	computed: {
 		classNames() {
@@ -23,22 +26,36 @@ export default {
 			return {
 				[`is-${isDark ? 'primary' : 'light'}`]: true,
 				"is-small": this.small,
-				"is-raised": this.raised
-			}
-		},
-		styles() {
-			const bg = this.backgroundImage
-			return {
-				...bg ? {
-					'background-image': `url(${ bg })`
-				} : {}
+				"is-raised": this.raised,
+				"is-fullheight": this.fullScreen
 			}
 		}
 	}
 }
 </script>
-<style scoped>
-.hero.is-raised {
-	box-shadow: 0 3px 20px -3px #0007
+<style scoped lang="scss">
+.hero {
+	position: relative;
+	overflow: hidden;
+	&.is-raised {
+		box-shadow: 0 3px 20px -3px #0007
+	}
+	> .bg {
+		$blur: 17px;
+		&.is-blurry {
+			filter: blur($blur) brightness(.5) saturate(.75);
+		}
+		position: absolute;
+		top: -$blur * 2;
+		left: -$blur * 2;
+		right: -$blur * 2;
+		bottom: -$blur * 2;
+		background-size: cover;
+		background-position: center;
+		z-index: 1;
+	}
+	> .hero-body {
+		z-index: 2;
+	}
 }
 </style>

@@ -1,6 +1,5 @@
 <template lang="pug">
-span(v-if='uid' v-text='uid')
-div(v-else)
+div
 	page-header(title="سینما")
 		simple-form(v-model='query' placeholder='نام فیلم' :loading='loading' @submit='handleSubmit')
 	main.section: .container: .columns.is-multiline
