@@ -1,5 +1,5 @@
 <template>
-	<svg xmlns="http://www.w3.org/2000/svg" role="img" :width="size" :height="size" viewBox="0 0 24 24">
+	<svg xmlns="http://www.w3.org/2000/svg" role="img" :width="size" viewBox="0 0 24 24">
 		<path :d="d" :fill="color"></path>
 	</svg>
 </template>
