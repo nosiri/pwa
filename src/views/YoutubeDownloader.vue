@@ -18,7 +18,7 @@
 						</div>
 					</div>
 				</div>
-				<div key="b" class="columns is-vcentered is-center is-variable is-1-mobile" v-else>
+				<!-- <div key="b" class="columns is-vcentered is-center is-variable is-1-mobile" v-else>
 					<div class="column is-4 has-text-centered">
 						<icon name="youtube" size="200" color="red" id="icon"></icon>
 					</div>
@@ -31,7 +31,14 @@
 						<br>
 						<simple-form placeholder='https://youtube.com' :loading='state === 0' button-text='دریافت' :validator='isValidUrl' v-model="link" @submit="handleSubmit" show-error />
 					</div>
-				</div>
+				</div> -->
+				<empty-state icon='youtube' color='red' v-else>
+					اگه می‌خواید فیلمی رو از یوتیوب دانلود کنید،
+					<b>لینک اون رو همینجا کپی کنید</b>
+					تا اون رو تماشا یا دانلود کنید.
+
+					<simple-form slot="extra" placeholder='https://youtube.com' :loading='state === 0' button-text='دریافت' :validator='isValidUrl' v-model="link" @submit="handleSubmit" show-error />					
+				</empty-state>
 			</transition>
 		</div>
 	</main>
@@ -39,7 +46,8 @@
 </div>
 </template>
 <script>
-import Icon from '../components/Icon.vue'
+// import Icon from '../components/Icon.vue'
+import EmptyState from '../components/EmptyState.vue'
 import { call } from '../api';
 // test case: https://www.youtube.com/watch?v=6SZ_wVEk2Z4
 export default {
@@ -72,16 +80,10 @@ export default {
 		},
 		isValidUrl: url => /^https?:\/\//i.test(url)
 	},
-	components: { Icon }
+	components: { EmptyState }
 }
 </script>
 <style scoped>
-#icon {
-	stroke: #a02;
-	stroke-width: 1;
-	stroke-linejoin: round;
-	stroke-linecap: round;
-}
 video {
 	width: 100%;
 	box-shadow: 0 10px 35px -2px #0004
