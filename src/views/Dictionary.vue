@@ -30,6 +30,7 @@ export default {
 	}),
 	methods: {
 		async handleSubmit() {
+			this.error_snack = false
 			this.state = 0
 			try {
 				const { ok, error, data } = await call('/dictionary', { query: this.query });
@@ -40,7 +41,6 @@ export default {
 					this.database = database
 					this.word = this.query
 					this.state = 1
-					this.error_snack = false
 				} else throw error
 			} catch (e) {
 				this.state = 2

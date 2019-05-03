@@ -65,7 +65,7 @@ export default {
 		color: $white;
 		max-width: 540px;
 		border-radius: $radius-small $radius-small 0 0;
-		box-shadow: 0 5px 35px -2px #000a;
+		box-shadow: 0 -5px 35px -2px #000a;
 		pointer-events: auto
 	}
 }

@@ -2,10 +2,13 @@
 page-header(full-screen :background-image='image' blur)
 	.columns.is-vcentered.has-text-centered-mobile
 		.column.is-5
-			img(:src='image' style='width: 80%')
+			img(:src='image')
 		.column
 			h1.title {{ title }}
 			p(v-html='description')
+			br
+			btn(color='primary' :href='link' style='margin-left: 10px') تماشای فیلم
+			btn(color='white' outlined @click.native='save') ذخیره
 </template>
 <script>
 import { call } from '../api';
@@ -24,21 +27,24 @@ export default {
 			try {
 				const res = await call('/cinema/movie', { id: uid })
 				if (res.ok) {
-					const { title, description, image } = res.data.result
+					const { title, description, image, link } = res.data.result;
+
 					this.title = title
 					this.description = description
 					this.image = image
+					this.link = link
 				} else throw res.error
-			} catch {}
+			} catch (e) {
+				console.log(e)
+			}
 		}
 	},
-	watch: {
-		'$route.params.uid'(u) {
-			this.init(u)
-		}
-	},
-	beforeRouteEnter(_to, _from, next) {
-		next(vm => vm.init(_to.params.uid))
+	created() {
+		this.$watch('$route.params.uid', u => {
+			if (u) this.init(u)
+		}, {
+			immediate: true
+		})
 	}
 }
 </script>
@@ -46,7 +52,8 @@ export default {
 @import "../styles/vars";
 img {
 	border-radius: $radius-large * 2;
-	box-shadow: 0 10px 50px -4px #000b
+	box-shadow: 0 10px 50px -4px #000b;
+	width: 70%
 }
 h1.title {
 	text-shadow: 0 2px 5px #0008

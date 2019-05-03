@@ -1,6 +1,6 @@
 import { openDB } from "idb";
 
-export default async () =>
+export const open = async () =>
 	await openDB("app", 1, {
 		upgrade(db) {
 			db.createObjectStore("movies", { keyPath: "id" });
