@@ -8,6 +8,11 @@
 			<div class="columns is-centered" v-if="state === 1">
 				<word-details :word='word' :type='type' :text='text' :database='database' has-save-button />
 			</div>
+			<empty-state v-else icon='word'>
+				<p>
+					برای دسترسی به معنی، نحوه تلفظ و ... یک کلمه خاص، آن را در فیلد بالا نوشته و جستجو را بزنید.
+				</p>
+			</empty-state>
 		</div>
 	</main>
 	<snackbar v-model="error_snack">
@@ -55,7 +60,8 @@ export default {
 		})
 	},
 	components: {
-		WordDetails: () => import("../components/WordDetails.vue")
+		WordDetails: () => import("../components/WordDetails.vue"),
+		EmptyState: () => import("../components/EmptyState.vue")
 	}
 }
 </script>

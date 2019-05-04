@@ -1,6 +1,8 @@
 <template>
 <div>
-	<page-header title="دانلود از یوتیوب" primary />
+	<page-header title="دانلود از یوتیوب">
+		<simple-form placeholder='https://youtube.com' :loading='state === 0' button-text='دریافت' :validator='isValidUrl' v-model="link" @submit="handleSubmit" show-error />					
+	</page-header>
 	<main class="section">
 		<div class="container">
 			<transition name="fade" mode="out-in">
@@ -18,26 +20,14 @@
 						</div>
 					</div>
 				</div>
-				<!-- <div key="b" class="columns is-vcentered is-center is-variable is-1-mobile" v-else>
-					<div class="column is-4 has-text-centered">
-						<icon name="youtube" size="200" color="red" id="icon"></icon>
-					</div>
-					<div class="column has-text-centered-mobile">
-						<p>
-							اگه می‌خواید فیلمی رو از یوتیوب دانلود کنید،
-							<b>لینک اون رو همینجا کپی کنید</b>
-							تا اون رو تماشا یا دانلود کنید.
-						</p> 
-						<br>
-						<simple-form placeholder='https://youtube.com' :loading='state === 0' button-text='دریافت' :validator='isValidUrl' v-model="link" @submit="handleSubmit" show-error />
-					</div>
-				</div> -->
-				<empty-state icon='youtube' color='red' v-else>
-					اگه می‌خواید فیلمی رو از یوتیوب دانلود کنید،
-					<b>لینک اون رو همینجا کپی کنید</b>
-					تا اون رو تماشا یا دانلود کنید.
 
-					<simple-form slot="extra" placeholder='https://youtube.com' :loading='state === 0' button-text='دریافت' :validator='isValidUrl' v-model="link" @submit="handleSubmit" show-error />					
+				<empty-state icon='youtube' v-else>
+					<p>
+						اگه می‌خواید فیلمی رو از یوتیوب دانلود کنید،
+						<b>لینک اون رو همینجا کپی کنید</b>
+						تا اون رو تماشا یا دانلود کنید.
+					</p>
+					<!-- <simple-form slot="extra" placeholder='https://youtube.com' :loading='state === 0' button-text='دریافت' :validator='isValidUrl' v-model="link" @submit="handleSubmit" show-error />					 -->
 				</empty-state>
 			</transition>
 		</div>

@@ -38,7 +38,7 @@ export default {
 	position: relative;
 	overflow: hidden;
 	&.is-raised {
-		box-shadow: 0 3px 20px -3px #0007
+		box-shadow: 0 3px 29px -5px #0005
 	}
 	> .bg {
 		$blur: 17px;

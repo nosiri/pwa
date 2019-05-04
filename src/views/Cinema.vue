@@ -1,10 +1,18 @@
 <template lang="pug">
 div
 	page-header(title="سینما")
-		simple-form(v-model='query' placeholder='نام فیلم' :loading='loading' @submit='handleSubmit')
-	main.section: .container: .columns.is-multiline
-		.column.is-6-desktop(v-for='(movie, i) in results' :key='i')
-			movie-box(:title='movie.title' :image='movie.image' :uid='movie.id')
+		simple-form(v-model='query' placeholder='نام فیلم' :loading='state === 0' @submit='handleSubmit')
+	main.section: .container
+		.columns.is-multiline(v-if="state === 1")
+			.column.is-6-desktop(v-for='(movie, i) in result' :key='i')
+				movie-box(:title='movie.title' :image='movie.image' :uid='movie.id')
+		empty-state(v-else-if='state === -1' icon='movies')
+			p
+				| نام فیلم مورد نظر خود را وارد کنید و آن را از سرویس‌های داخلی 
+				b نماوا 
+				| و 
+				b فیلیمو 
+				| تماشا کنید!
 </template>
 <script>
 import { call } from '../api'
@@ -13,30 +21,31 @@ export default {
 		uid: String
 	},
 	data: () => ({
-		loading: false,
-		results: [],
+		state: -1,
+		result: null,
 		query: ''
 	}),
 	methods: {
 		async handleSubmit() {
-			this.results = []
-			this.loading = true
+			this.state = 0
+			this.result = null
 			try {
 				const res = await call('/cinema/search', { query: this.query })
 				if (res.ok) {
-					this.results = res.data.result
-					console.log(res.data)
+					this.state = 1
+					this.result = res.data.result
 				} else throw res.error
 			} catch (e) {
+				this.state = 2
+				this.result = e
 				console.log(e)
-			} finally {
-				this.loading = false
 			}
 		}
 	},
 	components: {
 		Modal: () => import("../components/Modal.vue"),
-		MovieBox: () => import("../components/MovieBox.vue")
+		MovieBox: () => import("../components/MovieBox.vue"),
+		EmptyState: () => import("../components/EmptyState.vue")
 	}
 }
 </script>
