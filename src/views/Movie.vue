@@ -12,7 +12,7 @@ page-header(full-screen :background-image='image' blur)
 </template>
 <script>
 import { call } from '../api';
-import { reset } from '../mixins';
+import { reset } from '../mixins/';
 export default {
 	mixins: [reset],
 	data: () => ({
