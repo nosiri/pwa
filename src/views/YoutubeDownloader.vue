@@ -12,7 +12,7 @@ div
 						h2.title(dir="auto") {{ data.title }}
 						hr
 					.has-text-centered
-						.btn(@click.native="reset") جستجوی دوباره
+						.btn(@click.native="$reset") جستجوی دوباره
 
 			empty-state(icon='youtube' v-else)
 				p
@@ -33,11 +33,6 @@ export default {
 		error_snack: false
 	}),
 	methods: {
-		reset() {
-			this.state = null
-			this.data = null
-			this.link = ''
-		},
 		async handleSubmit() {
 			this.state = 0
 			this.error_snack = false
