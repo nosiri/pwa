@@ -6,7 +6,7 @@ form.columns.is-mobile.is-vcentered.is-variable.is-2-mobile(@submit.prevent='sub
 		btn(color='link' :disabled='!isValid' :loading='loading') {{ buttonText }}
 </template>
 <script>
-import { isRtlString } from '../utils';
+import { isRtlString } from '../helpers/';
 export default {
 	props: {
 		value: {

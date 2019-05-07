@@ -48,7 +48,7 @@ div
 </template>
 <script>
 import { call } from '../api'
-import { animateNumber } from '../utils'
+import animateNumber from '../helpers/animateNumber'
 import Box from "../components/Box.vue"
 export default {
 	data: () => ({

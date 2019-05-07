@@ -21,8 +21,15 @@ export default {
 		swipe_transition: false,
 		hasLoggedIn: !0
 	}),
+	computed: {
+		isInHome() {
+			return this.$route.path === '/'
+		}
+	},
 	created() {
 		window.addEventListener('swipe-progress', e => {
+			if (this.isInHome) return
+			
 			const n = e.detail.progress
 			this.swipe_transition = false
 			this.swiped = 75 * Math.min(n, 3)

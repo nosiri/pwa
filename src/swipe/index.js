@@ -1,8 +1,10 @@
 import router from "../router";
 import Point from "./point";
+import { isInput, openModalExists } from "../helpers/";
 
 /** @type {Point[]} */
 let records = [],
+	isRecording = false,
 	isOk = false,
 	progress = 0;
 
@@ -10,7 +12,12 @@ const dispatchEnd = () => {
 	window.dispatchEvent(new CustomEvent("swipe-end"));
 };
 
+window.addEventListener("touchstart", event => {
+	isRecording = !isInput(event.target) && !openModalExists();
+});
+
 window.addEventListener("touchmove", ({ targetTouches }) => {
+	if (!isRecording) return;
 	const [{ clientX: x, clientY: y }] = targetTouches,
 		thisOne = new Point(x, y),
 		[first] = records;
@@ -37,6 +44,7 @@ window.addEventListener("touchmove", ({ targetTouches }) => {
 });
 
 window.addEventListener("touchend", () => {
+	if (!isRecording) return;
 	if (
 		isOk &&
 		progress >= 1 &&
