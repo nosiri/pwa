@@ -17,9 +17,7 @@ div
 			.column
 				box(icon="youtube" icon-color="red" href="/youtube"): b یوتیوب
 			.column
-				box(icon="soundcloud" icon-color="#ff7500" button @tap="scModal = true")
-					b ساندکلود
-			soundcloud-modal#sc-modal(v-model="scModal")
+				box(icon="soundcloud" icon-color="#ff7500" href='/soundcloud'): b ساندکلود
 
 		.columns.is-multiline.is-vcentered.is-mobile.is-variable.is-2-mobile
 			.column.is-5-desktop.is-12-mobile
@@ -116,7 +114,6 @@ export default {
 	},
 	components: {
 		Box,
-		SoundcloudModal: () => import("../components/SoundcloudModal.vue"),
 		Modal: () => import("../components/Modal.vue"),
 	}
 }

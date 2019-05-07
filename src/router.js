@@ -9,6 +9,8 @@ const YoutubeDownloader = () =>
 	import(/* webpackChunkName: "ytdl" */ "./views/YoutubeDownloader.vue");
 const Dictionary = () =>
 	import(/* webpackChunkName: "dict" */ "./views/Dictionary.vue");
+const Soundcloud = () =>
+	import(/* webpackChunkName: "sc" */ "./views/Soundcloud.vue");
 
 Vue.use(Router);
 
@@ -35,6 +37,10 @@ export default new Router({
 		{
 			path: "/dictionary",
 			component: Dictionary
+		},
+		{
+			path: "/soundcloud",
+			component: Soundcloud
 		}
 	]
 });
