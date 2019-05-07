@@ -19,8 +19,10 @@ div
 </template>
 <script>
 import { call } from '../api';
+import { reset } from '../mixins';
 const URL_REGEX = /^(?:(?:https?:\/\/)?(?:www\.|m\.)?soundcloud\.com)?\/([^/]+)\/([^/]+)$/i
 export default {
+	mixins: [reset],
 	data: () => ({
 		url: '',
 		state: -1,
