@@ -16,6 +16,7 @@ div
 </template>
 <script>
 import { call } from '../api'
+import MovieBox from "../components/MovieBox.vue"
 export default {
 	props: {
 		uid: String
@@ -44,7 +45,7 @@ export default {
 	},
 	components: {
 		Modal: () => import("../components/Modal.vue"),
-		MovieBox: () => import("../components/MovieBox.vue"),
+		MovieBox,
 		EmptyState: () => import("../components/EmptyState.vue")
 	}
 }
