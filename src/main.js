@@ -1,12 +1,13 @@
 import Vue from "vue";
 import router from "./router";
 import App from "./App.vue";
-import "./keyboardNavigation";
 import "./mixins/globals";
 import "./filters";
+import "./keyboardNavigation";
+import "./swipe/";
+import "./db";
 import "./registerServiceWorker";
 import "./styles/main.scss";
-import "./db";
 
 Vue.config.productionTip = false;
 

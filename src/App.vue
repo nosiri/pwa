@@ -12,7 +12,6 @@
 	<signin-form v-else />
 </template>
 <script>
-import handleSwipe from './swipe/'
 export default {
 	components: {
 		SigninForm: () => import(/* webpackChunkName: "signin" */'./views/SigninForm.vue')
@@ -22,11 +21,13 @@ export default {
 		swipe_transition: false,
 		hasLoggedIn: !0
 	}),
-	mounted() {
-		handleSwipe(n => {
+	created() {
+		window.addEventListener('swipe-progress', e => {
+			const n = e.detail.progress
 			this.swipe_transition = false
 			this.swiped = 75 * Math.min(n, 3)
-		}, () => {
+		})
+		window.addEventListener('swipe-end', () => {
 			this.swipe_transition = true
 			this.swiped = 0
 		})
