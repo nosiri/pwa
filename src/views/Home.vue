@@ -76,14 +76,14 @@ export default {
 		try {
 			const res = await call('/init')
 			if (res.ok) {
-				const { result } = res.data
+				const { ip, date, dollar } = res.data
 
-				this.init_ip = result.ip
-				this.init_date = result.date
+				this.init_ip = ip
+				this.init_date = date
 				
 				animateNumber(i => {
 					this.init_usd = i
-				}, result.dollar)
+				}, dollar)
 	
 				this.init_state = 1
 			} else throw res.error
@@ -102,7 +102,7 @@ export default {
 			if (this.proxy_loaded) return;
 			const { data, ok } = await call('/proxy')
 			if (ok) {
-				const link = data.result.proxy
+				const link = data.proxy
 				this.proxy_loaded = true
 				this.proxy_link = link
 			}
@@ -113,7 +113,7 @@ export default {
 			const { ok, data, error } = await call('/currency');
 			this.cur_loaded = true
 			if (ok) {
-				this.cur_data = omit(data.result, ['last_update'])
+				this.cur_data = omit(data, ['last_update'])
 			} else throw error
 		}
 	},

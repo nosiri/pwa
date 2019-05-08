@@ -40,7 +40,7 @@ export default {
 				const res = await call('/youtube', { link: this.link })
 				if (res.ok) {
 					this.state = 1
-					this.data = res.data.result
+					this.data = res.data
 				} else throw res.error
 			} catch (e) {
 				this.state = 2

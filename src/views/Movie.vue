@@ -27,7 +27,7 @@ export default {
 			try {
 				const res = await call('/cinema/movie', { id: uid })
 				if (res.ok) {
-					const { title, description, image, link } = res.data.result;
+					const { title, description, image, link } = res.data;
 
 					this.title = title
 					this.description = description

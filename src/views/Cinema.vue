@@ -34,7 +34,7 @@ export default {
 				const res = await call('/cinema/search', { query: this.query })
 				if (res.ok) {
 					this.state = 1
-					this.result = res.data.result
+					this.result = res.data
 				} else throw res.error
 			} catch (e) {
 				this.state = 2
