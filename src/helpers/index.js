@@ -16,4 +16,3 @@ export const isRtlString = str => {
 	}
 	return false;
 };
-// /^[\s\d([!@#$%^&*;:'"`~/+-.]*[آ-ی۰-۹]/.test(str);

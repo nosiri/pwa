@@ -4,8 +4,14 @@ div
 	main.section: .container
 		.columns.is-mobile.is-vcentered.is-variable.is-2-mobile
 			.column
-				box(responsive icon="usd" icon-color="#4a8d4a" small href="/currencies")
+				box(responsive icon="usd" icon-color="#4a8d4a" small button @tap='fetchCurrencies')
 					b {{ init_usd | faNum }} تومان
+			modal#cur-modal(v-model='cur_open' title='قیمت واحدهای ارزی' close-button='باشه')
+				div(v-if='cur_loaded')
+					div(v-for='(price, unit) in cur_data' :key='unit')
+						span {{ unit | cur_name }}: 
+						b {{ price.toString() | comma | faNum }} تومان
+				p(v-else) لطفا چند لحظه صبر کنید...
 			.column
 				box(responsive icon="weather-pouring" icon-color="#6c8397" small)
 					| تهران: 
@@ -48,6 +54,7 @@ div
 import { call } from '../api'
 import animateNumber from '../helpers/animateNumber'
 import Box from "../components/Box.vue"
+import { omit } from 'lodash'
 export default {
 	data: () => ({
 		scModal: false,
@@ -60,7 +67,10 @@ export default {
 		init_temperature: 0,
 		proxy_open: false,
 		proxy_loaded: false,
-		proxy_link: ''
+		proxy_link: '',
+		cur_open: false,
+		cur_loaded: false,
+		cur_data: null
 	}),
 	async mounted() {
 		try {
@@ -75,13 +85,6 @@ export default {
 					this.init_usd = i
 				}, result.dollar)
 	
-				// if (result.weather.ok) {
-				// 	const w = result.weather.result.weather,
-				// 	c = +(w.match(/[-+]?\d+/) || 0);
-				// 	animateNumber(i => {
-				// 		this.init_temperature = i
-				// 	}, c)
-				// }
 				this.init_state = 1
 			} else throw res.error
 		} catch (e) {
@@ -94,18 +97,34 @@ export default {
 		}
 	},
 	methods: {
-		getAProxy() {
+		async getAProxy() {
 			this.proxy_open = true
-			if (!this.proxy_loaded) {
-				call('/proxy').then(({ data, ok }) => {
-					if (ok) {
-						const link = data.result.proxy
-						this.proxy_loaded = true
-						this.proxy_link = link
-					}
-				})
+			if (this.proxy_loaded) return;
+			const { data, ok } = await call('/proxy')
+			if (ok) {
+				const link = data.result.proxy
+				this.proxy_loaded = true
+				this.proxy_link = link
 			}
+		},
+		async fetchCurrencies() {
+			this.cur_open = true
+			if (this.cur_loaded) return;
+			const { ok, data, error } = await call('/currency');
+			this.cur_loaded = true
+			if (ok) {
+				this.cur_data = omit(data.result, ['last_update'])
+			} else throw error
 		}
+	},
+	filters: {
+		cur_name: eng => ({
+			dollar: 'دلار',
+			euro: 'یورو',
+			bitcoin: 'بیت‌کوین',
+			gold: 'طلا',
+			emami_coin: 'سکه امامی'
+		})[eng]
 	},
 	beforeRouteEnter(_to, _from, next) {
 		next(vm => {
