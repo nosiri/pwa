@@ -1,9 +1,8 @@
 /**
- * Resets component's data on route leave.
+ * Resets component's data every time it is deactivated.
  */
 export const reset = {
-	beforeRouteLeave(_to, _from, next) {
+	deactivated() {
 		this.$reset();
-		next();
 	}
 };

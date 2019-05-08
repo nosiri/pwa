@@ -1,7 +1,7 @@
 <template lang='pug'>
 form.columns.is-mobile.is-vcentered.is-variable.is-2-mobile(@submit.prevent='submit')
 	.column.control
-		input.input(v-model='_value' :dir='direction' :placeholder='placeholder' :class='{ "is-danger": showError && (value && !validator(_value)) }')
+		input.input(v-model='_value' :dir='direction' :placeholder='placeholder' :class='{ "is-danger": showError && (value && !validator(_value)) }' ref='input')
 	.column.is-narrow
 		btn(color='link' :disabled='!isValid' :loading='loading') {{ buttonText }}
 </template>
@@ -47,6 +47,10 @@ export default {
 				this.$emit('submit', this._value)
 			}
 		}
+	},
+	activated() {
+		const { input } = this.$refs
+		if (input) input.focus()
 	}
 }
 </script>
