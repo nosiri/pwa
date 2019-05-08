@@ -43,7 +43,7 @@ export default {
 			try {
 				const { ok, data, error } = await call('/soundcloud', { link: normalizedUrl })
 				if (ok) {
-					const { link } = data.result
+					const { link } = data
 					this.data = link
 					this.error = ''
 					this.state = 1

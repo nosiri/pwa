@@ -34,7 +34,7 @@ export async function call(path, data = {}) {
 		const ok = response.ok && data.ok;
 		return {
 			status,
-			data,
+			data: ok ? data.result : null,
 			ok,
 			error: ok ? null : data.error || status
 		};

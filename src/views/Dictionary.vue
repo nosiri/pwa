@@ -6,7 +6,7 @@
 	<main class="section">
 		<div class="container">
 			<div class="columns is-centered" v-if="state === 1">
-				<word-details :word='word' :type='type' :text='text' :database='database' has-save-button />
+				<word-details v-bind='{ word, type, text, database }' has-save-button />
 			</div>
 			<empty-state v-else icon='word'>
 				<p>
@@ -40,7 +40,7 @@ export default {
 			try {
 				const { ok, error, data } = await call('/dictionary', { query: this.query });
 				if (ok) {
-					const { text, type, database } = data.result
+					const { text, type, database } = data
 					this.text = text
 					this.type = type
 					this.database = database

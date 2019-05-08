@@ -10,6 +10,6 @@ const faNum = string => {
 };
 Vue.filter("faNum", faNum);
 
-/** @param {string} err */
-const formatErrorCode = err => faNum(ERR_CODES[err] || `خطای ${err}`);
-Vue.filter("errfmt", formatErrorCode);
+Vue.filter("errfmt", err => faNum(ERR_CODES[err] || `خطای ${err}`));
+
+Vue.filter("comma", s => s.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"));
