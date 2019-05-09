@@ -14,6 +14,9 @@ Vue.config.productionTip = false;
 Vue.component("btn", () =>
 	import(/* webpackChunkName: "btn" */ "./components/Btn.vue")
 );
+Vue.component("text-field", () =>
+	import(/* webpackChunkName: "text-field" */ "./components/TextField.vue")
+);
 Vue.component("page-header", () =>
 	import(/* webpackChunkName: "header" */ "./components/PageHeader.vue")
 );
