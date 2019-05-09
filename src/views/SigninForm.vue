@@ -1,45 +1,39 @@
-<template>
-	<section class="hero is-fullheight is-light is-bold">
-		<div class="hero-body">
-			<div class="container">
-				<div class="columns is-centered">
-					<div class="column is-8-tablet is-6-desktop is-4-widescreen">
-						<div class="card">
-							<div class="card-header">
-								<h1 class="card-header-title">ورود به برنامه</h1>
-							</div>
-							<div class="card-content">
-								<form @submit.prevent="handleSubmit">
-									<div class="control">
-										<label class="label">آدرس ایمیل</label>
-										<input ref="input" required type="email" class="input" placeholder="info@example.com" dir="ltr" autofocus v-model="email">
-									</div>
-									<br>
-									<div class="control has-text-centered">
-										<btn class="is-medium" color="primary" :disabled="!email" :loading='loading'>ورود</btn>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+<template lang="pug">
+page-header(full-screen).is-bold
+	.columns.is-centered: .column.is-8-tablet.is-6-desktop.is-4-widescreen: .box
+		h1.title.is-size-4 ورود به برنامه
+		hr
+		form(@submit.prevent='handleSubmit')
+			.control
+				label.label آدرس ایمیل
+				text-field(v-model='email' ref='e' show-error placeholder='info@example.com' type='email' :validator='isValidEmail' autofocus)
+			br
+			.control
+				label.label گذرواژه
+				text-field(v-model='password' ref='p' show-error placeholder='حداقل ۶ رقم' type='password' :validator='isValidPassword')
+			br
+			btn.is-fullwidth.is-medium(color='link' :loading='loading' :disabled='!isValid()' type='submit') ورود
 </template>
 <script>
 export default {
 	data: () => ({
 		email: '',
+		password: '',
 		loading: false
 	}),
 	methods: {
 		handleSubmit() {
-			if (!this.email || this.loading) return
+			if (!this.isValid() || this.loading) return
 			this.loading = true
 			setTimeout(() => {
 				this.loading = false
 			}, 2000)
+		},
+		isValidPassword: p => p.length >= 6,
+		isValidEmail: e => /^[a-z\d_.+-]+@[a-z\d-.]+$/i.test(e),
+		isValid() {
+			const { p, e } = this.$refs
+			return p?.isValid && e?.isValid
 		}
 	}
 }
