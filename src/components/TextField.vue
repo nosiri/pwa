@@ -1,6 +1,5 @@
 <template lang="pug">
-input.input(ref='input'
-	v-model='_value'
+input.input(v-model='_value'
 	:class='{ "is-danger": showError && (value && !validator(_value)) }'
 	:dir='direction'
 	:placeholder='placeholder' required)

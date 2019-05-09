@@ -6,7 +6,7 @@ div
 		.columns.is-multiline(v-if="state === 1")
 			.column.is-6-desktop(v-for='(movie, i) in result' :key='i')
 				movie-box(:title='movie.title' :image='movie.image' :uid='movie.id')
-		empty-state(v-else-if='state === -1' icon='movies')
+		empty-state(v-else-if='state === -1' icon='cinema')
 			p
 				| نام فیلم مورد نظر خود را وارد کنید و آن را از سرویس‌های داخلی 
 				b نماوا 

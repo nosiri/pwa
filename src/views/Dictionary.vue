@@ -6,9 +6,9 @@
 	<main class="section">
 		<div class="container">
 			<div class="columns is-centered" v-if="state === 1">
-				<word-details v-bind='{ word, type, text, database }' has-save-button />
+				<word-details v-bind='{ dictionary, type, text, database }' has-save-button />
 			</div>
-			<empty-state v-else icon='word'>
+			<empty-state v-else icon='dictionary'>
 				<p>
 					برای دسترسی به معنی، نحوه تلفظ و ... یک کلمه خاص، آن را در فیلد بالا نوشته و جستجو را بزنید.
 				</p>
