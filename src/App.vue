@@ -38,6 +38,9 @@ export default {
 			this.swipe_transition = true
 			this.swiped = 0
 		})
+		window.addEventListener('swipe-done', () => {
+			this.$router.back()
+		})
 	}
 }
 </script>

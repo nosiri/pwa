@@ -36,7 +36,7 @@ export default {
 		}
 	}
 	@include mobile {
-		.column {
+		> .column {
 			&:first-child {
 				padding-bottom: 0;
 			}

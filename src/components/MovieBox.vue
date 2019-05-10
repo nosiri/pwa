@@ -17,7 +17,7 @@ export default {
 			const { uid } = this
 			if (typeof uid === 'object') {
 				const { filimo, namava } = uid
-				return `${filimo}-${namava}`				
+				return `${filimo}-${namava}`
 			} else return String(uid)
 		}
 	},

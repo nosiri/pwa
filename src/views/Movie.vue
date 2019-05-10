@@ -12,7 +12,7 @@ page-header(full-screen :background-image='cover || image' :blur='!cover' :darke
 						| {{ g }}
 						template(v-if='genres.length - i > 1') ، 
 				.details زمان: 
-					b {{ duration | minToDuration | faNum }} ساعت
+					b {{ duration | minToDuration | faNum }}
 				.details محصول {{ year | faNum }}
 			br
 			template(v-if='!usesBothProviders')
@@ -23,7 +23,7 @@ page-header(full-screen v-else).is-bold
 		h1.title(style='margin-bottom: .35em') خطایی رخ داد!
 		p.has-text-grey-dark {{ error | errfmt }}
 	.has-text-centered(v-else)
-		spinner(:size='150')
+		spinner(:size='64')
 </template>
 <script>
 import { call } from '../api';
@@ -75,8 +75,10 @@ export default {
 		}
 	},
 	filters: {
-		minToDuration: sec => {
-			return `${sec / 60 >> 0}:${(sec % 60).toString().padStart(2, '0')}`
+		minToDuration: m => {
+			const hours = m / 60 >> 0,
+			minutes = m % 60;
+			return (hours ? `${hours} ساعت و ` : '') + `${minutes} دقیقه`
 		}
 	},
 	created() {
