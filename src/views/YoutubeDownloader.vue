@@ -48,7 +48,7 @@ export default {
 				this.error_snack = true
 			}
 		},
-		isValidUrl: url => /^https?:\/\//i.test(url)
+		isValidUrl: url => /^https?:\/\/((www|m)\.)?(youtube\.com|youtu\.be)\/.+/i.test(url)
 	},
 	components: {
 		EmptyState: () => import("../components/EmptyState.vue")
