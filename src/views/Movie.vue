@@ -7,10 +7,8 @@ page-header(full-screen :background-image='cover || image' :blur='!cover' :darke
 			h1.title {{ title }}
 			p.has-text-weight-semibold(v-html='description' style='margin-bottom: 10px')
 			p
-				.details ژانر: 
-					b(v-for='(g, i) in genres' :key='i')
-						| {{ g }}
-						template(v-if='genres.length - i > 1') ، 
+				.details(v-if='genres.length') ژانر: 
+					b {{ genres.join('، ') }}
 				.details زمان: 
 					b {{ duration | minToDuration | faNum }}
 				.details محصول {{ year | faNum }}
@@ -54,28 +52,27 @@ export default {
 	}),
 	methods: {
 		async init() {
-			const { uid } = this;
-
 			try {
 				const db = await open(),
 				tx = db.transaction(['movies'], 'readonly'),
 				movies = tx.objectStore('movies');
-				const fromDb = await movies.get(uid);
+				const fromDb = await movies.get(this.uid);
 				if (fromDb) {
 					this.use(fromDb);
+					this.isSaved = true
 					this.state = 1;
 					return
+				} else {
+					const res = await call(`/cinema/movie/${ this.uid }`),
+						[, fetchedId] = res.url.match(/\/([^/]+)\?/);
+					// prevents old requests to be used
+					if (fetchedId !== this.uid) return;
+	
+					if (res.ok) {
+						this.use(res.data)
+						this.state = 1
+					} else throw res.error
 				}
-
-				const res = await call(`/cinema/movie/${ uid }`),
-					[, fetchedId] = res.url.match(/\/([^/]+)\?/);
-				// prevent old requests to be used
-				if (fetchedId !== uid) return;
-
-				if (res.ok) {
-					this.use(res.data)
-					this.state = 1
-				} else throw res.error
 			} catch (e) {
 				this.error = e
 				this.state = 2
@@ -147,7 +144,7 @@ img {
 		display: inline-block;
 		&:not(:last-of-type)::after {
 			content: '|';
-			margin: 0 .2em;
+			margin: 0 0.2em;
 			opacity: 0.5;
 		}
 	}
