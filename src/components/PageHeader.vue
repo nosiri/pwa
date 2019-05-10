@@ -1,6 +1,7 @@
 <template>
 	<header class="hero" :class="classNames">
-		<div class="bg" v-if='backgroundImage' :style="{ 'background-image': `url(${ backgroundImage })` }" :class="{ 'is-blurry': blur}" />
+		<div class="bg" v-if='backgroundImage'
+			:style="{ 'background-image': `url(${ backgroundImage })` }" :class="bgClassNames" />
 		<div class="hero-body">
 			<div class="container">
 				<h1 v-if="title" class="title has-text-weight-bold">{{ title }}</h1>
@@ -18,16 +19,23 @@ export default {
 		raised: Boolean,
 		backgroundImage: String,
 		fullScreen: Boolean,
+		darken: Boolean,
 		blur: Boolean
 	},
 	computed: {
 		classNames() {
-			const isDark = this.primary || this.backgroundImage
+			const isDark = this.backgroundImage || this.primary
 			return {
 				[`is-${isDark ? 'primary' : 'light'}`]: true,
 				"is-small": this.small,
 				"is-raised": this.raised,
 				"is-fullheight": this.fullScreen
+			}
+		},
+		bgClassNames() {
+			return {
+				'is-dark': this.darken,
+				'is-blurry': this.blur
 			}
 		}
 	}
@@ -42,6 +50,9 @@ export default {
 	}
 	> .bg {
 		$blur: 17px;
+		&.is-dark {
+			filter: brightness(.5);
+		}
 		&.is-blurry {
 			filter: blur($blur) brightness(.4) saturate(1.5);
 		}

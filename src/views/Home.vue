@@ -19,7 +19,7 @@ div
 
 		.columns.is-vcentered
 			.column.is-5
-				box(icon="movies" icon-color="#5716da" href="/cinema"): b سینما
+				box(icon="cinema" icon-color="#5716da" href="/cinema"): b سینما
 			.column
 				box(icon="youtube" icon-color="red" href="/youtube"): b یوتیوب
 			.column
@@ -35,7 +35,7 @@ div
 					btn(slot='footer' color='primary' :href="proxy_link") اتصال
 				p(v-else) لطفا چند لحظه صبر کنید...
 			.column
-				box(icon="word" icon-color="#c25541" small href='/dictionary' responsive)
+				box(icon="dictionary" icon-color="#c25541" small href='/dictionary' responsive)
 					b لغت‌نامه
 			.column.is-3-desktop
 				box(icon="omen" icon-color="#bd9548" small button responsive): b فال حافظ

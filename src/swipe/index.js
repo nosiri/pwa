@@ -1,4 +1,3 @@
-import router from "../router";
 import Point from "./point";
 import { isInput, openModalExists } from "../helpers/";
 
@@ -8,8 +7,8 @@ let records = [],
 	isOk = false,
 	progress = 0;
 
-const dispatchEnd = () => {
-	window.dispatchEvent(new CustomEvent("swipe-end"));
+const dispatch = (type, detail) => {
+	window.dispatchEvent(new CustomEvent(type, { detail }));
 };
 
 window.addEventListener("touchstart", event => {
@@ -33,11 +32,7 @@ window.addEventListener("touchmove", ({ targetTouches }) => {
 
 	if (isOk) {
 		progress = (thisOne.distanceFrom(first) / window.innerWidth) * 4;
-		window.dispatchEvent(
-			new CustomEvent("swipe-progress", {
-				detail: { progress }
-			})
-		);
+		dispatch("swipe-progress", { progress });
 	}
 
 	if (!first || isOk) records.push(thisOne);
@@ -49,16 +44,16 @@ window.addEventListener("touchend", () => {
 		isOk &&
 		progress >= 1 &&
 		records
-			.map((p, i, a) => {
+			.map(({ x }, i, a) => {
 				const prev = a[i - 1];
-				return prev ? p.x > prev.x : true;
+				return prev ? x >= prev.x : true;
 			})
 			.every(Boolean)
 	) {
-		router.push("/");
+		dispatch("swipe-done");
 	}
 
-	dispatchEnd();
+	dispatch("swipe-end");
 	records = [];
 	isOk = false;
 	progress = 0;

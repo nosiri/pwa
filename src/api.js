@@ -36,7 +36,8 @@ export async function call(path, data = {}) {
 			status,
 			data: ok ? data.result : null,
 			ok,
-			error: ok ? null : data.error || status
+			error: ok ? null : data.error || status,
+			url: fullUrl
 		};
 	} catch ({ message }) {
 		console.log(message);
