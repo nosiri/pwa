@@ -28,7 +28,8 @@ export default new Router({
 		},
 		{
 			path: "/cinema/:uid",
-			component: Movie
+			component: Movie,
+			props: true
 		},
 		{
 			path: "/youtube",
