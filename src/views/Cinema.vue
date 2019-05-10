@@ -4,7 +4,7 @@ div
 		simple-form(v-model='query' placeholder='نام فیلم' :loading='state === 0' @submit='handleSubmit')
 	main.section: .container
 		.columns.is-multiline(v-if="state === 1")
-			.column.is-6-desktop(v-for='(movie, i) in result' :key='i')
+			.column.is-6-desktop.is-4-widescreen(v-for='(movie, i) in result' :key='i')
 				movie-box(:title='movie.title' :image='movie.image' :uid='movie.id')
 		empty-state(v-else-if='state === -1' icon='cinema')
 			p
