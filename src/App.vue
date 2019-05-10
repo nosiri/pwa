@@ -34,12 +34,10 @@ export default {
 			this.swipe_transition = false
 			this.swiped = 75 * Math.min(n, 3)
 		})
-		window.addEventListener('swipe-end', () => {
+		window.addEventListener('swipe-end', e => {
+			if (e.detail.isDone) this.$router.back()
 			this.swipe_transition = true
 			this.swiped = 0
-		})
-		window.addEventListener('swipe-done', () => {
-			this.$router.back()
 		})
 	}
 }
