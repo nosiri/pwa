@@ -1,24 +1,16 @@
-<template>
-<transition name="fade">
-	<div class="modal is-active" v-if='open'>
-		<div class="modal-background" @click.self="close"></div>
-		<div class="modal-card">
-			<header class="modal-card-head">
-				<p class="modal-card-title">{{ title }}</p>
-			</header>
-			<section class="modal-card-body">
-				<slot></slot>
-			</section>
-			<footer class="modal-card-foot">
-				<slot name="footer" />
-				<btn v-if="closeButton" @click.native="close">
-					{{ closeButton }}
-				</btn>
-			</footer>
-		</div>
-		<button class="modal-close is-large" aria-label="close" @click="close"></button>
-	</div>
-</transition>
+<template lang="pug">
+transition(name='fade')
+	.modal.is-active(v-if='open' tabindex='-1' @keydown.esc.exact.self='close')
+		.modal-background(@click.self='close')
+		.modal-card
+			header.modal-card-head
+				p.modal-card-title {{ title }}
+			section.modal-card-body
+				slot
+			footer.modal-card-foot
+				slot(name='footer')
+				btn(v-if='closeButton' @click.native='close') {{ closeButton }}
+		button.modal-close.is-large(aria-label='close' @click='close')
 </template>
 <script>
 export default {
@@ -41,13 +33,10 @@ export default {
 			const html = document.body.parentElement
 			if (isOpen) {
 				html.style.overflowY = 'hidden'
-
 				this.$nextTick(() => {
-					const input = this.$el.querySelector('input')
-					if (input) input.focus()
+					this.$el.focus()
 				})
-			}
-			else html.removeAttribute('style')
+			} else html.removeAttribute('style')
 		}
 	},
 	name: 'Modal'
