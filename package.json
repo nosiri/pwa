@@ -5,8 +5,8 @@
 		"serve": "vue-cli-service serve --mode production",
 		"build": "vue-cli-service build",
 		"lint": "vue-cli-service lint",
-		"test": "cypress open",
-		"pretest": "yarn serve"
+		"test": "cypress run",
+		"test:gui": "cypress open"
 	},
 	"dependencies": {
 		"bulma": "^0.7.4",
