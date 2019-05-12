@@ -1,15 +1,11 @@
-<template>
-	<div v-if="hasLoggedIn">
-		<div id="swipe-progress"
-			:style="{ width: swiped + 'px' }"
-			:class='{"has-transition": swipe_transition}' />
-		<transition name="fade" mode="out-in">
-			<keep-alive>
-				<router-view class="rv" /> 
-			</keep-alive>
-		</transition>
-	</div>
-	<signin-form v-else />
+<template lang="pug">
+div(v-if="hasLoggedIn")
+	#swipe-progress(:style="{ width: swiped + 'px' }"
+		:class='{ "has-transition": swipe_transition }')
+	transition(name="fade" mode="out-in")
+		keep-alive
+			router-view.rv
+signin-form(v-else)
 </template>
 <script>
 export default {
@@ -34,12 +30,10 @@ export default {
 			this.swipe_transition = false
 			this.swiped = 75 * Math.min(n, 3)
 		})
-		window.addEventListener('swipe-end', () => {
+		window.addEventListener('swipe-end', e => {
+			if (e.detail.isDone) this.$router.back()
 			this.swipe_transition = true
 			this.swiped = 0
-		})
-		window.addEventListener('swipe-done', () => {
-			this.$router.back()
 		})
 	}
 }

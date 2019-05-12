@@ -54,9 +54,6 @@ export default {
 				this.state = 2
 			}
 		}
-	},
-	components: {
-		EmptyState: () => import('../components/EmptyState.vue')
 	}
 }
 </script>

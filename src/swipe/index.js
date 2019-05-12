@@ -40,7 +40,7 @@ window.addEventListener("touchmove", ({ targetTouches }) => {
 
 window.addEventListener("touchend", () => {
 	if (!isRecording) return;
-	if (
+	const isDone =
 		isOk &&
 		progress >= 1 &&
 		records
@@ -48,12 +48,9 @@ window.addEventListener("touchend", () => {
 				const prev = a[i - 1];
 				return prev ? x >= prev.x : true;
 			})
-			.every(Boolean)
-	) {
-		dispatch("swipe-done");
-	}
+			.every(Boolean);
 
-	dispatch("swipe-end");
+	dispatch("swipe-end", { isDone });
 	records = [];
 	isOk = false;
 	progress = 0;

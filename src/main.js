@@ -20,6 +20,9 @@ Vue.component("text-field", () =>
 Vue.component("page-header", () =>
 	import(/* webpackChunkName: "header" */ "./components/PageHeader.vue")
 );
+Vue.component("empty-state", () =>
+	import(/* webpackChunkName: "empty-state" */ "./components/EmptyState.vue")
+);
 Vue.component("snackbar", () =>
 	import(/* webpackChunkName: "snackbar" */ "./components/Snackbar.vue")
 );

@@ -1,18 +1,26 @@
 <template lang="pug">
 div
 	page-header(title="سینما")
-		simple-form(v-model='query' placeholder='نام فیلم' :loading='state === 0' @submit='handleSubmit')
+		simple-form(v-model='query' placeholder='نام فیلم'
+			:loading='state === 0' @submit='handleSubmit'
+			@focuschange='form_focus = $event')
 	main.section: .container
 		.columns.is-multiline(v-if="state === 1")
-			.column.is-6-desktop(v-for='(movie, i) in result' :key='i')
+			.column.is-6-desktop.is-4-widescreen(v-for='(movie, i) in result' :key='i')
 				movie-box(:title='movie.title' :image='movie.image' :uid='movie.id')
-		empty-state(v-else-if='state === -1' icon='cinema')
-			p
-				| نام فیلم مورد نظر خود را وارد کنید و آن را از سرویس‌های داخلی 
-				b نماوا 
-				| و 
-				b فیلیمو 
-				| تماشا کنید!
+		transition(v-else-if='state === -1' name='fade' mode='out-in')
+			div(v-if='!form_focus && suggested.length') 
+				h2.title پیشنهادی
+				.columns.is-multiline
+					.column.is-6-desktop.is-4-widescreen(v-for='(movie, i) in suggested' :key='i')
+						movie-box(:title='movie.title' :image='movie.image' :uid='movie.id')
+			empty-state(icon='cinema' v-else)
+				p
+					| نام فیلم مورد نظر خود را وارد کنید و آن را از سرویس‌های داخلی 
+					b نماوا 
+					| و 
+					b فیلیمو 
+					| تماشا کنید!
 </template>
 <script>
 import { call } from '../api'
@@ -24,7 +32,9 @@ export default {
 	data: () => ({
 		state: -1,
 		result: null,
-		query: ''
+		query: '',
+		suggested: [],
+		form_focus: false
 	}),
 	methods: {
 		async handleSubmit() {
@@ -43,10 +53,16 @@ export default {
 			}
 		}
 	},
+	mounted() {
+		call('/cinema').then(res => {
+			if (res.ok) {
+				this.suggested = res.data
+			} else throw res.error
+		}).catch(console.log)
+	},
 	components: {
 		Modal: () => import("../components/Modal.vue"),
-		MovieBox,
-		EmptyState: () => import("../components/EmptyState.vue")
+		MovieBox
 	}
 }
 </script>
