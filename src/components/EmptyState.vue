@@ -1,5 +1,5 @@
 <template lang="pug">
-.columns.is-vcentered.is-center.is-multiline.empty-state(:class='{ "is-error": error }')
+.columns.is-vcentered.is-centered.is-multiline.empty-state(:class='{ "is-error": error }')
 	.column.has-text-centered(:class='{ [`is-${ vertical ? 12 : 4 }`]: true }')
 		icon(:name="icon" size='75%')
 	.column(:class='{ [`has-text-centered${vertical ? "" : "-mobile"}`]: true }')

@@ -1,7 +1,7 @@
 <template lang='pug'>
 form.columns.is-mobile.is-vcentered.is-variable.is-2-mobile(@submit.prevent='submit')
 	.column.control
-		text-field(v-model='_value' ref='field' v-bind='{ placeholder, showError, validator }')
+		text-field(v-model='_value' ref='field' v-bind='{ placeholder, showError, validator }' @focus.native='$emit("focuschange", true)' @blur.native='$emit("focuschange", false)')
 	.column.is-narrow
 		btn(color='link' :disabled='!isValid()' :loading='loading') {{ buttonText }}
 </template>

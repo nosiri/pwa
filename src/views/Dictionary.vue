@@ -60,8 +60,7 @@ export default {
 		})
 	},
 	components: {
-		WordDetails: () => import("../components/WordDetails.vue"),
-		EmptyState: () => import("../components/EmptyState.vue")
+		WordDetails: () => import("../components/WordDetails.vue")
 	}
 }
 </script>

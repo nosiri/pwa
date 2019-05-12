@@ -13,9 +13,19 @@ export default {
 		uid: [Number, String, Object]
 	},
 	computed: {
+		provider() {
+			switch (typeof this.uid) {
+				case 'string': 
+					return 'filimo'
+				case 'number':
+					return 'namava'
+				default: 
+					return 'both'
+			}
+		},
 		to() {
 			const { uid } = this
-			if (typeof uid === 'object') {
+			if (this.provider === 'both') {
 				const { filimo, namava } = uid
 				return `${filimo}-${namava}`
 			} else return String(uid)

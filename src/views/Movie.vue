@@ -120,10 +120,7 @@ export default {
 			this.init()
 		}
 	},
-	components: {
-		Spinner,
-		EmptyState: () => import('../components/EmptyState.vue')
-	}
+	components: { Spinner }
 }
 </script>
 <style lang="scss" scoped>
