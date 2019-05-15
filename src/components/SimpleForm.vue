@@ -22,7 +22,11 @@ export default {
 			type: String,
 			default: 'جستجو'
 		},
-		showError: Boolean
+		showError: Boolean,
+		autofocus: {
+			type: Boolean,
+			default: true
+		}
 	},
 	model: {
 		prop: 'value',
@@ -31,7 +35,12 @@ export default {
 	computed: {
 		_value: {
 			get() { return this.value },
-			set(v) { this.$emit('update', v) }
+			set(v) {
+				if (!!this.value.trim() && !v.trim()) {
+					this.$emit('clear')
+				}
+				this.$emit('update', v)
+			}
 		}
 	},
 	methods: {
@@ -45,7 +54,9 @@ export default {
 		}
 	},
 	activated() {
-		this.$refs.field?.focus()
+		if (this.autofocus) {
+			this.$refs.field?.focus()
+		}
 	}
 }
 </script>

@@ -11,6 +11,19 @@ const dispatch = (type, detail) => {
 	window.dispatchEvent(new CustomEvent(type, { detail }));
 };
 
+const end = isDone => {
+	dispatch("swipe-end", { isDone });
+	records = [];
+	isOk = false;
+	progress = 0;
+};
+
+window.addEventListener("scroll", () => {
+	if (isRecording) {
+		end(false);
+	}
+});
+
 window.addEventListener("touchstart", event => {
 	isRecording = !isInput(event.target) && !openModalExists();
 });
@@ -40,18 +53,14 @@ window.addEventListener("touchmove", ({ targetTouches }) => {
 
 window.addEventListener("touchend", () => {
 	if (!isRecording) return;
-	const isDone =
+	end(
 		isOk &&
-		progress >= 1 &&
-		records
-			.map(({ x }, i, a) => {
-				const prev = a[i - 1];
-				return prev ? x >= prev.x : true;
-			})
-			.every(Boolean);
-
-	dispatch("swipe-end", { isDone });
-	records = [];
-	isOk = false;
-	progress = 0;
+			progress >= 1 &&
+			records
+				.map(({ x }, i, a) => {
+					const prev = a[i - 1];
+					return prev ? x >= prev.x : true;
+				})
+				.every(Boolean)
+	);
 });
