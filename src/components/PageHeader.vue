@@ -51,7 +51,7 @@ export default {
 	> .bg {
 		$blur: 17px;
 		&.is-dark {
-			filter: brightness(.5);
+			filter: brightness(.35);
 		}
 		&.is-blurry {
 			filter: blur($blur) brightness(.4) saturate(1.5);
@@ -62,7 +62,7 @@ export default {
 		right: -$blur * 2;
 		bottom: -$blur * 2;
 		background-size: cover;
-		background-position: center;
+		background-position: 25% 50%;
 		z-index: 1;
 	}
 	> .hero-body {
