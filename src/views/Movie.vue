@@ -30,6 +30,7 @@ import { reset } from '../mixins/';
 import { pick } from 'lodash';
 import Spinner from '../components/Spinner.vue';
 export default {
+	mixins: [reset],
 	props: {
 		uid: {
 			type: String,
@@ -132,6 +133,9 @@ img {
 .result {
 	h1.title {
 		text-shadow: 0 2px 5px #0008
+	}
+	p {
+		text-shadow: 0 2px 10px #0004
 	}
 	.details {
 		display: inline-block;
