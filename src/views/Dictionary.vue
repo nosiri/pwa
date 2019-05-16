@@ -6,7 +6,7 @@
 	<main class="section">
 		<div class="container">
 			<div class="columns is-centered" v-if="state === 1">
-				<word-details v-bind='{ dictionary, type, text, database }' has-save-button />
+				<word-details v-bind='{ dictionary, type, text, database, word }' has-save-button />
 			</div>
 			<empty-state v-else icon='dictionary'>
 				<p>

@@ -3,7 +3,7 @@
 	<div class="columns is-variable is-3 is-vcentered has-text-right" :class="columnClassNames">
 		<div class="column is-narrow icon">
 			<slot name="avatar">
-				<icon :name="icon" size="2.75em" :color="iconColor" />
+				<icon v-if='icon' :name="icon" size="2.75em" :color="iconColor" />
 			</slot>
 		</div>
 		<div class="column text" :class="{ 'no-wrap': noWrap }">
@@ -51,7 +51,7 @@ export default {
 		}
 	},
 	components: {
-		Icon: () => import('./Icon.vue')
+		Icon: () => import('./Icon/Icon.vue')
 	}
 }
 </script>
@@ -68,6 +68,8 @@ export default {
 		white-space: nowrap;
 		text-overflow: ellipsis;
 	}
+}
+.text, .icon {
 	&:empty {
 		display: none;
 	}

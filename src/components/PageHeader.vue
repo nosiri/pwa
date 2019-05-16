@@ -4,7 +4,8 @@
 			:style="{ 'background-image': `url(${ backgroundImage })` }" :class="bgClassNames" />
 		<div class="hero-body">
 			<div class="container">
-				<h1 v-if="title" class="title has-text-weight-bold">{{ title }}</h1>
+				<h1 v-if="title" class="title has-text-weight-bold"
+				:class="{ [`is-size-${small ? 4 : 3}`]: true }">{{ title }}</h1>
 				<slot />
 			</div>
 		</div>
@@ -51,7 +52,7 @@ export default {
 	> .bg {
 		$blur: 17px;
 		&.is-dark {
-			filter: brightness(.5);
+			filter: brightness(.35);
 		}
 		&.is-blurry {
 			filter: blur($blur) brightness(.4) saturate(1.5);
@@ -62,7 +63,7 @@ export default {
 		right: -$blur * 2;
 		bottom: -$blur * 2;
 		background-size: cover;
-		background-position: center;
+		background-position: 25% 50%;
 		z-index: 1;
 	}
 	> .hero-body {

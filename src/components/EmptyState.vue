@@ -1,7 +1,7 @@
 <template lang="pug">
 .columns.is-vcentered.is-centered.is-multiline.empty-state(:class='{ "is-error": error }')
 	.column.has-text-centered(:class='{ [`is-${ vertical ? 12 : 4 }`]: true }')
-		icon(:name="icon" size='75%')
+		icon(:name="icon" :color='color' size='75%')
 	.column(:class='{ [`has-text-centered${vertical ? "" : "-mobile"}`]: true }')
 		.is-size-5-desktop
 			slot
@@ -9,11 +9,12 @@
 		slot(name='extra')
 </template>
 <script>
-import Icon from './Icon.vue'
+import Icon from './Icon/Icon.vue'
 export default {
 	props: {
 		icon: String,
 		error: Boolean,
+		color: String,
 		vertical: Boolean
 	},
 	components: { Icon }
@@ -27,12 +28,12 @@ export default {
 		min-width: 175px;
 		max-width: 225px;
 	}
-	svg > path {
+	svg > path:not([fill]) {
 		fill: #2929292a;
 	}
 	&.is-error {
 		svg > path {
-			fill: $red
+			fill: $red !important
 		}
 	}
 	@include mobile {

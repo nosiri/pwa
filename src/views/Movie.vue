@@ -13,7 +13,10 @@ page-header(full-screen :background-image='cover || image' :blur='!cover' :darke
 					b {{ duration | minToDuration | faNum }}
 				.details محصول {{ year | faNum }}
 			br
-			btn(color='link' outlined :href='link' v-if='!usesBothProviders' style='margin-left: 10px') تماشای فیلم
+			btn(v-if='!usesBothProviders' color='link' outlined :href='link') تماشای فیلم
+			template(v-else)
+				btn(:href='link.namava' outlined color='info') تماشا از نماوا
+				btn(:href='link.filimo' outlined color='warning') تماشا از فیلیمو
 			btn(color='light' outlined @click.native='save()')
 				| {{ !isSaved ? 'ذخیره' : 'حذف' }}
 page-header(full-screen v-else).is-bold
@@ -30,7 +33,6 @@ import { reset } from '../mixins/';
 import { pick } from 'lodash';
 import Spinner from '../components/Spinner.vue';
 export default {
-	mixins: [reset],
 	props: {
 		uid: {
 			type: String,
@@ -133,9 +135,6 @@ img {
 .result {
 	h1.title {
 		text-shadow: 0 2px 5px #0008
-	}
-	p {
-		text-shadow: 0 2px 10px #0004
 	}
 	.details {
 		display: inline-block;

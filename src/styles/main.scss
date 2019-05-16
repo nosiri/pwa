@@ -29,14 +29,13 @@
 
 .button {
 	font-weight: $weight-semibold;
+	& + & {
+		margin-right: 10px;
+	}
 }
 
 .modal-card-foot {
 	justify-content: flex-end;
-	.button:not(:last-child) {
-		margin-right: 0;
-		margin-left: 10px;
-	}
 }
 
 .buttons {

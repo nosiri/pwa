@@ -1,6 +1,6 @@
 <template lang="pug">
 div(v-if="hasLoggedIn")
-	#swipe-progress(:style="{ width: swiped + 'px' }"
+	#swipe-indicator(:style="{ width: swiped + 'px' }"
 		:class='{ "has-transition": swipe_transition }')
 	transition(name="fade" mode="out-in")
 		keep-alive
@@ -28,7 +28,7 @@ export default {
 			
 			const n = e.detail.progress
 			this.swipe_transition = false
-			this.swiped = 75 * Math.min(n, 3)
+			this.swiped = 70 * Math.min(n, 3)
 		})
 		window.addEventListener('swipe-end', e => {
 			if (e.detail.isDone) this.$router.back()
@@ -40,7 +40,7 @@ export default {
 </script>
 <style lang="scss">
 @import "./styles/vars";
-#swipe-progress {
+#swipe-indicator {
 	position: fixed;
 	top: 0;
 	left: 0;

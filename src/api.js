@@ -15,15 +15,14 @@ export async function call(path, data = {}) {
 
 	try {
 		const response = await fetch(
-				fullUrl,
-				usePost
-					? {
-							method: "post",
-							body: JSON.stringify(data)
-					  }
-					: {}
-			),
-			{ status } = response;
+			fullUrl,
+			usePost
+				? {
+						method: "post",
+						body: JSON.stringify(data)
+				  }
+				: {}
+		);
 
 		let data;
 		try {
@@ -36,7 +35,7 @@ export async function call(path, data = {}) {
 			status,
 			data: ok ? data.result : null,
 			ok,
-			error: ok ? null : data.error || status,
+			error: ok ? null : data.error || response.status,
 			url: fullUrl
 		};
 	} catch ({ message }) {
