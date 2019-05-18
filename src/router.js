@@ -11,6 +11,10 @@ const Dictionary = () =>
 	import(/* webpackChunkName: "dict" */ "./views/Dictionary.vue");
 const Soundcloud = () =>
 	import(/* webpackChunkName: "sc" */ "./views/Soundcloud.vue");
+const Settings = () =>
+	import(/* webpackChunkName: "settings" */ "./views/Settings.vue");
+const Weather = () =>
+	import(/* webpackChunkName: "weather" */ "./views/Weather.vue");
 
 Vue.use(Router);
 
@@ -23,6 +27,10 @@ export default new Router({
 			component: Home
 		},
 		{
+			path: "/settings",
+			component: Settings
+		},
+		{
 			path: "/cinema",
 			component: Cinema
 		},
@@ -30,6 +38,10 @@ export default new Router({
 			path: "/cinema/:uid",
 			component: Movie,
 			props: true
+		},
+		{
+			path: "/weather",
+			component: Weather
 		},
 		{
 			path: "/youtube",

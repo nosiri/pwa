@@ -16,3 +16,22 @@ export const isRtlString = str => {
 	}
 	return false;
 };
+
+export function getCurrentPosition() {
+	return new Promise((r, j) => {
+		navigator.geolocation.getCurrentPosition(
+			({ coords }) => {
+				r({
+					long: coords.longitude.toFixed(6),
+					lat: coords.latitude.toFixed(6)
+				});
+			},
+			j,
+			{
+				enableHighAccuracy: true
+			}
+		);
+	});
+}
+
+export const wait = dur => new Promise(r => setTimeout(r, dur));
