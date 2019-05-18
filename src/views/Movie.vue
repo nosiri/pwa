@@ -13,11 +13,12 @@ page-header(full-screen :background-image='cover || image' :blur='!cover' :darke
 					b {{ duration | minToDuration | faNum }}
 				.details محصول {{ year | faNum }}
 			br
-			btn(v-if='!usesBothProviders' color='link' outlined :href='link') تماشای فیلم
-			template(v-else)
-				btn(:href='link.namava' outlined color='info') تماشا از نماوا
-				btn(:href='link.filimo' outlined color='warning') تماشا از فیلیمو
-			btn(color='light' outlined @click.native='save()')
+			template(v-if='link')
+				btn(v-if='!usesBothProviders' color='link' outlined :href='link') تماشای فیلم
+				template(v-else)
+					btn(:href='link.namava' outlined color='info') تماشا از نماوا
+					btn(:href='link.filimo' outlined color='warning') تماشا از فیلیمو
+			btn(color='light' outlined @click.native='!isSaved ? saveToDb() : removeFromDb()')
 				| {{ !isSaved ? 'ذخیره' : 'حذف' }}
 page-header(full-screen v-else).is-bold
 	empty-state(v-if='state === 2' vertical icon='error' error)
@@ -29,7 +30,6 @@ page-header(full-screen v-else).is-bold
 <script>
 import { call } from '../api';
 import { open } from '../db';
-import { reset } from '../mixins/';
 import { pick } from 'lodash';
 import Spinner from '../components/Spinner.vue';
 export default {
@@ -50,55 +50,63 @@ export default {
 		genres: [],
 		duration: 0,
 		year: 0,
+		serial: null,
+		rate: null,
 		isSaved: false
 	}),
 	methods: {
 		async init() {
 			try {
-				const db = await open(),
-				tx = db.transaction(['movies'], 'readonly'),
-				movies = tx.objectStore('movies');
-				const fromDb = await movies.get(this.uid);
+				const fromDb = await this.loadFromDb();
 				if (fromDb) {
-					this.use(fromDb);
 					this.isSaved = true
-					this.state = 1;
-					return
-				} else {
-					const res = await call(`/cinema/movie/${ this.uid }`),
-						[, fetchedId] = res.url.match(/\/([^/]+)\?/);
-					// prevents old requests to be used
-					if (fetchedId !== this.uid) return;
-	
-					if (res.ok) {
-						this.use(res.data)
-						this.state = 1
-					} else throw res.error
+					Object.assign(this.$data, fromDb)
+					this.state = 1
 				}
+
+				const res = await call(`/cinema/movie/${ this.uid }`, {
+					linkonly: !!fromDb
+				}),
+				fetchedId = res.url.match(/\/([^/]+)\?/)?.[1];
+
+				// prevents old requests to be used
+				if (fetchedId !== this.uid) return;
+
+				if (res.ok) {
+					Object.assign(this.$data, res.data)
+					this.state = 1
+				} else throw res.error
 			} catch (e) {
 				this.error = e
 				this.state = 2
 				console.log(e)
 			}
 		},
-		async save() {
+		async loadFromDb() {
+			const db = await open(),
+				tx = db.transaction(['movies'], 'readonly'),
+				movies = tx.objectStore('movies');
+
+			return await movies.get(this.uid);
+		},
+		async saveToDb() {
 			const db = await open(),
 			tx = db.transaction(['movies'], 'readwrite'),
 			movies = tx.objectStore('movies')
 
 			await movies.add({
 				id: this.uid,
-				...this.pick(this)
+				...pick(this.$data, ['title', 'description', 'genres', 'duration', 'year', 'image', 'cover'])
 			})
 			this.isSaved = true
 		},
-		use(data) {
-			Object.assign(this, this.pick(data))
-		},
-		pick(obj) {
-			return pick(obj, [
-				'title', 'description', 'image', 'link',
-				'cover', 'genres', 'duration', 'year'])
+		async removeFromDb() {
+			const db = await open(),
+			tx = db.transaction(['movies'], 'readwrite'),
+			movies = tx.objectStore('movies');
+
+			movies.delete(this.uid)
+			this.isSaved = false
 		}
 	},
 	computed: {
