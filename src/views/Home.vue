@@ -13,9 +13,8 @@ div
 						b {{ price.toString() | comma | faNum }} تومان
 				p(v-else) لطفا چند لحظه صبر کنید...
 			.column
-				box(responsive icon="weather-pouring" icon-color="#6c8397" small)
-					| تهران: 
-					b(dir="ltr") {{ init_temperature | faNum }}&deg;
+				box(responsive icon="thermometer" icon-color="#78abff" small href='/weather')
+					b آب و هوا
 
 		.columns.is-vcentered
 			.column.is-5
@@ -26,7 +25,7 @@ div
 				box(icon="soundcloud" icon-color="#ff7500" href='/soundcloud'): b ساندکلود
 
 		.columns.is-multiline.is-vcentered.is-mobile.is-variable.is-2-mobile
-			.column.is-5-desktop.is-12-mobile
+			.column.is-two-fifths-desktop.is-12-mobile
 				box(icon="telegram" icon-color="#2a89b6" small button @tap="getAProxy")
 					b پراکسی تلگرام
 			modal#mtp-modal(v-model="proxy_open" title="پراکسی تلگرام" close-button="لغو")
@@ -40,11 +39,17 @@ div
 			.column.is-3-desktop
 				box(icon="omen" icon-color="#bd9548" small button responsive): b فال حافظ
 
-		p.is-size-6.has-text-grey-dark(dir="ltr" v-if="init_state === 1")
-			| IP: 
-			b {{ init_ip }}
-			br
-			b {{ init_date | faNum }}
+		.columns.is-multiline.is-vcentered
+			//- to be changed later
+			.column
+				box(icon='settings' icon-color='grey' small href='/settings')
+					b تنظیمات
+			.column.is-narrow(v-if='init_state === 1')
+				p.is-size-6.has-text-grey-dark(dir="ltr")
+					| IP: 
+					b {{ init_ip }}
+					br
+					b {{ init_date | faNum }}
 
 		snackbar(v-model="init_err_snack")
 			| خطایی رخ داد:  

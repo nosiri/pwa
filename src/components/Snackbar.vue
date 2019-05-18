@@ -1,11 +1,7 @@
-<template>
-<transition name="snack">
-	<div class="snackbar is-active" @click="close" v-if="active">
-		<div @click.self="close">
-			<slot></slot>
-		</div>
-	</div>
-</transition>
+<template lang="pug">
+transition(name="snack")
+	.snackbar(v-if='active' @click='close')
+		slot
 </template>
 <script>
 export default {
@@ -31,6 +27,8 @@ export default {
 	},
 	mounted() {
 		this.$watch('active', b => {
+			if (this.duration === 0) return;
+
 			if (b) {
 				this.timeout = setTimeout(() => {
 					this.close()
@@ -44,29 +42,24 @@ export default {
 	}
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../styles/_vars";
+@import "~bulma/sass/utilities/mixins";
 .snackbar {
 	position: fixed;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	pointer-events: none;
 	z-index: 10;
-	> div {
-		transition: inherit;
-		cursor: pointer;
+	bottom: 0;
+	left: calc(calc(100vw - 540px) / 2);
+	width: 540px;
+	@media only screen and (max-width: 540px) {
+		left: 0;
 		width: 100%;
-		padding: 1rem 1.5rem;
-		background: $grey-darker;
-		color: $white;
-		max-width: 540px;
-		border-radius: $radius-small $radius-small 0 0;
-		box-shadow: 0 -6px 32px -4px #0005;
-		pointer-events: auto
 	}
+	padding: 1rem 1.5rem;
+	cursor: pointer;
+	box-shadow: 0 -6px 32px -4px #0005;
+	border-radius: $radius-small $radius-small 0 0;
+	color: $white;
+	background-color: $grey-darker
 }
 </style>

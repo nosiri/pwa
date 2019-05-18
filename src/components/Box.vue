@@ -3,11 +3,16 @@
 	<div class="columns is-variable is-3 is-vcentered has-text-right" :class="columnClassNames">
 		<div class="column is-narrow icon">
 			<slot name="avatar">
-				<icon v-if='icon' :name="icon" size="2.75em" :color="iconColor" />
+				<icon v-if='icon' :name="icon" size="2.5em" :color="iconColor" />
 			</slot>
 		</div>
 		<div class="column text" :class="{ 'no-wrap': noWrap }">
-			<slot />
+			<div class="has-text-weight-bold">
+				<slot />
+			</div>
+			<div class="is-size-6 has-text-grey">
+				<slot name="caption"></slot>
+			</div>
 		</div>
 	</div>
 </component>
@@ -62,10 +67,12 @@ export default {
 	align-items: center;
 	justify-content: center;
 }
-.text {
-	&.no-wrap {
+.text.no-wrap {
+	&, > div {
 		overflow: hidden;
 		white-space: nowrap;
+	}
+	> div {
 		text-overflow: ellipsis;
 	}
 }

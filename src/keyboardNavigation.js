@@ -10,7 +10,7 @@ window.addEventListener("keypress", ev => {
 	/** @type {import("vue-router").RouterOptions} */
 	const opts = router.options;
 	for (const { path, meta } of opts.routes) {
-		if (meta && meta.disableKeyNav) continue;
+		if (meta?.disableKeyNav) continue;
 
 		const [firstSection] = path.match(/^\/[^/]*/i);
 		if ((firstSection.charAt(1) || firstSection.charAt(0)) === ev.key) {
