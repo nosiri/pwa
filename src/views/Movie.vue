@@ -13,7 +13,7 @@ page-header(full-screen :background-image='cover || image' :blur='!cover' :darke
 					b {{ duration | minToDuration | faNum }}
 				span محصول 
 					b {{ year | faNum }}
-				span(v-if='rate >= 0') امتیاز: 
+				span(v-if='rate && rate >= 0') امتیاز: 
 					b {{ rate | faNum }} 
 					| از ۱۰
 			br

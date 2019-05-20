@@ -13,11 +13,17 @@ div
 					movie-box(:title='movie.title' :image='movie.image' :uid='movie.id')
 
 			template(v-else)
-				div(v-if='!form_focus && suggested.length') 
-					h2.title پیشنهادی
-					.columns.is-multiline
-						.column.is-6-desktop.is-4-widescreen(v-for='(movie, i) in suggested' :key='i')
-							movie-box(:title='movie.title' :image='movie.image' :uid='movie.id')
+				div(v-if='!form_focus && (suggested.length || saved.length)')
+					template(v-if='suggested.length')
+						h2.title پیشنهادی
+						.columns.is-multiline
+							.column.is-6-desktop.is-4-widescreen(v-for='(movie, i) in suggested' :key='i')
+								movie-box(:title='movie.title' :image='movie.image' :uid='movie.id')
+					template(v-if='saved.length')
+						h2.title ذخیره‌شده
+						.columns.is-multiline
+							.column.is-6-desktop.is-4-widescreen(v-for='(movie, i) in saved' :key='i')
+								movie-box(:title='movie.title' :image='movie.image' :uid='movie.id')
 				empty-state(icon='cinema' v-else)
 					p
 						| نام فیلم مورد نظر خود را وارد کنید و آن را از سرویس‌های داخلی 
@@ -30,6 +36,7 @@ div
 <script>
 import { call } from '../api'
 import MovieBox from "../components/MovieBox.vue"
+import { open } from '../db';
 export default {
 	props: {
 		uid: String
@@ -40,6 +47,7 @@ export default {
 		error_snack: false,
 		query: '',
 		suggested: [],
+		saved: [],
 		form_focus: false
 	}),
 	methods: {
@@ -61,17 +69,30 @@ export default {
 			}
 		},
 		handleClear() {
-			if (this.state === -1) {
-				this.$reset('suggested', 'form_focus')
+			if (this.state !== -1) {
+				this.$reset('suggested', 'form_focus', 'saved')
 			}
 		}
 	},
-	mounted() {
-		call('/cinema').then(res => {
-			if (res.ok) {
-				this.suggested = res.data
-			} else throw res.error
-		}).catch(console.log)
+	async mounted() {
+		const res = await call('/cinema')
+		if (res.ok) {
+			this.suggested = res.data
+		}
+		
+		const db = await open(),
+		tx = db.transaction(['movies']),
+		movies = tx.objectStore('movies');
+
+		let cursor = await movies.openCursor();
+
+		while (cursor) {
+			this.saved.push({
+				id: cursor.key,
+				...cursor.value
+			})
+			cursor = await cursor.continue()
+		}
 	},
 	components: {
 		Modal: () => import("../components/Modal.vue"),
