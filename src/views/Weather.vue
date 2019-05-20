@@ -1,25 +1,56 @@
 <template lang="pug">
 main.container: .columns.is-centered.is-vcentered.is-mobile(style='min-height: 100vh')
-	.column.is-size-7-desktop
-		empty-state(icon='thermometer' vertical)
-			h1.title {{ temp[1] | faNum }}&deg;
-			.subtitle {{ temp[2] | faNum }} &ndash; {{ temp[0] | faNum }}
+	transition(name='fade' mode='out-in')
+		.column.is-size-7-desktop(v-if='!loading && !error')
+			empty-state(icon='thermometer')
+				h1.title {{ temp.now | faNum }} درجه
+				.subtitle.is-size-6
+					| کمترین: {{ temp.min | faNum }}
+					br
+					| بیشترین: {{ temp.max | faNum }}
+		spinner(:size='64' v-else-if='loading && !error')
+		empty-state(v-else vertical icon='error' error)
+			h1.title(style='margin-bottom: .35em') خطایی رخ داد!
+			p.has-text-grey-dark {{ error | translate }}
 </template>
 <script>
 import { call } from '../api';
-import { getCookie } from 'tiny-cookie';
+import { getCurrentPosition } from '../helpers/';
+import animateNumber from '../helpers/animateNumber';
+import { reset } from '../mixins/'
 export default {
 	data: () => ({
-		temp: [0, 0, 0]
+		loading: false,
+		error: null,
+		temp: {
+			now: 0,
+			min: 0,
+			max: 0
+		},
+		phrase: '',
+		city: ''
 	}),
-	async created() {
-		const [lat, long] = getCookie('position').split(',').map(e => (+e).toFixed(6));
-
-		const res = await call('/weather', { lat, long })
-		if (res.ok) {
-			const { now, min, max } = res.data.temp
-			this.temp = [min, now, max]
+	mixins: [reset],
+	methods: {
+		async init() {
+			this.loading = true
+			try {
+				const res = await call('/weather', await getCurrentPosition())
+				if (res.ok) {
+					const { phrase, temp, location: city } = res.data;
+					this.temp = temp
+					this.phrase = phrase.replace(/_/g, '-').toLowerCase()
+					this.city = city
+				} else throw res.error
+			} catch (e) {
+				this.error = e
+			} finally {
+				this.loading = false
+			}
 		}
+	},
+	activated() {
+		this.init()
 	},
 	components: {
 		EmptyState: () => import('../components/EmptyState.vue'),
