@@ -1,5 +1,5 @@
 <template lang="pug">
-page-header(full-screen :background-image='cover || image' :blur='!cover' :darken='!!cover' v-if='state === 1')
+page-header(full-screen :background-image='cover || image' :blur='!cover' :darken='!!cover' v-if='isSaved || state === 1')
 	.columns.is-vcentered.has-text-centered-mobile
 		.column.is-5
 			img(:src='image')
@@ -13,6 +13,7 @@ page-header(full-screen :background-image='cover || image' :blur='!cover' :darke
 					b {{ duration | minToDuration | faNum }}
 				.details محصول {{ year | faNum }}
 			br
+			div
 			template(v-if='link')
 				btn(v-if='!usesBothProviders' color='link' outlined :href='link') تماشای فیلم
 				template(v-else)
@@ -20,8 +21,10 @@ page-header(full-screen :background-image='cover || image' :blur='!cover' :darke
 					btn(:href='link.filimo' outlined color='warning') تماشا از فیلیمو
 			btn(color='light' outlined @click.native='!isSaved ? saveToDb() : removeFromDb()')
 				| {{ !isSaved ? 'ذخیره' : 'حذف' }}
+	
+	snackbar(v-if='isSaved && state === 2' v-model='error_snack') {{ error | translate }}
 page-header(full-screen v-else).is-bold
-	empty-state(v-if='state === 2' vertical icon='error' error)
+	empty-state(v-if='state === 2 && !isSaved' vertical icon='error' error)
 		h1.title(style='margin-bottom: .35em') خطایی رخ داد!
 		p.has-text-grey-dark {{ error | translate }}
 	.has-text-centered(v-else)
@@ -42,6 +45,9 @@ export default {
 	data: () => ({
 		state: 0,
 		error: null,
+		isSaved: false,
+		error_snack: true,
+
 		title: '',
 		description: '',
 		image: '',
@@ -51,8 +57,7 @@ export default {
 		duration: 0,
 		year: 0,
 		serial: null,
-		rate: null,
-		isSaved: false
+		rate: null
 	}),
 	methods: {
 		async init() {
@@ -116,9 +121,8 @@ export default {
 	},
 	filters: {
 		minToDuration: m => {
-			const hours = m / 60 >> 0,
-			minutes = m % 60;
-			return (hours ? `${hours} ساعت و ` : '') + `${minutes} دقیقه`
+			const hours = m / 60 >> 0;
+			return (hours ? `${hours} ساعت و ` : '') + `${m % 60} دقیقه`
 		}
 	},
 	created() {
