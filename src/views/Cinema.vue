@@ -25,7 +25,7 @@ div
 						| و 
 						b فیلیمو 
 						| تماشا کنید!
-	snackbar(v-model='error_snack') {{ result | errfmt }}
+	snackbar(v-model='error_snack') {{ result | translate }}
 </template>
 <script>
 import { call } from '../api'

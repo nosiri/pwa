@@ -19,7 +19,7 @@ div
 					| اگه می‌خواید فیلمی رو از یوتیوب دانلود کنید، 
 					b لینک اون رو همینجا کپی کنید 
 					| تا اون رو تماشا یا دانلود کنید.
-	snackbar(v-model="error_snack" :duration="3") {{ data | errfmt }}
+	snackbar(v-model="error_snack" :duration="3") {{ data | translate }}
 </div>
 </template>
 <script>

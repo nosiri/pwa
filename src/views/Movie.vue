@@ -23,7 +23,7 @@ page-header(full-screen :background-image='cover || image' :blur='!cover' :darke
 page-header(full-screen v-else).is-bold
 	empty-state(v-if='state === 2' vertical icon='error' error)
 		h1.title(style='margin-bottom: .35em') خطایی رخ داد!
-		p.has-text-grey-dark {{ error | errfmt }}
+		p.has-text-grey-dark {{ error | translate }}
 	.has-text-centered(v-else)
 		spinner(:size='64')
 </template>

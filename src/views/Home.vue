@@ -53,7 +53,7 @@ div
 
 		snackbar(v-model="init_err_snack")
 			| خطایی رخ داد:  
-			b {{ init_err | errfmt }}
+			b {{ init_err | translate }}
 </template>
 <script>
 import { call } from '../api'

@@ -1,5 +1,5 @@
 import Vue from "vue";
-import ERR_CODES from "./errors.json";
+import TRANSLATIONS from "./translations.json";
 
 /** @param {string|number} string */
 const faNum = string => {
@@ -10,6 +10,6 @@ const faNum = string => {
 };
 Vue.filter("faNum", faNum);
 
-Vue.filter("errfmt", err => faNum(ERR_CODES[err] || `خطای ${err}`));
+Vue.filter("translate", err => faNum(TRANSLATIONS[err] || `خطای ${err}`));
 
 Vue.filter("comma", s => s.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"));

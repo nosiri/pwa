@@ -16,7 +16,7 @@
 		</div>
 	</main>
 	<snackbar v-model="error_snack">
-		خطایی رخ داد: <b>{{ error | errfmt }}</b>
+		خطایی رخ داد: <b>{{ error | translate }}</b>
 	</snackbar>
 </div>
 </template>

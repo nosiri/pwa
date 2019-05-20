@@ -10,7 +10,7 @@ div
 					hr
 					p.has-text-danger(v-if="state === 2")
 						| خطایی رخ داد: 
-						b {{ data | errfmt }}
+						b {{ data | translate }}
 					p(v-else-if='state === 1')
 						b.has-text-success پیدا شد! 
 						| این آهنگ را می‌توانید از طریق 
