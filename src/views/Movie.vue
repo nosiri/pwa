@@ -6,12 +6,16 @@ page-header(full-screen :background-image='cover || image' :blur='!cover' :darke
 		.column.result
 			h1.title {{ title }}
 			p.has-text-weight-semibold(v-html='description' style='margin-bottom: 10px')
-			p
-				.details(v-if='genres.length') ژانر: 
+			p.details
+				span(v-if='genres.length') ژانر: 
 					b {{ genres.join('، ') }}
-				.details زمان: 
+				span زمان: 
 					b {{ duration | minToDuration | faNum }}
-				.details محصول {{ year | faNum }}
+				span محصول 
+					b {{ year | faNum }}
+				span(v-if='rate >= 0') امتیاز: 
+					b {{ rate | faNum }} 
+					| از ۱۰
 			br
 			div
 			template(v-if='link')
@@ -57,7 +61,7 @@ export default {
 		duration: 0,
 		year: 0,
 		serial: null,
-		rate: null
+		rate: -1
 	}),
 	methods: {
 		async init() {
@@ -148,9 +152,9 @@ img {
 	h1.title {
 		text-shadow: 0 2px 5px #0008
 	}
-	.details {
+	p.details > span {
 		display: inline-block;
-		&:not(:last-of-type)::after {
+		&:not(:last-child)::after {
 			content: '|';
 			margin: 0 0.2em;
 			opacity: 0.5;
