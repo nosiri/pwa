@@ -18,5 +18,17 @@
 	"CENSORED_VIDEO": "امکان دسترسی به ویدیو مورد نظر وجود ندارد",
 	"FILIMO_INCORRECT_ID": "آیدی ویدیو مورد نظر معتبر نیست (فیلیمو)",
 	"NAMAVA_INCORRECT_ID": "آیدی ویدیو مورد نظر معتبر نیست (نماوا)",
-	"INVALID_CARD": "ساختار شماره کارت ارسالی صحیح نیست"
+	"INVALID_CARD": "ساختار شماره کارت ارسالی صحیح نیست",
+
+	"CLEAR": "هوای صاف",
+	"FAIR": "هوای صاف",
+	"SUNNY": "آفتابی",
+	"PARTLY_CLOUDY": "تقریباً ابری",
+	"CLOUDY": "ابری",
+	"MOSTLY_CLOUDY": "اغلب ابری",
+	"WIND": "باد",
+	"RAIN": "باران",
+	"SHOWERS_IN_THE_VICINITY": "",
+	"LIGHT_RAIN": "باران آرام",
+	"RAIN_SHOWER": "باران شدید"
 }
