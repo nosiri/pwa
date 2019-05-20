@@ -1,3 +1,5 @@
+import { getCookie } from "tiny-cookie";
+
 /** @param {Element} el */
 export const isInput = ({ tagName }) => tagName.toLowerCase() === "input";
 
@@ -17,8 +19,15 @@ export const isRtlString = str => {
 	return false;
 };
 
-export function getCurrentPosition() {
+/** @returns {Promise<{ long: number, lat: number }>} */
+export function getCurrentPosition(allowCookie = false) {
 	return new Promise((r, j) => {
+		if (allowCookie) {
+			const [lat, long] = getCookie("position")
+				.split(",")
+				.map(e => +e);
+			r({ lat, long });
+		}
 		navigator.geolocation.getCurrentPosition(
 			({ coords }) => {
 				r({
