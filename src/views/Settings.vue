@@ -13,7 +13,7 @@ div
 <script>
 import { setCookie } from 'tiny-cookie';
 import pick from 'lodash/pick';
-import { getCurrentPosition, wait } from '../helpers/';
+import { getCurrentPosition } from '../helpers/';
 export default {
 	data: () => ({
 		gl_open: false,

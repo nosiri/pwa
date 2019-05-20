@@ -27,20 +27,19 @@ export function getCurrentPosition(allowCookie = false) {
 				.split(",")
 				.map(e => +e);
 			r({ lat, long });
+		} else {
+			navigator.geolocation.getCurrentPosition(
+				({ coords: { longitude, latitude } }) => {
+					r({
+						long: longitude.toFixed(6),
+						lat: latitude.toFixed(6)
+					});
+				},
+				j,
+				{
+					enableHighAccuracy: true
+				}
+			);
 		}
-		navigator.geolocation.getCurrentPosition(
-			({ coords }) => {
-				r({
-					long: coords.longitude.toFixed(6),
-					lat: coords.latitude.toFixed(6)
-				});
-			},
-			j,
-			{
-				enableHighAccuracy: true
-			}
-		);
 	});
 }
-
-export const wait = dur => new Promise(r => setTimeout(r, dur));
