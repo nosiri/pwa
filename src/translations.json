@@ -20,16 +20,15 @@
 	"NAMAVA_INCORRECT_ID": "آیدی ویدیو مورد نظر معتبر نیست (نماوا)",
 	"INVALID_CARD": "ساختار شماره کارت ارسالی صحیح نیست",
 
-	"CLEAR": "هوای صاف",
+	"CLEAR": "هوای پاک",
 	"FAIR": "هوای صاف",
 	"SUNNY": "آفتابی",
 	"PARTLY_CLOUDY": "تقریباً ابری",
 	"CLOUDY": "ابری",
 	"MOSTLY_CLOUDY": "اغلب ابری",
-	"MOSTLY_CLOUDY/WIND": "اغلب ابری همراه با باد",
 	"WIND": "باد",
 	"RAIN": "باران",
-	"SHOWERS_IN_THE_VICINITY": "",
-	"LIGHT_RAIN": "باران آرام",
+	"SHOWERS_IN_THE_VICINITY": "باران در نزدیکی",
+	"LIGHT_RAIN": "باران نم‌نم",
 	"RAIN_SHOWER": "باران شدید"
 }
