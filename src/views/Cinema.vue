@@ -75,15 +75,9 @@ export default {
 		}
 	},
 	async mounted() {
-		const res = await call('/cinema')
-		if (res.ok) {
-			this.suggested = res.data
-		}
-		
 		const db = await open(),
 		tx = db.transaction(['movies']),
 		movies = tx.objectStore('movies');
-
 		let cursor = await movies.openCursor();
 
 		while (cursor) {
@@ -92,6 +86,11 @@ export default {
 				...cursor.value
 			})
 			cursor = await cursor.continue()
+		}
+
+		const res = await call('/cinema')
+		if (res.ok) {
+			this.suggested = res.data
 		}
 	},
 	components: {

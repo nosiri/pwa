@@ -22,10 +22,9 @@ export const isRtlString = str => {
 /** @returns {Promise<{ long: number, lat: number }>} */
 export function getCurrentPosition(allowCookie = false) {
 	return new Promise((r, j) => {
-		if (allowCookie) {
-			const [lat, long] = getCookie("position")
-				.split(",")
-				.map(e => +e);
+		const cookie = getCookie("position");
+		if (allowCookie && cookie) {
+			const [lat, long] = cookie.split(",").map(e => +e);
 			r({ lat, long });
 		} else {
 			navigator.geolocation.getCurrentPosition(
