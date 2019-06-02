@@ -24,13 +24,13 @@ page-header(full-screen :background-image='cover || image' :blur='!cover' :darke
 						btn(:href='link.filimo' outlined color='warning') تماشا از فیلیمو
 				btn(color='light' outlined @click.native='!isSaved ? saveToDb() : removeFromDb()')
 					| {{ !isSaved ? 'ذخیره' : 'حذف' }}
-	div(v-if="serial.length")
+	div(v-if="serial && serial.length")
 		h3.title.is-size-5 قسمت‌های دیگر ({{ serial.length | faNum }})
 		carousel
 			slide(v-for="({ id: uid, title, image }) in serial" :key="uid")
 				movie-box(v-bind="{ uid, title, image }")
 	br
-	div(v-if="recommended.length")
+	div(v-if="recommended && recommended.length")
 		h3.title.is-size-5 پیشنهادی ({{ recommended.length | faNum }})
 		carousel
 			slide(v-for="({ id: uid, title, image }) in recommended" :key="uid")
@@ -70,8 +70,8 @@ export default {
 		genres: [],
 		duration: 0,
 		year: 0,
-		serial: [],
-		recommended: [],
+		serial: null,
+		recommended: null,
 		rate: -1
 	}),
 	methods: {
@@ -84,9 +84,7 @@ export default {
 					this.state = 1
 				}
 
-				const res = await call(`/cinema/movie/${ this.uid }`, {
-					linkonly: !!fromDb
-				}),
+				const res = await call(`/cinema/movie/${ this.uid }`, { linkonly: !!fromDb }),
 				fetchedId = res.url.match(/\/([^/]+)\?/)?.[1];
 
 				// prevents old requests to be used
