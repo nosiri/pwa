@@ -18,11 +18,17 @@ const end = isDone => {
 	progress = 0;
 };
 
-window.addEventListener("scroll", () => {
-	if (isRecording) {
-		end(false);
+window.addEventListener(
+	"scroll",
+	() => {
+		if (isRecording) {
+			end(false);
+		}
+	},
+	{
+		capture: true
 	}
-});
+);
 
 window.addEventListener("touchstart", event => {
 	isRecording = !isInput(event.target) && !openModalExists();

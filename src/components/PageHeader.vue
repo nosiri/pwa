@@ -3,7 +3,7 @@
 		<div class="bg" v-if='backgroundImage'
 			:style="{ 'background-image': `url(${ backgroundImage })` }" :class="bgClassNames" />
 		<div class="hero-body">
-			<div class="container">
+			<div class="container" style="width: 100%">
 				<h1 v-if="title" class="title has-text-weight-bold"
 				:class="{ [`is-size-${small ? 4 : 3}`]: true }">{{ title }}</h1>
 				<slot />

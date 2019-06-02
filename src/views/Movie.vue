@@ -1,8 +1,7 @@
 <template lang="pug">
 page-header(full-screen :background-image='cover || image' :blur='!cover' :darken='!!cover' v-if='isSaved || state === 1')
 	.columns.is-vcentered.has-text-centered-mobile
-		.column.is-5
-			img(:src='image')
+		.column.is-5: img(:src='image')
 		.column.result
 			h1.title {{ title }}
 			p.has-text-weight-semibold(v-html='description' style='margin-bottom: 10px')
@@ -18,13 +17,24 @@ page-header(full-screen :background-image='cover || image' :blur='!cover' :darke
 					| از ۱۰
 			br
 			div
-			template(v-if='link')
-				btn(v-if='!usesBothProviders' color='link' outlined :href='link') تماشای فیلم
-				template(v-else)
-					btn(:href='link.namava' outlined color='info') تماشا از نماوا
-					btn(:href='link.filimo' outlined color='warning') تماشا از فیلیمو
-			btn(color='light' outlined @click.native='!isSaved ? saveToDb() : removeFromDb()')
-				| {{ !isSaved ? 'ذخیره' : 'حذف' }}
+				template(v-if='link')
+					btn(v-if='!usesBothProviders' color='link' outlined :href='link') تماشای فیلم
+					template(v-else)
+						btn(:href='link.namava' outlined color='info') تماشا از نماوا
+						btn(:href='link.filimo' outlined color='warning') تماشا از فیلیمو
+				btn(color='light' outlined @click.native='!isSaved ? saveToDb() : removeFromDb()')
+					| {{ !isSaved ? 'ذخیره' : 'حذف' }}
+	div(v-if="serial.length")
+		h3.title.is-size-5 قسمت‌های دیگر ({{ serial.length | faNum }})
+		carousel
+			slide(v-for="({ id: uid, title, image }) in serial" :key="uid")
+				movie-box(v-bind="{ uid, title, image }")
+	br
+	div(v-if="recommended.length")
+		h3.title.is-size-5 پیشنهادی ({{ recommended.length | faNum }})
+		carousel
+			slide(v-for="({ id: uid, title, image }) in recommended" :key="uid")
+				movie-box(v-bind="{ uid, title, image }")
 	
 	snackbar(v-if='isSaved && state === 2' v-model='error_snack') {{ error | translate }}
 page-header(full-screen v-else).is-bold
@@ -60,7 +70,8 @@ export default {
 		genres: [],
 		duration: 0,
 		year: 0,
-		serial: null,
+		serial: [],
+		recommended: [],
 		rate: -1
 	}),
 	methods: {
@@ -91,18 +102,18 @@ export default {
 				console.log(e)
 			}
 		},
-		async loadFromDb() {
+		async db() {
 			const db = await open(),
-				tx = db.transaction(['movies'], 'readonly'),
-				movies = tx.objectStore('movies');
-
+			tx = db.transaction(['movies'], 'readwrite'),
+			movies = tx.objectStore('movies');
+			return movies
+		},
+		async loadFromDb() {
+			const movies = await this.db();
 			return await movies.get(this.uid);
 		},
 		async saveToDb() {
-			const db = await open(),
-			tx = db.transaction(['movies'], 'readwrite'),
-			movies = tx.objectStore('movies')
-
+			const movies = await this.db();
 			await movies.add({
 				id: this.uid,
 				...pick(this.$data, ['title', 'description', 'genres', 'duration', 'year', 'image', 'cover'])
@@ -110,10 +121,7 @@ export default {
 			this.isSaved = true
 		},
 		async removeFromDb() {
-			const db = await open(),
-			tx = db.transaction(['movies'], 'readwrite'),
-			movies = tx.objectStore('movies');
-
+			const movies = await this.db();
 			movies.delete(this.uid)
 			this.isSaved = false
 		}
@@ -138,7 +146,12 @@ export default {
 			this.init()
 		}
 	},
-	components: { Spinner }
+	components: {
+		Spinner,
+		Carousel: () => import("../components/Carousel.vue"),
+		Slide: () => import("../components/Slide.vue"),
+		MovieBox: () => import("../components/MovieBox.vue")
+	}
 }
 </script>
 <style lang="scss" scoped>
@@ -160,5 +173,9 @@ img {
 			opacity: 0.5;
 		}
 	}
+}
+.box {
+	background-color: #0003;
+	border: 1px solid #fff5
 }
 </style>
