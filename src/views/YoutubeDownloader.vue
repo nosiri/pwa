@@ -6,13 +6,13 @@ div
 		transition(name="fade" mode="out-in")
 			.columns(v-if="state === 1 && data")
 				.column.is-7
-					video(:src="data.link" controls)
+					video(:src="data.link" controls :autoplay="false")
 				.column
 					template(v-if="data.title.trim()")
 						h2.title(dir="auto") {{ data.title }}
-						hr
 					.has-text-centered
-						.btn(@click.native="$reset") جستجوی دوباره
+						btn(@click.native="$reset") جستجوی دوباره
+						btn(:href="data.link" download target="_blank" color="primary" outlined) دانلود
 
 			empty-state(icon='youtube' v-else)
 				p
