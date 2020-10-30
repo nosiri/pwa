@@ -1,6 +1,6 @@
 import { get } from "tiny-cookie";
 
-export const API_DOMAIN = "https://nosiri.sh-sh.ml";
+export const API_DOMAIN = "https://nosiri.herokuapp.com";
 
 export const getToken = () => get("TOKEN");
 
